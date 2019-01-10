@@ -32,6 +32,17 @@ class Comment
      */
     private $adress;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Address", inversedBy="comment")
+     */
+    private $address;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="comment")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -69,6 +80,30 @@ class Comment
     public function setAdress(?Address $adress): self
     {
         $this->adress = $adress;
+
+        return $this;
+    }
+
+    public function getAddress(): ?Address
+    {
+        return $this->address;
+    }
+
+    public function setAddress(?Address $address): self
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

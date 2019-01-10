@@ -58,9 +58,21 @@ class Address
      */
     private $average;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\SubCategory", inversedBy="address")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $subCategory;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="address")
+     */
+    private $comment;
+
     public function __construct()
     {
         $this->average = new ArrayCollection();
+        $this->comment = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -177,6 +189,49 @@ class Address
             // set the owning side to null (unless already changed)
             if ($average->getAdress() === $this) {
                 $average->setAdress(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getSubCategory(): ?SubCategory
+    {
+        return $this->subCategory;
+    }
+
+    public function setSubCategory(?SubCategory $subCategory): self
+    {
+        $this->subCategory = $subCategory;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getComment(): Collection
+    {
+        return $this->comment;
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comment->contains($comment)) {
+            $this->comment[] = $comment;
+            $comment->setAddress($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->comment->contains($comment)) {
+            $this->comment->removeElement($comment);
+            // set the owning side to null (unless already changed)
+            if ($comment->getAddress() === $this) {
+                $comment->setAddress(null);
             }
         }
 
