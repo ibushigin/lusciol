@@ -16,6 +16,7 @@ class AddressController extends AbstractController
         $repository = $this->getDoctrine()->getRepository(Address::class);
         $address = $repository->findAll();
 
+
         return $this->render('address/index.html.twig', [
             'address' => $address,
         ]);
