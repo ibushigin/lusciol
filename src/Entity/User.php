@@ -58,6 +58,11 @@ class User
      */
     private $message;
 
+    /**
+     * @ORM\Column(type="string", length=30)
+     */
+    private $role;
+
     public function __construct()
     {
         $this->comment = new ArrayCollection();
@@ -204,6 +209,18 @@ class User
                 $message->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getRole(): ?string
+    {
+        return $this->role;
+    }
+
+    public function setRole(string $role): self
+    {
+        $this->role = $role;
 
         return $this;
     }
