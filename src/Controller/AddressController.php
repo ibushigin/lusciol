@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Address;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -12,8 +13,8 @@ class AddressController extends AbstractController
      */
     public function index()
     {
-        $respository = $this->getDoctrine()->getRepository(AddressController::class);
-        $address = $respository->findAll();
+        $repository = $this->getDoctrine()->getRepository(Address::class);
+        $address = $repository->findAll();
 
         return $this->render('address/index.html.twig', [
             'address' => $address,
