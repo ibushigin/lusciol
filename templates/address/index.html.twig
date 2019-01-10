@@ -4,7 +4,24 @@
 
 {% block body %}
     <div id="test">test</div>
-    <div id="mapid"></div>
+    <div id="map"></div>
+
+{% for item in address %}
+    <article>
+
+        {#{{ dump(item) }}#}
+        Nom : {{ item.name }}<br>
+        Sous-Categorie : {{ item.subCategory.label }}
+        Categorie : {{ item.subCategory.category.label }}
+        Adresse : {{ item.location }}<br>
+        Coordoonées géographiques : {{ item.coordinates }}<br>
+        Tel : {{ item.tel }}<br>
+        Site internet : {{ item.website }}<br>
+
+    </article>
+{% endfor %}
+
+
 
 {% endblock %}
 
