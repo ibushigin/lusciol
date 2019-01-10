@@ -5,9 +5,9 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ResetPasswordRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\MessageRepository")
  */
-class ResetPassword
+class Message
 {
     /**
      * @ORM\Id()
@@ -17,12 +17,12 @@ class ResetPassword
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="text")
      */
-    private $token;
+    private $content;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="resetPassword", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="message")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
@@ -32,14 +32,14 @@ class ResetPassword
         return $this->id;
     }
 
-    public function getToken(): ?string
+    public function getContent(): ?string
     {
-        return $this->token;
+        return $this->content;
     }
 
-    public function setToken(string $token): self
+    public function setContent(string $content): self
     {
-        $this->token = $token;
+        $this->content = $content;
 
         return $this;
     }
@@ -49,7 +49,7 @@ class ResetPassword
         return $this->user;
     }
 
-    public function setUser(User $user): self
+    public function setUser(?User $user): self
     {
         $this->user = $user;
 
