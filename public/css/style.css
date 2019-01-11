@@ -40,4 +40,28 @@
 #map {
     height: 600px;
     width: 800px;
+	margin-top: 50px;
 }
+
+#addressList{
+	margin-top: 50px;
+	height: 80vh;
+	background-color: #d7dae0;
+	overflow-y: scroll;
+	padding : 0;
+}
+
+.linkToSingle, #addressList a:hover {
+	text-decoration: none;
+	color: black;
+}
+
+#addressList a:hover{
+	text-decoration: none;
+	color: black;
+}
+
+.oneShop{
+	padding: 0 20px;
+}
+

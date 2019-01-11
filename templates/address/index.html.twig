@@ -3,39 +3,31 @@
 {% block title %}View All Shops{% endblock %}
 
 {% block body %}
-    <div id="test">test</div>
-    <div id="map"></div>
-
-    <p>
-        {% for key, latitude in locations_lat %}
-            Latitude{{ key }} : {{ latitude }}
-        {% endfor %}
-        <br>
-        {% for key, longitude in locations_long %}
-            Longitude{{ key }} : {{ longitude }}
-        {% endfor %}
-
-
-    </p>
-
-
-    {% for item in address %}
-        <article>
-
-            {#{{ dump(item) }}#}
-            <strong>Nom :</strong> {{ item.name }}<br>
-            <strong>Sous-Categorie :</strong> {{ item.subCategory.label }}<br>
-            <strong>Categorie :</strong> {{ item.subCategory.category.label }}<br>
-            <strong>Adresse :</strong> {{ item.location }}<br>
-            <strong>Coordoonées géographiques :</strong> {{ item.coordinates }}<br>
-            <strong>Tel :</strong> {{ item.tel }}<br>
-            <strong>Site internet :</strong> {{ item.website }}<br>
-            <strong>Réduction :</strong> {{ item.discount }}<br>
-            <strong>Statut :</strong> {{ item.status }}<br>
-            <hr>
-        </article>
-
-    {% endfor %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-6" id="addressList">
+            {% for item in address %}
+                <a href="{{ path('viewSingle', {id : item.id}) }}" class="linkToSingle">
+                <article class="oneShop">
+                    <strong>Nom :</strong> {{ item.name }}<br>
+                    <strong>Sous-Categorie :</strong> {{ item.subCategory.label }}<br>
+                    <strong>Categorie :</strong> {{ item.subCategory.category.label }}<br>
+                    <strong>Adresse :</strong> {{ item.location }}<br>
+                    {#<strong>Coordoonées géographiques :</strong> {{ item.coordinates }}<br>#}
+                    <strong>Tel :</strong> {{ item.tel }}<br>
+                    <strong>Site internet :</strong> {{ item.website }}<br>
+                    <strong>Réduction :</strong> {{ item.discount }}<br>
+                    {#<strong>Statut :</strong> {{ item.status }}<br>#}
+                </article>
+                </a>
+                <hr>
+            {% endfor %}
+            </div>
+            <div class="col-12 col-md-6">
+                <div id="map"></div>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}
 
@@ -75,7 +67,17 @@
                 var marker{{ i }} = L.marker([latitude{{ i }}, longitude{{ i }}]).addTo(map);
             {% endfor %}
 
+            // Gestion du CSS dynamique pour le lien vers les pages boutique
 
+            $('.oneShop').on('mouseenter', function(){
+                $(this).css('background-color', '#a7abb2')});
+            $('.oneShop').on('mouseleave', function(){
+                $(this).css('background-color', '#d7dae0')});
         });
+
+
+
+
+
     </script>
 {% endblock %}
