@@ -1,9 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ item.name }}{% endblock %}
+{% block title %}{% endblock %}
 
 {% block body %}
-    <div id="test">test</div>
+
+    {#DIV pour OSM#}
     <div id="map"></div>
 
     <p>
@@ -50,6 +51,9 @@ Latitude : {{ lat }} ,Longitude: {{ long }}
 
 
             var marker = L.marker([lat, long]).addTo(map);
+
+
+            marker.bindPopup("<b></b><br>").openPopup();
         });
     </script>
 {% endblock %}
