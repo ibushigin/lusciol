@@ -6,6 +6,20 @@
     <div id="test">test</div>
     <div id="map"></div>
 
+    <p>
+
+    {#{% set loc = "" %}#}
+        {#{% for location in locations  %}#}
+            {#{% set loc = location %}#}
+        {#{% endfor %}#}
+    {#dump de loc : {{ dump(loc) }}#}
+
+        {{ lat }} et {{ long }}
+
+
+    </p>
+
+
 {% for item in address %}
     <article>
 
@@ -18,10 +32,11 @@
         <strong>Tel :</strong> {{ item.tel }}<br>
         <strong>Site internet :</strong> {{ item.website }}<br>
         <strong>Réduction :</strong> {{ item.discount }}<br>
-        <strong>Statut :</strong> {{ item.status }}<br>    </article>
+        <strong>Statut :</strong> {{ item.status }}<br>
+
+    </article>
+
 {% endfor %}
-
-
 
 {% endblock %}
 
