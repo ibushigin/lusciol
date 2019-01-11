@@ -41,7 +41,7 @@
 
 {% block javascripts %}
     {{ parent() }}
-    <script src="{{ asset('js/map.js') }}"></script>
+    {#<script src="{{ asset('js/map.js') }}"></script>#}
     <script>
         $(function(){
             let osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
