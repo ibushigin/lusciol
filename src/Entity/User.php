@@ -5,11 +5,14 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
-class User
+class User implements UserInterface
 {
     /**
      * @ORM\Id()
@@ -24,9 +27,15 @@ class User
     private $username;
 
     /**
+     * @var string The hashed password
      * @ORM\Column(type="string", length=20)
      */
     private $password;
+
+    /**
+     * stockage mdp en clair lors de l'inscription
+     */
+    private $plainPassword;
 
     /**
      * @ORM\Column(type="string", length=50)
@@ -59,9 +68,9 @@ class User
     private $message;
 
     /**
-     * @ORM\Column(type="string", length=30)
+     * @ORM\Column(type="array")
      */
-    private $role;
+    private $roles = [];
 
     public function __construct()
     {
@@ -97,6 +106,39 @@ class User
 
         return $this;
     }
+
+    //-----------------------------------//
+
+    public function getPlainPassword(): string
+    {
+        return (string) $this->plainPassword;
+    }
+
+    public function setPlainPassword(string $plainpassword): self
+    {
+        $this->plainPassword = $plainpassword;
+
+        return $this;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getSalt()
+    {
+        // not needed when using the "bcrypt" algorithm in security.yaml
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials()
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        $this->plainPassword = null;
+    }
+
+    //-----------------------------------//
 
     public function getEmail(): ?string
     {
@@ -213,15 +255,23 @@ class User
         return $this;
     }
 
-    public function getRole(): ?string
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
     {
-        return $this->role;
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
     }
 
-    public function setRole(string $role): self
+    public function setRoles(array $roles): self
     {
-        $this->role = $role;
+        $this->roles = $roles;
 
         return $this;
     }
+
 }
