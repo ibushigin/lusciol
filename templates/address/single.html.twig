@@ -44,6 +44,9 @@ Latitude : {{ lat }} ,Longitude: {{ long }}
 
             //Initialisation de la carte
             //Ne pas toucher sous peine de torture
+
+
+
             let osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
                 osmAttrib = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
                 osm = L.tileLayer(osmUrl, {maxZoom: 18, attribution: osmAttrib});
@@ -56,14 +59,23 @@ Latitude : {{ lat }} ,Longitude: {{ long }}
                 accessToken: 'pk.eyJ1IjoiaWJ1c2hpZ2luIiwiYSI6ImNqcXJ1d3lwdjBnZXo0MmxqZWRyMGIzdmEifQ.MAtmFHO16MD5osbZotlXYw'
             }).addTo(map);
 
+            var markerPosition = L.icon({
+                iconUrl: '{{ asset("img/markerPosition.png") }}',
+
+
+                iconSize:     [20, 20], // size of the icon
+
+
+
+            });
+
 
             map.locate({setView: true, maxZoom: 16});
             function onLocationFound(e) {
-                var radius = e.accuracy /2;
+
+                L.marker(e.latlng, {icon: markerPosition}).addTo(map);
 
 
-
-                L.circle(e.latlng, radius).addTo(map);
             }
 
             map.on('locationfound', onLocationFound);
