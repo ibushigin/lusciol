@@ -4,7 +4,7 @@ $(function(){
         osm = L.tileLayer(osmUrl, {maxZoom: 18, attribution: osmAttrib});
     let map = L.map('map').setView([44.845423, -0.570373], 11).addLayer(osm);
 
-    
+
 
     var marker = L.marker([44.841684, -0.583934]).addTo(map);
 });
