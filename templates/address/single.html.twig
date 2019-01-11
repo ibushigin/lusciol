@@ -41,6 +41,9 @@ Latitude : {{ lat }} ,Longitude: {{ long }}
 
     <script>
         $(function() {
+
+            //Initialisation de la carte
+            //Ne pas toucher sous peine de torture
             let osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
                 osmAttrib = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
                 osm = L.tileLayer(osmUrl, {maxZoom: 18, attribution: osmAttrib});
@@ -56,15 +59,18 @@ Latitude : {{ lat }} ,Longitude: {{ long }}
 
             map.locate({setView: true, maxZoom: 16});
             function onLocationFound(e) {
-                var radius = e.accuracy / 4;
+                var radius = e.accuracy /2;
 
-                // L.marker(e.latlng).addTo(map);
 
 
                 L.circle(e.latlng, radius).addTo(map);
             }
 
             map.on('locationfound', onLocationFound);
+
+
+            //A partir d'ici, c'est custom selon la view
+            //La menace de torture s'arrête ici
 
             var lat = '{{lat}}';
             var long = '{{long}}';
