@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
 
         <title>{% block title %}Welcome!{% endblock %}</title>
+
         {% block stylesheets %}
             {# Pictogrammes ICONES #}
 
@@ -20,10 +21,16 @@
             {#CSS custom #}
             <link rel="stylesheet" href="{{ asset('css/style.css') }}">
         {% endblock %}
+
     </head>
+
     <body>
         {% block body %}
+
+
+
         {% endblock %}
+
         {% block javascripts %}
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
             <script src="{{ asset('js/bootstrap.min.js') }}"></script>
@@ -32,5 +39,7 @@
                     integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
                     crossorigin=""></script>
         {% endblock %}
+
     </body>
+
 </html>
