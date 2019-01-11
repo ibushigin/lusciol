@@ -17,13 +17,6 @@ class AddressController extends AbstractController
         if(!$address){
             throw $this->createNotFoundException('Aucun magasin trouvé');
         }
-
-
-        //TODO Supprimer la Boucle, passer en FinfById, changer le nom de la fonction(index->SingleView...)
-//        $repository = $this->getDoctrine()->getRepository(Address::class);
-//        $address = $repository->find($id);
-
-
             $loc = $address->getCoordinates();
             $long = strstr($loc, ',');
             $long = substr($long,1);
