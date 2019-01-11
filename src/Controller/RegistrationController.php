@@ -49,6 +49,8 @@ class RegistrationController extends AbstractController
             //j'injecte le nom du fichier dans la propriété image
             $user->setAvatar($filename);
 
+            
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
