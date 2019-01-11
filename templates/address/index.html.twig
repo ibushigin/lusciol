@@ -54,17 +54,23 @@
 
 
             {% for key, latitude in locations_lat %}
-                let latitude{{ key }} = {{ latitude }}
+                let latitude{{ key }} = {{ latitude }};
             {% endfor %}
 
             {% for key, longitude in locations_long %}
-                    let longitude{{ key }} = {{ longitude }}
+                    let longitude{{ key }} = {{ longitude }};
             {% endfor %}
+
+            {% for key, address_id in address_ids %}
+                let item{{ key }} = {{ address_id }};
+            {% endfor %}
+
+
 
                 {% set nbAddress = nbAddress-1 %}
 
             {% for i in 0..nbAddress %}
-                var marker{{ i }} = L.marker([latitude{{ i }}, longitude{{ i }}]).addTo(map);
+                var marker{{ i }} = L.marker([latitude{{ i }}, longitude{{ i }}], {alt: item{{ i }}}).addTo(map);
             {% endfor %}
 
             // Gestion du CSS dynamique pour le lien vers les pages boutique
@@ -73,6 +79,13 @@
                 $(this).css('background-color', '#a7abb2')});
             $('.oneShop').on('mouseleave', function(){
                 $(this).css('background-color', '#d7dae0')});
+            $('.leaflet-marker-icon').on('click', function(){
+                var current_id = $(this).attr('alt');
+                console.log(current_id);
+                path = "{{ path('viewSingle', {id : 0}) }}";
+                path = path.replace(0, current_id);
+                document.location.href=path;
+            })
         });
 
 
