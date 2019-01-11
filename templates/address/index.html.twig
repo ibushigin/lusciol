@@ -3,9 +3,9 @@
 {% block title %}View All Shops{% endblock %}
 
 {% block body %}
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
-            <div class="col-12 col-md-6" id="addressList">
+            <div class="col-12 col-md-3" id="addressList">
             {% for item in address %}
                 <a href="{{ path('viewSingle', {id : item.id}) }}" class="linkToSingle">
                 <article class="oneShop">
@@ -23,7 +23,7 @@
                 <hr>
             {% endfor %}
             </div>
-            <div class="col-12 col-md-6">
+            <div class="col-12 col-md-9">
                 <div id="map"></div>
             </div>
         </div>
@@ -36,10 +36,15 @@
     {#<script src="{{ asset('js/map.js') }}"></script>#}
     <script>
         $(function(){
-            let osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-                osmAttrib = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-                osm = L.tileLayer(osmUrl, {maxZoom: 18, attribution: osmAttrib});
-            let map = L.map('map').setView([44.8397534, -0.5739364], 14);
+            //Initialisation de la carte
+            //Ne pas toucher sous peine de torture
+
+
+            let bordeaux = [44.8397534, -0.5739364];
+            let osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+            let osmAttrib = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+            let osm = L.tileLayer(osmUrl, {maxZoom: 18, attribution: osmAttrib});
+            let map = L.map('map').setView(bordeaux, 14);
 
             L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
                 attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -49,7 +54,29 @@
             }).addTo(map);
 
 
+
+
+            //Création des icones
+            var markerPosition = L.icon({
+                iconUrl: '{{ asset("img/markerPosition.png") }}',
+                iconSize:     [20, 20], // size of the icon
+            });
+
+            //Géolocalisation
+
             map.locate({setView: true, maxZoom: 16});
+            function onLocationFound(e) {
+                L.marker(e.latlng, {icon: markerPosition}).addTo(map);
+            }
+            map.on('locationfound', onLocationFound);
+            function onLocationError(e) {
+                alert(e.message);
+            }
+            map.on('locationerror', onLocationError);
+
+
+            //A partir d'ici, c'est custom selon la view
+            //La menace de torture s'arrête ici
 
 
 
