@@ -1,12 +1,28 @@
 /*HOME*/
 
+.container-fluid{
+	padding: 0 !important; 
+}
+
 .backgroundHome{
-	background-image: url("../image/fond1.jpg");
-	/*background-attachment:fixed;*/
+/*	background-image: url("../img/fond1.jpg");
+	background-attachment:fixed;
 	background-repeat:no-repeat;
-	height: 600px;
+	background-size:cover;*/
+	background-color: #A39E9E; 
+	height: 500px;
 	overflow-y : hidden;
-	background-size:cover;
+	z-index: 0;
+	position:relative;
+}
+
+.LogoLUSCIOL{
+	z-index: 1;
+	position:relative;
+	margin-top: -300px; 
+
+
+
 }
 
 /*/adresse*/
