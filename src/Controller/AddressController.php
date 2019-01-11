@@ -9,30 +9,21 @@ use Symfony\Component\Routing\Annotation\Route;
 class AddressController extends AbstractController
 {
     /**
-     * @Route("/address/single", name="single")
+     * @Route("/address/single/{id}", name="viewSingle", requirements={"id"="[0-9]+"})
      */
-    public function index()
+    public function viewSingle(Address $address)
     {
-        //TODO Supprimer la Boucle, passer en FinfById, changer le nom de la fonction(index->SingleView...)
-        $repository = $this->getDoctrine()->getRepository(Address::class);
-        $address = $repository->findAll();
 
-
-        $locations = [];
-        foreach ($address as $adr){
-
-            $location = [];
-            $loc = $adr->getCoordinates();
+        if(!$address){
+            throw $this->createNotFoundException('Aucun magasin trouvé');
+        }
+            $loc = $address->getCoordinates();
             $long = strstr($loc, ',');
             $long = substr($long,1);
             $lat = strstr($loc,',', true);
-            $location[] = $lat;
-            $location[] = $long;
-            $locations[] = $location;
-    }
 
         return $this->render('address/single.html.twig', [
-            'address' => $address, 'locations' => $locations, 'lat' => $lat, 'long' => $long
+            'address' => $address, 'lat' => $lat, 'long' => $long
         ]);
     }
 
@@ -47,6 +38,7 @@ class AddressController extends AbstractController
 
         $locations_lat = [];
         $locations_long = [];
+        $address_ids = [];
 
         foreach ($address as $adr){
 
@@ -56,11 +48,12 @@ class AddressController extends AbstractController
             $lat = strstr($loc,',', true);
             $locations_lat[] = $lat;
             $locations_long[] = $long;
+            $address_ids[] = $adr->getId();
             $nbAdress = count($locations_lat);
         }
 
         return $this->render('address/index.html.twig', [
-            'address' => $address, 'locations_lat' => $locations_lat, 'locations_long' => $locations_long, 'nbAddress' =>$nbAdress
+            'address' => $address, 'locations_lat' => $locations_lat, 'locations_long' => $locations_long, 'nbAddress' =>$nbAdress, 'address_ids' => $address_ids
         ]);
     }
 
