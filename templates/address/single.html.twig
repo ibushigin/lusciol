@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AddressController!{% endblock %}
+{% block title %}{{ item.name }}{% endblock %}
 
 {% block body %}
     <div id="test">test</div>
@@ -36,7 +36,7 @@ Latitude : {{ lat }} ,Longitude: {{ long }}
 
 {% block javascripts %}
     {{ parent() }}
-    <script src="{{ asset('js/map.js') }}"></script>
+
     <script>
         $(function(){
             let osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
