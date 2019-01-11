@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AddressController extends AbstractController
 {
     /**
-     * @Route("/address", name="address")
+     * @Route("/address/single", name="single")
      */
     public function index()
     {
@@ -30,7 +30,7 @@ class AddressController extends AbstractController
             $locations[] = $location;
     }
 
-        return $this->render('address/index.html.twig', [
+        return $this->render('address/single.html.twig', [
             'address' => $address, 'locations' => $locations, 'lat' => $lat, 'long' => $long
         ]);
     }
