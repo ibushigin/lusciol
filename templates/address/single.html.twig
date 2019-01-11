@@ -55,6 +55,17 @@ Latitude : {{ lat }} ,Longitude: {{ long }}
 
 
             map.locate({setView: true, maxZoom: 16});
+            function onLocationFound(e) {
+                var radius = e.accuracy / 4;
+
+                // L.marker(e.latlng).addTo(map);
+
+
+                L.circle(e.latlng, radius).addTo(map);
+            }
+
+            map.on('locationfound', onLocationFound);
+
             var lat = '{{lat}}';
             var long = '{{long}}';
 
@@ -62,7 +73,10 @@ Latitude : {{ lat }} ,Longitude: {{ long }}
             var marker = L.marker([lat, long]).addTo(map);
 
 
-            marker.on("click", alert('banzai'));
+            marker.on('click', function () {
+                marker.bindPopup('NTM').openPopup;
+
+            })
 
         })
 
