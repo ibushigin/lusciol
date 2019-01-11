@@ -16,7 +16,9 @@ security:
             security: false
         main:
             anonymous: true
-            #TODO ajouter le guard de symfonyp8 lorsque LoginAuthenticator sera ajouté
+            guard:
+                authenticators:
+                    - App\Security\LoginFormAuthenticator
             form_login:
                 login_path: app_login
                 check_path: app_login
