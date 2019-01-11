@@ -9,30 +9,28 @@ use Symfony\Component\Routing\Annotation\Route;
 class AddressController extends AbstractController
 {
     /**
-     * @Route("/address/single", name="single")
+     * @Route("/address/single/{id}", name="viewSingle", requirements={"id"="[0-9]+"})
      */
-    public function index()
+    public function viewSingle(Address $address)
     {
+
+        if(!$address){
+            throw $this->createNotFoundException('Aucun magasin trouvé');
+        }
+
+
         //TODO Supprimer la Boucle, passer en FinfById, changer le nom de la fonction(index->SingleView...)
-        $repository = $this->getDoctrine()->getRepository(Address::class);
-        $address = $repository->findAll();
+//        $repository = $this->getDoctrine()->getRepository(Address::class);
+//        $address = $repository->find($id);
 
 
-        $locations = [];
-        foreach ($address as $adr){
-
-            $location = [];
-            $loc = $adr->getCoordinates();
+            $loc = $address->getCoordinates();
             $long = strstr($loc, ',');
             $long = substr($long,1);
             $lat = strstr($loc,',', true);
-            $location[] = $lat;
-            $location[] = $long;
-            $locations[] = $location;
-    }
 
         return $this->render('address/single.html.twig', [
-            'address' => $address, 'locations' => $locations, 'lat' => $lat, 'long' => $long
+            'address' => $address, 'lat' => $lat, 'long' => $long
         ]);
     }
 
