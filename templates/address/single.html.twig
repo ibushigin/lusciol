@@ -1,19 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AddressController!{% endblock %}
+{% block title %}{% endblock %}
 
 {% block body %}
-    <div id="test">test</div>
+
+    {#DIV pour OSM#}
     <div id="map"></div>
 
     <p>
-        {% for key, latitude in locations_lat %}
-            Latitude{{ key }} : {{ latitude }}
-        {% endfor %}
-        <br>
-        {% for key, longitude in locations_long %}
-            Longitude{{ key }} : {{ longitude }}
-        {% endfor %}
+
+Latitude : {{ lat }} ,Longitude: {{ long }}
 
 
     </p>
@@ -32,7 +28,7 @@
             <strong>Site internet :</strong> {{ item.website }}<br>
             <strong>Réduction :</strong> {{ item.discount }}<br>
             <strong>Statut :</strong> {{ item.status }}<br>
-            <hr>
+
         </article>
 
     {% endfor %}
@@ -41,7 +37,7 @@
 
 {% block javascripts %}
     {{ parent() }}
-    <script src="{{ asset('js/map.js') }}"></script>
+
     <script>
         $(function(){
             let osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -50,21 +46,14 @@
             let map = L.map('map').setView([44.845423, -0.570373], 11).addLayer(osm);
 
 
-
-            {% for key, latitude in locations_lat %}
-                let latitude{{ key }} = {{ latitude }}
-            {% endfor %}
-
-            {% for key, longitude in locations_long %}
-                    let longitude{{ key }} = {{ longitude }}
-            {% endfor %}
-
-            {% for i in 0..nbAddress %}
-                var marker{{ i }} = L.marker([latitude{{ i }}, longitude{{ i }}]).addTo(map);
-            {% endfor %}
+            var lat = '{{lat}}';
+            var long = '{{long}}';
 
 
-            {#var marker = L.marker([lat, long]).addTo(map);#}
+            var marker = L.marker([lat, long]).addTo(map);
+
+
+            marker.bindPopup("<b></b><br>").openPopup();
         });
     </script>
 {% endblock %}
