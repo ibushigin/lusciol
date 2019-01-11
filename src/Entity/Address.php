@@ -69,6 +69,11 @@ class Address
      */
     private $comment;
 
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    private $image;
+
     public function __construct()
     {
         $this->average = new ArrayCollection();
@@ -236,5 +241,16 @@ class Address
         }
 
         return $this;
+    }
+
+    public function getImage()
+    {
+        return $this->image; 
+    }
+
+    public function setImage($image)
+    {
+        $this->image = $image; 
+        return $this; 
     }
 }

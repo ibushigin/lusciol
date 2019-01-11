@@ -5,6 +5,10 @@ namespace App\Controller;
 use App\Entity\Address;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
+use App\Form\AddressType; 
+use Symfony\Component\HttpFoundation\File\File;
+use App\Service\FileUploader;
 
 class AddressController extends AbstractController
 {
@@ -55,6 +59,42 @@ class AddressController extends AbstractController
         return $this->render('address/index.html.twig', [
             'address' => $address, 'locations_lat' => $locations_lat, 'locations_long' => $locations_long, 'nbAddress' =>$nbAdress, 'address_ids' => $address_ids
         ]);
+    }
+
+     /**
+    *@Route("/address/add", name="addAddress")
+    */
+    public function addAdress(Request $request){
+
+        $form = $this->createForm(AddressType::class);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+
+
+            $address = $form->getData();
+
+            //$article->getImage() contient un objet qui représent le fichier image envoyé
+            $file = $address->getImage();
+
+            $filename = $file ? $fileuploader->upload($file, $this->getParameter('shop_image_directory')) : '';
+
+            //je remplace l'attribut imgae qui contient toujours le fichier par le nom du fichier
+            $address->setImage($filename);
+
+            $entityManager->persist($address);
+
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Adresse ajoutée');
+
+            return $this->redirectToRoute('articles');
+
+        }
+
+        return $this->render('address/add.html.twig', ['form' => $form->createView()]);
+
     }
 
 
