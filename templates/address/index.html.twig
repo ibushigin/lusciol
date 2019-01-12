@@ -89,8 +89,8 @@
                 iconSize:     [20, 20], // size of the icon
             });
             var markerPoint = L.icon({
-                iconUrl: '{{ asset("img//markerPoint.png") }}',
-                iconSize:     [25, 41], // size of the icon
+                iconUrl: '{{ asset("img/markerPoint.png") }}',
+                iconSize:     [30, 49], // size of the icon
             });
 
             //Géolocalisation
@@ -127,6 +127,7 @@
 
                 {% set nbAddress = nbAddress-1 %}
 
+
             {% for i in 0..nbAddress %}
                 var marker{{ i }} = L.marker([latitude{{ i }}, longitude{{ i }}], {alt: item{{ i }}}).addTo(map);
             {% endfor %}
@@ -141,34 +142,82 @@
 
             // Gestion du CSS dynamique pour le lien vers les pages boutique
 
+            var currentIcon;
+            var viewStatus = "all";
+
             $('#addressList').on('mouseenter', '.oneShop', function(){
-                $(this).css('background-color', '#a7abb2')});
-                $
+                $(this).css('background-color', '#a7abb2');
+                let address_id = $(this).attr('data-id');
+                if(viewStatus === "all"){
+                currentIcon = $("img[alt='"+address_id+"']").attr('src');
+                $("img[alt='"+address_id+"']").attr('src', '{{ asset("img/markerPoint.png") }}');
+                }
+            });
+
+
+
             $('#addressList').on('mouseleave', '.oneShop', function(){
-                $(this).css('background-color', '#d7dae0')});
+                $(this).css('background-color', '#d7dae0');
+                let address_id = $(this).attr('data-id');
+                if(viewStatus === "all") {
+                    $("img[alt='" + address_id + "']").attr('src', currentIcon);
+                }
+            });
+
+            // Surbrillance des infos boutique au survol de l'icone sur la carte
+
+            $('.leaflet-marker-icon').on('mouseenter', function(){
+                var address_id = $(this).attr('alt');
+                $("article[data-id='"+address_id+"']").css('background-color', '#a7abb2');
+                if (viewStatus === "all"){
+                    currentIcon = $("img[alt='"+address_id+"']").attr('src');
+                    $("img[alt='"+address_id+"']").attr('src', '{{ asset("img/markerPoint.png") }}');
+                }
+
+            })
+
+            $('.leaflet-marker-icon').on('mouseleave', function(){
+                var address_id = $(this).attr('alt');
+                $("article[data-id='"+address_id+"']").css('background-color', '#d7dae0');
+                if (viewStatus === "all"){
+                    $("img[alt='"+address_id+"']").attr('src', currentIcon);
+                }
+            })
+
+
 
 
                 // Ajax => Info Boutique au clic sur le pointeur de la carte
 
                 $('.leaflet-marker-icon').on('click', function(){
-                // Requete AJAX :
-                var address_id = $(this).attr('alt');
-                    $.ajax({
-                        type: 'post',
-                        url: '{{ path("singleView") }}',
-                        data: 'address_id=' + address_id + '&result_content=' +result_content,
-                        datatype: 'html',
-                        success: function(result){
-                            $("#addressList").html(result);
-                        },
-                        error: function(error){
-                            console.log(error)
-                        },
-                    });
+
+                    var address_id = $(this).attr('alt');
+
+                    // La vue passe en singleView par ajax, gestion du visuel
+                    console.log(viewStatus);
+                    if (viewStatus === "all"){
+                        // Requete AJAX :
+                        $.ajax({
+                            type: 'post',
+                            url: '{{ path("singleView") }}',
+                            data: 'address_id=' + address_id + '&result_content=' +result_content,
+                            datatype: 'html',
+                            success: function(result){
+                                $("#addressList").html(result);
+                            },
+                            error: function(error){
+                                console.log(error)
+                            },
+                        });
+                        viewStatus ="single";
+                    }
                 })
 
                 // Ajax => Info Boutique au clic sur la div du magasin
                 $('#addressList').on('click', '.oneShop', function(){
+                    // La vue passe en singleView par ajax, gestion du visuel
+                    viewStatus = "single";
+
                     var address_id = $(this).attr('data-id');
                     $.ajax({
                         type: 'post',
@@ -187,6 +236,11 @@
 
             // Ajax => Retourner sur l'affichage des résultats
                 $('#addressList').on('click', '#result_content', function(){
+
+                    // La vue revient sur les resultats par ajax, gestion du visuel
+                    viewStatus = "all";
+
+                    $('.leaflet-marker-icon').attr('src', currentIcon);
                     $.ajax({
                         type: 'post',
                         url: '{{ path("returnToResult") }}',
