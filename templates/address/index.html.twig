@@ -89,8 +89,8 @@
                 iconSize:     [20, 20], // size of the icon
             });
             var markerPoint = L.icon({
-                iconUrl: '{{ asset("img/") }}',
-                iconSize:     [20, 20], // size of the icon
+                iconUrl: '{{ asset("img//markerPoint.png") }}',
+                iconSize:     [25, 41], // size of the icon
             });
 
             //Géolocalisation
@@ -131,8 +131,6 @@
                 var marker{{ i }} = L.marker([latitude{{ i }}, longitude{{ i }}], {alt: item{{ i }}}).addTo(map);
             {% endfor %}
 
-            // Gestion du CSS dynamique pour le lien vers les pages boutique
-
             // Stockage des résultat de recherche dans une variable pour pouvoir revenir en ajax sur la page des
             // résultats
 
@@ -141,67 +139,73 @@
 
             var result_content = $('#addressList').html();
 
-            $('.oneShop').on('mouseenter', function(){
+            // Gestion du CSS dynamique pour le lien vers les pages boutique
+
+            $('#addressList').on('mouseenter', '.oneShop', function(){
                 $(this).css('background-color', '#a7abb2')});
                 $
-            $('.oneShop').on('mouseleave', function(){
+            $('#addressList').on('mouseleave', '.oneShop', function(){
                 $(this).css('background-color', '#d7dae0')});
 
+
+                // Ajax => Info Boutique au clic sur le pointeur de la carte
 
                 $('.leaflet-marker-icon').on('click', function(){
                 // Requete AJAX :
                 var address_id = $(this).attr('alt');
-                $.ajax({
-                    type: 'post',
-                    url: '{{ path("singleView") }}',
-                    data: 'address_id=' + address_id + '&result_content=' +result_content,
-                    datatype: 'html',
-                    success: function(result){
-                        $("#addressList").html(result);
-                    },
-                    error: function(error){
-                        console.log(error)
-                    },
-                });
-            })
+                    $.ajax({
+                        type: 'post',
+                        url: '{{ path("singleView") }}',
+                        data: 'address_id=' + address_id + '&result_content=' +result_content,
+                        datatype: 'html',
+                        success: function(result){
+                            $("#addressList").html(result);
+                        },
+                        error: function(error){
+                            console.log(error)
+                        },
+                    });
+                })
 
-            $('#addressList').on('click', '.oneShop', function(){
-                var address_id = $(this).attr('data-id');
-                $.ajax({
-                    type: 'post',
-                    url: '{{ path("singleView") }}',
-                    data: 'address_id=' + address_id,
-                    datatype: 'html',
-                    success: function(result){
-                        $("#addressList").html(result);
-                    },
-                    error: function(error){
-                        console.log(error)
-                    },
-                });
+                // Ajax => Info Boutique au clic sur la div du magasin
+                $('#addressList').on('click', '.oneShop', function(){
+                    var address_id = $(this).attr('data-id');
+                    $.ajax({
+                        type: 'post',
+                        url: '{{ path("singleView") }}',
+                        data: 'address_id=' + address_id,
+                        datatype: 'html',
+                        success: function(result){
+                            $("#addressList").html(result);
+                        },
+                        error: function(error){
+                            console.log(error)
+                        },
+                    });
 
-            })
+                })
 
-            $('#addressList').on('click', '#result_content', function(){
-                $.ajax({
-                    type: 'post',
-                    url: '{{ path("returnToResult") }}',
-                    data: 'result_content=' + result_content,
-                    datatype: 'html',
-                    success: function(result){
-                        $("#addressList").html(result);
-                    },
-                    error: function(error){
-                        console.log(error)
-                    },
-                });
-            })
+            // Ajax => Retourner sur l'affichage des résultats
+                $('#addressList').on('click', '#result_content', function(){
+                    $.ajax({
+                        type: 'post',
+                        url: '{{ path("returnToResult") }}',
+                        data: 'result_content=' + result_content,
+                        datatype: 'html',
+                        success: function(result){
+                            $("#addressList").html(result);
+                        },
+                        error: function(error){
+                            console.log(error)
+                        },
+                    });
+                })
 
-            // console.log(current_id);
-            {#path = "{{ path('viewSingle', {id : 0}) }}";#}
-            {#path = path.replace(0, current_id);#}
-            {#document.location.href=path;#}
-        });
+                // console.log(current_id);
+                {#path = "{{ path('viewSingle', {id : 0}) }}";#}
+                {#path = path.replace(0, current_id);#}
+                {#document.location.href=path;#}
+            });
 
 
 
