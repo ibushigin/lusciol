@@ -7,8 +7,8 @@
         <div class="row">
             <div class="col-12 col-md-3" id="addressList">
             {% for item in address %}
-                <a href="{{ path('viewSingle', {id : item.id}) }}" class="linkToSingle">
-                <article class="oneShop">
+                <a href="#" class="linkToSingle">
+                <article class="oneShop" data-id="{{ item.id }}">
                     <strong>Nom :</strong> {{ item.name }}<br>
                     <strong>Sous-Categorie :</strong> {{ item.subCategory.label }}<br>
                     <strong>Categorie :</strong> {{ item.subCategory.category.label }}<br>
@@ -84,7 +84,7 @@
             }
             map.on('locationfound', onLocationFound);
             function onLocationError(e) {
-                alert(e.message);
+                // alert(e.message);
             }
             map.on('locationerror', onLocationError);
 
@@ -121,8 +121,9 @@
                 $
             $('.oneShop').on('mouseleave', function(){
                 $(this).css('background-color', '#d7dae0')});
-            $('.leaflet-marker-icon').on('click', function(){
 
+
+                $('.leaflet-marker-icon').on('click', function(){
                 // Requete AJAX :
                 var address_id = $(this).attr('alt');
                 $.ajax({
@@ -136,14 +137,36 @@
                     error: function(error){
                         console.log(error)
                     },
-                })
-
-
-                // console.log(current_id);
-                {#path = "{{ path('viewSingle', {id : 0}) }}";#}
-                {#path = path.replace(0, current_id);#}
-                {#document.location.href=path;#}
+                });
             })
+
+            $('#addressList').on('click', '.oneShop', function(){
+                var address_id = $(this).attr('data-id');
+                $.ajax({
+                    type: 'post',
+                    url: '{{ path("singleView") }}',
+                    data: 'address_id=' + address_id,
+                    datatype: 'html',
+                    success: function(result){
+                        $("#addressList").html(result);
+                    },
+                    error: function(error){
+                        console.log(error)
+                    },
+                });
+
+            })
+
+
+
+
+
+
+
+            // console.log(current_id);
+            {#path = "{{ path('viewSingle', {id : 0}) }}";#}
+            {#path = path.replace(0, current_id);#}
+            {#document.location.href=path;#}
 
 
         });
