@@ -43,6 +43,7 @@ class AddressController extends AbstractController
         $locations_lat = [];
         $locations_long = [];
         $address_ids = [];
+        $address_cat = [];
 
         foreach ($address as $adr){
 
@@ -53,11 +54,12 @@ class AddressController extends AbstractController
             $locations_lat[] = $lat;
             $locations_long[] = $long;
             $address_ids[] = $adr->getId();
+            $address_cat[] = $adr->getSubCategory()->getCategory()->getLabel();
             $nbAdress = count($locations_lat);
         }
 
         return $this->render('address/index.html.twig', [
-            'address' => $address, 'locations_lat' => $locations_lat, 'locations_long' => $locations_long, 'nbAddress' =>$nbAdress, 'address_ids' => $address_ids
+            'address' => $address, 'locations_lat' => $locations_lat, 'locations_long' => $locations_long, 'nbAddress' =>$nbAdress, 'address_ids' => $address_ids, 'address_cat' => $address_cat,
         ]);
     }
 

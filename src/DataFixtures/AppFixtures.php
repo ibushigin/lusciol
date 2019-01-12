@@ -53,7 +53,7 @@ class AppFixtures extends Fixture
 
         }
 
-        for($i=1;$i<=10;$i++){
+        for($i=1;$i<=4;$i++){
 
             $categorie = new Category();
             $categorie->setLabel('categorie' . $i);

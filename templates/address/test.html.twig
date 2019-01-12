@@ -3,22 +3,23 @@
 {% block title %}View All Shops{% endblock %}
 
 {% block body %}
+
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 col-md-3" id="addressList">
-            {% for item in address %}
-                <a href="#" class="linkToSingle">
-                <article class="oneShop" data-id="{{ item.id }}">
-                    <h2 class="text-center">{{ item.name }}<br></h2>
-                    <p>
-                    <strong>Sous-Categorie :</strong> {{ item.subCategory.label }}<br>
-                    <strong>Categorie :</strong> {{ item.subCategory.category.label }}<br>
-                    <strong>Réduction :</strong> {{ item.discount }}<br>
-                    </p>
-                </article>
-                </a>
-                <hr>
-            {% endfor %}
+                {% for item in address %}
+                    <a href="#" class="linkToSingle">
+                        <article class="oneShop" data-id="{{ item.id }}">
+                            <h2 class="text-center">{{ item.name }}<br></h2>
+                            <p>
+                                <strong>Sous-Categorie :</strong> {{ item.subCategory.label }}<br>
+                                <strong>Categorie :</strong> {{ item.subCategory.category.label }}<br>
+                                <strong>Réduction :</strong> {{ item.discount }}<br>
+                            </p>
+                        </article>
+                    </a>
+                    <hr>
+                {% endfor %}
             </div>
             <div class="col-12 col-md-9">
                 <div id="map"></div>
@@ -32,6 +33,7 @@
     {{ parent() }}
     {#<script src="{{ asset('js/map.js') }}"></script>#}
     <script>
+
         $(function(){
             //Initialisation de la carte
             //Ne pas toucher sous peine de torture
@@ -67,31 +69,40 @@
 
 
 
+            //Heritage de la classe L.icon pour passer des attributs customs :
+            // Non recupérable dans la balise img
+             var CustomL = L.Icon.extend({
+                 options: {
+                     iconSize: [25, 41],
+                     shadowUrl: '{{ asset("img/marker-shadow.png") }}',
+                     shadowAnchor: [10, 20],
+                     item_cat : "",
+                 }
+            });
+
             //Création des icones
             var markerPosition = L.icon({
                 iconUrl: '{{ asset("img/markerPosition.png") }}',
                 iconSize:     [20, 20], // size of the icon
             });
-            var basicMarker =  L.icon({
-                iconUrl: '{{ asset("img/marker-icon.png") }}',
-                iconSize:     [25, 41], // size of the icon
+            var markerBlue = new CustomL({
+                iconUrl: '{{ asset("img/marker-blue.png") }}',
+                item_cat: 'categorie1',
+            });
+            markerBlue.options.tabindex = '25';
 
+            var markerPink = new CustomL({
+                iconUrl: '{{ asset("img/marker-pink.png") }}',
+                item_cat: 'categorie2',
             });
-            var markerCat1 = L.icon({
-                iconUrl: '{{ asset("img/") }}',
-                iconSize:     [20, 20], // size of the icon
+            var markerGreen = new CustomL({
+                iconUrl: '{{ asset("img/marker-green.png") }}',
+                item_cat: 'categorie3',
             });
-            var markerCat2 = L.icon({
-                iconUrl: '{{ asset("img/") }}',
-                iconSize:     [20, 20], // size of the icon
-            });
-            var markerCat3 = L.icon({
-                iconUrl: '{{ asset("img/") }}',
-                iconSize:     [20, 20], // size of the icon
-            });
-            var markerCat4 = L.icon({
-                iconUrl: '{{ asset("img/") }}',
-                iconSize:     [20, 20], // size of the icon
+
+            var markerYellow = new CustomL({
+                iconUrl: '{{ asset("img/marker-yellow.png") }}',
+                item_cat: 'categorie4',
             });
             var markerPoint = L.icon({
                 iconUrl: '{{ asset("img/markerPoint.png") }}',
@@ -117,25 +128,44 @@
 
 
             {% for key, latitude in locations_lat %}
-                let latitude{{ key }} = {{ latitude }};
+            let latitude{{ key }} = {{ latitude }};
             {% endfor %}
 
             {% for key, longitude in locations_long %}
-                    let longitude{{ key }} = {{ longitude }};
+            let longitude{{ key }} = {{ longitude }};
             {% endfor %}
 
             {% for key, address_id in address_ids %}
-                let item{{ key }} = {{ address_id }};
+            let item{{ key }} = {{ address_id }};
             {% endfor %}
 
+            {% for key, cat in address_cat %}
+            let item_cat{{ key }} = '{{ cat }}';
+            {% endfor %}
 
-
-                {% set nbAddress = nbAddress-1 %}
+            {% set nbAddress = nbAddress-1 %}
 
 
             {% for i in 0..nbAddress %}
-                var marker{{ i }} = L.marker([latitude{{ i }}, longitude{{ i }}], {alt: item{{ i }}}).addTo(map);
-                marker{{ i }}.myCustomID ={{ i }};
+
+            var markerIcon;
+            if(item_cat{{ i }} === 'categorie1'){
+                markerIcon = markerYellow;
+            }
+            if(item_cat{{ i }} === 'categorie2'){
+                markerIcon = markerBlue;
+            }
+            if(item_cat{{ i }} === 'categorie3'){
+                markerIcon = markerPink;
+            }
+            if(item_cat{{ i }} === 'categorie4'){
+                markerIcon = markerGreen;
+            }
+
+            var param = item_cat{{ i }} + '&' + item{{ i }};
+
+
+            var marker{{ i }} = L.marker([latitude{{ i }}, longitude{{ i }}], {icon: markerIcon, alt: param}).addTo(map);
             {% endfor %}
 
             // Stockage des résultat de recherche dans une variable pour pouvoir revenir en ajax sur la page des
@@ -156,8 +186,8 @@
                 $(this).css('background-color', '#a7abb2');
                 let address_id = $(this).attr('data-id');
                 if(viewStatus === "all"){
-                currentIcon = $("img[alt='"+address_id+"']").attr('src');
-                $("img[alt='"+address_id+"']").attr('src', '{{ asset("img/markerPoint.png") }}');
+                    currentIcon = $("img[alt='"+address_id+"']").attr('src');
+                    $("img[alt='"+address_id+"']").attr('src', '{{ asset("img/markerPoint.png") }}');
                 }
             });
 
@@ -192,44 +222,22 @@
             })
 
 
-                // Ajax => Info Boutique au clic sur le pointeur de la carte
 
-                $('.leaflet-marker-icon').on('click', function(){
 
-                    var address_id = $(this).attr('alt');
+            // Ajax => Info Boutique au clic sur le pointeur de la carte
 
-                    // La vue passe en singleView par ajax, gestion du visuel
-                    console.log(viewStatus);
-                    if (viewStatus === "all"){
-                        // Requete AJAX :
-                        $.ajax({
-                            type: 'post',
-                            url: '{{ path("singleView") }}',
-                            data: 'address_id=' + address_id + '&result_content=' +result_content,
-                            datatype: 'html',
-                            success: function(result){
-                                $("#addressList").html(result);
-                            },
-                            error: function(error){
-                                console.log(error)
-                            },
-                        });
-                        viewStatus ="single";
-                    }
-                })
+            $('.leaflet-marker-icon').on('click', function(){
 
-                // Ajax => Info Boutique au clic sur la div du magasin
-                $('#addressList').on('click', '.oneShop', function(){
-                    // La vue passe en singleView par ajax, gestion du visuel
-                    viewStatus = "single";
-                    $('img[alt="https://unpkg.com/leaflet@1.4.0/dist/images/marker-icon.png"]').css('display', 'none');
-                    // https://unpkg.com/leaflet@1.4.0/dist/images/marker-icon.png
+                var address_id = $(this).attr('alt');
 
-                    var address_id = $(this).attr('data-id');
+                // La vue passe en singleView par ajax, gestion du visuel
+                console.log(viewStatus);
+                if (viewStatus === "all"){
+                    // Requete AJAX :
                     $.ajax({
                         type: 'post',
                         url: '{{ path("singleView") }}',
-                        data: 'address_id=' + address_id,
+                        data: 'address_id=' + address_id + '&result_content=' +result_content,
                         datatype: 'html',
                         success: function(result){
                             $("#addressList").html(result);
@@ -238,34 +246,58 @@
                             console.log(error)
                         },
                     });
+                    viewStatus ="single";
+                }
+            })
 
-                })
+            // Ajax => Info Boutique au clic sur la div du magasin
+            $('#addressList').on('click', '.oneShop', function(){
+                // La vue passe en singleView par ajax, gestion du visuel
+                viewStatus = "single";
+                $('img[alt="https://unpkg.com/leaflet@1.4.0/dist/images/marker-icon.png"]').css('display', 'none');
+                // https://unpkg.com/leaflet@1.4.0/dist/images/marker-icon.png
+
+                var address_id = $(this).attr('data-id');
+                $.ajax({
+                    type: 'post',
+                    url: '{{ path("singleView") }}',
+                    data: 'address_id=' + address_id,
+                    datatype: 'html',
+                    success: function(result){
+                        $("#addressList").html(result);
+                    },
+                    error: function(error){
+                        console.log(error)
+                    },
+                });
+
+            })
 
             // Ajax => Retourner sur l'affichage des résultats
-                $('#addressList').on('click', '#result_content', function(){
+            $('#addressList').on('click', '#result_content', function(){
 
-                    // La vue revient sur les resultats par ajax, gestion du visuel
-                    viewStatus = "all";
-                    $('.leaflet-marker-icon').attr('src', currentIcon);
-                    $.ajax({
-                        type: 'post',
-                        url: '{{ path("returnToResult") }}',
-                        data: 'result_content=' + result_content,
-                        datatype: 'html',
-                        success: function(result){
-                            $("#addressList").html(result);
-                        },
-                        error: function(error){
-                            console.log(error)
-                        },
-                    });
-                })
+                // La vue revient sur les resultats par ajax, gestion du visuel
+                viewStatus = "all";
+                $('.leaflet-marker-icon').attr('src', currentIcon);
+                $.ajax({
+                    type: 'post',
+                    url: '{{ path("returnToResult") }}',
+                    data: 'result_content=' + result_content,
+                    datatype: 'html',
+                    success: function(result){
+                        $("#addressList").html(result);
+                    },
+                    error: function(error){
+                        console.log(error)
+                    },
+                });
+            })
 
-                // console.log(current_id);
-                {#path = "{{ path('viewSingle', {id : 0}) }}";#}
-                {#path = path.replace(0, current_id);#}
-                {#document.location.href=path;#}
-            });
+            // console.log(current_id);
+            {#path = "{{ path('viewSingle', {id : 0}) }}";#}
+            {#path = path.replace(0, current_id);#}
+            {#document.location.href=path;#}
+        });
 
 
 
