@@ -70,7 +70,7 @@ class Address
     private $comment;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=50, nullable=true)
      */
     private $image;
 
