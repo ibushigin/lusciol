@@ -93,7 +93,7 @@ class AppFixtures extends Fixture
             $adresse->setDiscount($reductions[array_rand($reductions)]);
             $adresse->setStatus('valid');
             $adresse->setSubCategory($subCategories[array_rand($subCategories)]);
-
+            $adresse->setImage(' ');
             $manager->persist($adresse);
 
             $adresses[] = $adresse;
