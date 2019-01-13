@@ -9,7 +9,7 @@
             <div class="col-12 col-md-3" id="addressList">
                 {% for item in address %}
                     <a href="#" class="linkToSingle">
-                        <article class="oneShop" data-id="{{ item.subCategory.category.label }}&{{ item.id }}">
+                        <article class="oneShop" data-id="{{ item.subCategory.category.label }}_{{ item.id }}">
                             <h2 class="text-center">{{ item.name }}<br></h2>
                             <p>
                                 <strong>Sous-Categorie :</strong> {{ item.subCategory.label }}<br>
@@ -149,19 +149,19 @@
 
             var markerIcon;
             if(item_cat{{ i }} === 'categorie1'){
-                markerIcon = markerYellow;
-            }
-            if(item_cat{{ i }} === 'categorie2'){
                 markerIcon = markerBlue;
             }
-            if(item_cat{{ i }} === 'categorie3'){
+            if(item_cat{{ i }} === 'categorie2'){
                 markerIcon = markerPink;
             }
-            if(item_cat{{ i }} === 'categorie4'){
+            if(item_cat{{ i }} === 'categorie3'){
                 markerIcon = markerGreen;
             }
+            if(item_cat{{ i }} === 'categorie4'){
+                markerIcon = markerYellow;
+            }
 
-            var param = item_cat{{ i }} + '&' + item{{ i }};
+            var param = item_cat{{ i }} + '_' + item{{ i }};
 
 
             var marker{{ i }} = L.marker([latitude{{ i }}, longitude{{ i }}], {icon: markerIcon, alt: param}).addTo(map);
@@ -227,11 +227,14 @@
             // Ajax => Info Boutique au clic sur le pointeur de la carte
 
             $('.leaflet-marker-icon').on('click', function(){
-
-                var address_id = $(this).attr('alt').slice(11);
+                var currentDataID = $(this).attr('alt');
+                var address_id = currentDataID.slice(11);
+                // On supprime toutes les icones qui ne sont pas celle de la boutique selectionnée:
+                $('.leaflet-marker-pane img[alt != "'+currentDataID+'"]').css('display','none');
+                $('.leaflet-shadow-pane').css('display','none');
 
                 // La vue passe en singleView par ajax, gestion du visuel
-                console.log(viewStatus);
+                // console.log(viewStatus);
                 if (viewStatus === "all"){
                     // Requete AJAX :
                     $.ajax({
@@ -253,24 +256,29 @@
             // Ajax => Info Boutique au clic sur la div du magasin
             $('#addressList').on('click', '.oneShop', function(){
                 // La vue passe en singleView par ajax, gestion du visuel
-                viewStatus = "single";
-                $('img[alt="https://unpkg.com/leaflet@1.4.0/dist/images/marker-icon.png"]').css('display', 'none');
-                // https://unpkg.com/leaflet@1.4.0/dist/images/marker-icon.png
 
-                var address_id = $(this).attr('data-id').slice(11);
-                $.ajax({
-                    type: 'post',
-                    url: '{{ path("singleView") }}',
-                    data: 'address_id=' + address_id,
-                    datatype: 'html',
-                    success: function(result){
-                        $("#addressList").html(result);
-                    },
-                    error: function(error){
-                        console.log(error)
-                    },
-                });
+                var currentDataID = $(this).attr('data-id');
+                var address_id = currentDataID.slice(11);
+                // On supprime toutes les icones qui ne sont pas celle de la boutique selectionnée:
+                $('.leaflet-marker-pane img[alt != "'+currentDataID+'"]').css('display','none');
+                $('.leaflet-shadow-pane').css('display','none');
 
+                if(viewStatus === "all"){
+                    //Requete AJAX
+                    $.ajax({
+                        type: 'post',
+                        url: '{{ path("singleView") }}',
+                        data: 'address_id=' + address_id,
+                        datatype: 'html',
+                        success: function(result){
+                            $("#addressList").html(result);
+                        },
+                        error: function(error){
+                            console.log(error)
+                        },
+                    });
+                    viewStatus = "single";
+                }
             })
 
             // Ajax => Retourner sur l'affichage des résultats
@@ -278,11 +286,7 @@
 
                 // La vue revient sur les resultats par ajax, gestion du visuel
                 viewStatus = "all";
-                if($('.leaflet-marker-icon').attr('alt').slice(9, 1) === "1"){
-                    console.log('categorie1 trouvée')
-                }
 
-                // $('.leaflet-marker-icon').attr('src', currentIcon);
                 $.ajax({
                     type: 'post',
                     url: '{{ path("returnToResult") }}',
@@ -295,17 +299,27 @@
                         console.log(error)
                     },
                 });
+                // On remet l'icone qu'avait le magasin sur la carte avant que l'on clic dessus
+                // Depuis le data ID genéré depuis ajax/returnToResult.html.twig
+                var dataID = $(this).attr('data-id');
+                var cat = dataID.slice(9,10);
+                var markerAddress = $("img[alt='"+dataID+"']");
+                if(cat ==='1'){
+                    markerAddress.attr('src', '{{ asset("img/marker-blue.png") }}');
+                }
+                if(cat ==='2'){
+                    markerAddress.attr('src', '{{ asset("img/marker-pink.png") }}');
+                }
+                if(cat ==='3'){
+                    markerAddress.attr('src', '{{ asset("img/marker-green.png") }}');
+                }
+                if(cat ==='4'){
+                    markerAddress.attr('src', '{{ asset("img/marker-yellow.png") }}');
+                }
+                // On reaffiche tous les marker vu qu'on reviens a une vue ALL
+                $('.leaflet-shadow-pane').css('display','block');
+                $('.leaflet-marker-pane img').css('display','block');
             })
-
-            // console.log(current_id);
-            {#path = "{{ path('viewSingle', {id : 0}) }}";#}
-            {#path = path.replace(0, current_id);#}
-            {#document.location.href=path;#}
         });
-
-
-
-
-
     </script>
 {% endblock %}
