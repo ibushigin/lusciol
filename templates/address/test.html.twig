@@ -9,7 +9,7 @@
             <div class="col-12 col-md-3" id="addressList">
                 {% for item in address %}
                     <a href="#" class="linkToSingle">
-                        <article class="oneShop" data-id="{{ item.id }}">
+                        <article class="oneShop" data-id="{{ item.subCategory.category.label }}&{{ item.id }}">
                             <h2 class="text-center">{{ item.name }}<br></h2>
                             <p>
                                 <strong>Sous-Categorie :</strong> {{ item.subCategory.label }}<br>
@@ -182,6 +182,7 @@
             var currentIcon;
             var viewStatus = "all";
 
+
             $('#addressList').on('mouseenter', '.oneShop', function(){
                 $(this).css('background-color', '#a7abb2');
                 let address_id = $(this).attr('data-id');
@@ -228,7 +229,7 @@
 
             $('.leaflet-marker-icon').on('click', function(){
 
-                var address_id = $(this).attr('alt');
+                var address_id = $(this).attr('alt').slice(11);
 
                 // La vue passe en singleView par ajax, gestion du visuel
                 console.log(viewStatus);
@@ -257,7 +258,7 @@
                 $('img[alt="https://unpkg.com/leaflet@1.4.0/dist/images/marker-icon.png"]').css('display', 'none');
                 // https://unpkg.com/leaflet@1.4.0/dist/images/marker-icon.png
 
-                var address_id = $(this).attr('data-id');
+                var address_id = $(this).attr('data-id').slice(11);
                 $.ajax({
                     type: 'post',
                     url: '{{ path("singleView") }}',
@@ -278,6 +279,13 @@
 
                 // La vue revient sur les resultats par ajax, gestion du visuel
                 viewStatus = "all";
+                if($('.leaflet-marker-icon').attr('alt').slice(9, 1) === "1"){
+                    console.log('categorie1 trouvée')
+                }
+
+
+
+
                 $('.leaflet-marker-icon').attr('src', currentIcon);
                 $.ajax({
                     type: 'post',
