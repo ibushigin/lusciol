@@ -73,7 +73,7 @@
             // Non recupérable dans la balise img
              var CustomL = L.Icon.extend({
                  options: {
-                     iconSize: [25, 41],
+                     iconSize: [30, 41],
                      shadowUrl: '{{ asset("img/marker-shadow.png") }}',
                      shadowAnchor: [10, 20],
                      item_cat : "",
@@ -89,7 +89,6 @@
                 iconUrl: '{{ asset("img/marker-blue.png") }}',
                 item_cat: 'categorie1',
             });
-            markerBlue.options.tabindex = '25';
 
             var markerPink = new CustomL({
                 iconUrl: '{{ asset("img/marker-pink.png") }}',
@@ -283,10 +282,7 @@
                     console.log('categorie1 trouvée')
                 }
 
-
-
-
-                $('.leaflet-marker-icon').attr('src', currentIcon);
+                // $('.leaflet-marker-icon').attr('src', currentIcon);
                 $.ajax({
                     type: 'post',
                     url: '{{ path("returnToResult") }}',
