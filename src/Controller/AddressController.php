@@ -37,7 +37,7 @@ class AddressController extends AbstractController
      */
     public function viewAll(){
         $repository = $this->getDoctrine()->getRepository(Address::class);
-        $address = $repository->findAll();
+        $address = $repository->findAllValidAddress();
 
 
         $locations_lat = [];
@@ -85,6 +85,8 @@ class AddressController extends AbstractController
             //je remplace l'attribut imgae qui contient toujours le fichier par le nom du fichier
             $address->setImage($filename);
 
+            $address->setStatus('pending');
+
             $entityManager = $this->getDoctrine()->getManager(); 
 
             $entityManager->persist($address);
@@ -98,6 +100,14 @@ class AddressController extends AbstractController
         }
 
         return $this->render('address/add.html.twig', ['form' => $form->createView()]);
+
+    }
+
+    /**
+     * @Route("/address/validateAddress/{id}", name="valideAddress", requirements={"id"="[0-9]+"})
+     */
+
+    public function validateAddress(){
 
     }
 
