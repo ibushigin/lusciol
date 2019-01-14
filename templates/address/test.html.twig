@@ -8,7 +8,6 @@
 
         <div class="row">
             <div class="col-12 col-md-3" id="addressList">
-<<<<<<< HEAD
                 <div class="container">
                     <div class="search input-group col-12">
                         <div class="input-group-prepend ">
@@ -37,21 +36,6 @@
                         </a>
                     {% endfor %}
                 </div>
-=======
-                {% for item in address %}
-                    <a href="#" class="linkToSingle">
-                        <article class="oneShop" data-id="{{ item.subCategory.category.label }}_{{ item.id }}">
-                            <h2 class="text-center">{{ item.name }}<br></h2>
-                            <p>
-                                <strong>Sous-Categorie :</strong> {{ item.subCategory.label }}<br>
-                                <strong>Categorie :</strong> {{ item.subCategory.category.label }}<br>
-                                <strong>Réduction :</strong> {{ item.discount }}<br>
-                            </p>
-                        </article>
-                    </a>
-                    <hr>
-                {% endfor %}
->>>>>>> parent of 69f0b2b... Merge branch 'master' of https://github.com/ibushigin/lusciol
             </div>
             <div class="col-12 col-md-9">
                 <div id="map"></div>
