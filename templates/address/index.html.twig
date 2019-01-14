@@ -5,11 +5,9 @@
 {% block body %}
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 col-md-3">
-                <div id="addressSearch">
-                    <p>barre de recherche</p>
-                </div>
-                <div class="addressList">
+            <div class="col-12 col-md-3" id="addressList">
+
+
                     {% for item in address %}
                         <a href="#" class="linkToSingle">
                             <article class="oneShop" data-id="{{ item.id }}">
@@ -18,13 +16,11 @@
                                     <strong>Sous-Categorie :</strong> {{ item.subCategory.label }}<br>
                                     <strong>Categorie :</strong> {{ item.subCategory.category.label }}<br>
                                     <strong>Réduction :</strong> {{ item.discount }}<br>
-                                    <p>ljklkjlkjlkjlkj</p>
                                 </p>
                             </article>
                         </a>
                         <hr>
                     {% endfor %}
-                </div>
 
             </div>
             <div class="col-12 col-md-9">
