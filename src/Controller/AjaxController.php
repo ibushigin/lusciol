@@ -41,4 +41,13 @@ class AjaxController extends AbstractController
             'result_content' => $result_content,
         ]);
     }
+
+    /**
+     * @Route("/ajax/admin/pendingRestult"), name="pendingResult")
+     */
+    public function pendingResult(Request $request)
+    {
+        $pend
+    }
+
 }
