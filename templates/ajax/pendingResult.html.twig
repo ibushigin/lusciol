@@ -10,9 +10,21 @@
     <strong>Site internet :</strong> {{ address.website }}<br>
     <strong>Réduction :</strong> {{ address.discount }}<br>
     <strong>Statut :</strong> {{ address.status }}<br>
+    <div class="col-12 d-flex justify-content-around mt-5">
+
+            <button class="btn btn-success">Valider</button>
+
+
+            <button class="btn btn-warning">Modifier</button>
+
+
+            <button class="btn btn-danger">Refuser</button>
+        
+    </div>
 </article>
 
 
+{#{{ path('validateAddress', {id : address.id}) }}#}
 
 
     {#{{ form_start(form) }}#}

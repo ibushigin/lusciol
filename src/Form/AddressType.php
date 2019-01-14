@@ -23,7 +23,6 @@ class AddressType extends AbstractType
             ->add('coordinates', TextType::class)
             ->add('tel', TextType::class)
             ->add('discount', TextType::class)
-            ->add('status', TextType::class)
             ->add('subCategory',EntityType::class, [
                 'class' => SubCategory::class, 
                 'choice_label' => 'label'

@@ -61,6 +61,18 @@ class AddressRepository extends ServiceEntityRepository
             ->getQuery();
         return $qb->execute();
     }
+
+    public function findAllValidAddress(){
+        $qb = $this->createQueryBuilder('a')
+            ->innerJoin('a.subCategory', 'sc')
+            ->addSelect('sc')
+            ->innerJoin('sc.category', 'c')
+            ->addSelect('c')
+            ->andWhere('a.status = :status')
+            ->setParameter(':status', 'valid')
+            ->getQuery();
+        return $qb->execute();
+    }
 }
 
 //'
