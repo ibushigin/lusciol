@@ -9,7 +9,7 @@
         {# Pictogrammes ICONES #}
 
         {# Typographies GOOGLE FONT#}
-        <link href="https://fonts.googleapis.com/css?family=Baloo" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Chivo" rel="stylesheet">
         {#Le css bootstrap#}
         <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
         {#Fontawesome#}
@@ -27,7 +27,12 @@
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="{{ path('home') }}"><img src="{{ asset("img/logo.png") }}" alt="LusciolLogo" width="100"></a>
+    <a class="navbar-brand" href="{{ path('home') }}">
+    
+    <div class="LogoLusciol">
+         <img src="{{ asset("img/logo.png") }}" alt="LusciolLogo" width="120"></a>
+    </div>
+
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -35,7 +40,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link text-info" href="{{ path('viewAll') }}">Map</a>
+                <a class="nav-link text-white" href="{{ path('viewAll') }}">Map</a>
             </li>
             {# crée un lien vers la page admin si on a le role admin #}
             {% if is_granted('ROLE_ADMIN') %}
@@ -46,9 +51,6 @@
             {# liens login si je ne suis pas connecté ou logout si je suis connecté #}
             {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
                 {# je ne suis pas connecté#}
-                <li class="nav-item">
-                    <a class="nav-link text-success" href="{{ path('app_login') }}">Login</a>
-                </li>
             {% else %}
                 <li class="nav-item">
                     <a class="nav-link text-info" href="{{ path('userInfo') }}">Profile</a>
@@ -56,8 +58,14 @@
                 <li class="nav-item">
                     <a class="nav-link text-danger" href="{{ path('logout') }}">Logout</a>
                 </li>
+
+                </li>
             {% endif %}
         </ul>
+               {# Picto connexion#}
+                <div class="Connect">
+                    <i class="fas fa-user"></i>
+                </div>
     </div>
 </nav>
 

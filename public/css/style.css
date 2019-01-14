@@ -1,110 +1,84 @@
+@font-face {
+ font-family: "TektonPro-BoldCond";
+ src: url("../typo/TektonPro-BoldCond.otf") format("otf");
+}
+
 /*HOME*/
+
+/*HEADER*/
 
 .container-fluid{
 	padding: 0 !important; 
 }
 
-/* ANIMATION STARS */
+/*CONTAIN*/
 
-@keyframes move-twink-back {
-  from {background-position:0 0;}
-  to {background-position:-10000px 5000px;}
-}
-@-webkit-keyframes move-twink-back {
-  from {background-position:0 0;}
-  to {background-position:-10000px 5000px;}
-}
-@-moz-keyframes move-twink-back {
-  from {background-position:0 0;}
-  to {background-position:-10000px 5000px;}
-}
-@-ms-keyframes move-twink-back {
-  from {background-position:0 0;}
-  to {background-position:-10000px 5000px;}
+.ConceptLUSCIOl h1{
+	color: rgb(88, 89,91);
+	margin-top: 50px; 
+	font-size: 3rem; 
+	font-family: 'TektonPro-BoldCond'; 
+	text-align: center;
 }
 
-.stars, .twinkling {
-  padding: 0;
-  min-height: 900px;
-  width:100%;
-  display:block;
-  color:#fff;
-  overflow: hidden;
+.ConceptLUSCIOl p{
+	margin-top: 20px; 
+	font-family: 'PT Serif', serif;
+	text-align: justify;
+  	text-justify: inter-word;
 }
 
-.block-partner{ 
-	background-image: url('../img/fond1.jpeg');
+.barre{
+	text-align: center; 
 }
 
-.stars_trace, .twinkling_trace {
-  min-height: 450px;
-  width:100%;
-  display:block;
-  color:#fff;
-}
-.stars_trace{
-  background:#061f3c url(../img/stars_trace.png) repeat top center;
-  z-index:0;
-}
-.twinkling_trace{
-    padding-top: 20px;
-    background:transparent url(../img/twinkling.png) repeat top center;
-    z-index:1;
-    -moz-animation:move-twink-back 170s linear infinite;
-    -o-animation:move-twink-back 170s linear infinite;
-    -webkit-animation:move-twink-back 170s linear infinite;
-    animation:move-twink-back 170s linear infinite;
+
+/*NAVBAR*/
+
+.Connect i{
+	font-size: 1.5rem;
+	color: white;
 }
 
-.stars {
-  background:#061f3c url(../img/stars.png) repeat top center;
-  z-index:0;
-}
-
-.twinkling{
-	height: 100%;
-    background:transparent url(../img/twinkling.png) repeat top center;
-    z-index:1;
-    -moz-animation:move-twink-back 170s linear infinite;
-    -o-animation:move-twink-back 170s linear infinite;
-    -webkit-animation:move-twink-back 170s linear infinite;
-    animation:move-twink-back 170s linear infinite;
-}
-
-.content-etoile{
-  position: relative;
-  text-align: center;
-  height: 150px;
-  margin: auto;
-}
-
-/*/adresse/all*/
-
-#map {
-    height: 100vh;
-    width: 100%;
-	margin-top: 50px;
-}
-
-#addressList{
-	margin-top: 50px;
-	height: 80vh;
-	background-color: #d7dae0;
-	overflow-y: scroll;
-	padding : 0;
-}
-
-.linkToSingle, #addressList a:hover {
+.nav-item a{
+	color: white;
+	font-size: 1.5rem; 
+	font-family: 'TektonPro-BoldCond'; 
+	margin-left: 50px;
 	text-decoration: none;
+	padding-bottom: 10px;
 	color: black;
-}
-
-#addressList a:hover{
+	transition: 0.3s ease;
 	text-decoration: none;
-	color: black;
+	border-top: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	padding: 10px 0;
 }
 
-.oneShop{
-	padding: 0 20px;
+.nav-item a:hover{
+	text-decoration: none;
+	border-top: 2px solid #d2d5db;
+	border-bottom: 2px solid #d2d5db;
+	padding: 2px 0; 
+	color: #d2d5db;
+
 }
+
+.background{
+	background-image: url('../img/fond1.jpg'); 
+	background-repeat: no-repeat; 
+	height: 800px;
+	z-index: 0; 
+	position: relative;
+}
+
+.Arrow{
+	color: white;
+	text-align: center; 
+	position: relative; 
+	z-index: 1; 
+	top: 730px;
+}
+
+
 
