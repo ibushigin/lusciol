@@ -47,4 +47,30 @@ class AddressRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function pendingAddress(){
+        $status = 'pending';
+        $qb = $this->createQueryBuilder('a')
+
+            ->innerJoin('a.subCategory', 'sc')
+            ->addSelect('sc')
+            ->innerJoin('sc.category', 'c')
+            ->addSelect('c')
+            ->andWhere('a.status = :status')
+            ->setParameter(':status', $status)
+            ->getQuery();
+        return $qb->execute();
+    }
 }
+
+//'
+//            SELECT address.id as id, name, location, website, coordinates, tel, discount, status, image, sub_category_id, sub_category.id  from address
+//            INNER JOIN sub_category ON address.sub_category_id = sub_category.id
+//            INNER JOIN category ON sub_category.category_id = category.id
+//            WHERE status = :status
+//$select = $connexion->prepare($sql);
+//$select->bindValue(':status', 'pending');
+//$select->execute();
+//
+//return $select->fetchAll();
+//        '
