@@ -7,6 +7,20 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 col-md-3" id="addressList">
+                <div class="container">
+                <div class="search ">
+                    <form>
+                        <div class="form-row">
+                            <div class="form-group col-10 pr-0">
+                                <input type="text" class="form-control border-secondary shadow-none ">
+                            </div>
+                            <div class="col-2  pl-0">
+                                <button type="submit" class="btn btn-secondary"><i class="fas fa-search"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                </div>
                 {% for item in address %}
                     <a href="#" class="linkToSingle">
                         <article class="oneShop" data-id="{{ item.subCategory.category.label }}_{{ item.id }}">
