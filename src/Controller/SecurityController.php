@@ -70,7 +70,7 @@ class SecurityController extends AbstractController
             }
             $url = $this->generateUrl('app_reset_password', array('token' => $token), UrlGeneratorInterface::ABSOLUTE_URL);
             $message = (new \Swift_Message('Oubli mot de passe'))
-                ->setFrom('jeanmickhail@gmail.com')
+                ->setFrom('z8rpz42@gmail.com')
                 ->setTo($user->getEmail())
                 ->setBody(
                     "Voici le token pour réinitialiser votre mot de passe : " . $url,
@@ -92,14 +92,18 @@ class SecurityController extends AbstractController
             $user = $entityManager->getRepository(User::class)->findOneByResetToken($token);
             /* @var $user User */
             if ($user === null) {
-                $this->addFlash('danger', 'Token Inconnu');
+                $this->addFlash('danger', 'Token inconnu');
                 return $this->redirectToRoute('home');
             }
             $user->setResetToken(null);
-            $user->setPassword($passwordEncoder->encodePassword($user, $request->request->get('password')));
-            $entityManager->flush();
-            $this->addFlash('notice', 'Mot de passe mis à jour');
-            return $this->redirectToRoute('home');
+            if($request->request->get('password') === $request->request->get('repeatedPassword')) {
+                $user->setPassword($passwordEncoder->encodePassword($user, $request->request->get('password')));
+                $entityManager->flush();
+                $this->addFlash('notice', 'Mot de passe mis à jour');
+                return $this->redirectToRoute('home');
+            }else{
+                $this->addFlash('danger', 'Les mots de passe ne correspondent pas');
+            }
         }else {
             return $this->render('security/reset_password.html.twig', ['token' => $token]);
         }
