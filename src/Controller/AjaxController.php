@@ -47,7 +47,7 @@ class AjaxController extends AbstractController
      */
     public function pendingResult(Request $request)
     {
-        $pend
+        
     }
 
 }
