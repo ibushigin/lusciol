@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Address;
 use App\Form\AddressType;
+use App\Service\FileUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -47,7 +48,7 @@ class AjaxController extends AbstractController
      * @Route("/ajax/pendingResult", name="pendingResult")
      */
 
-    public function pendingResult(Request $request)
+    public function pendingResult(Request $request, FileUploader $fileuploader)
     {
         $address_id = $request->request->get('address_id', null);
         if(empty($address_id) || !preg_match("#^\d+$#", $address_id)){
@@ -58,9 +59,7 @@ class AjaxController extends AbstractController
             ->getRepository(Address::class)
             ->find($address_id);
 
-
-
-        $form = $this->createForm(AddressType::class);
+        $form = $this->createForm(AddressType::class, $address);
 
         $form->handleRequest($request);
 
@@ -77,6 +76,8 @@ class AjaxController extends AbstractController
             //je remplace l'attribut imgae qui contient toujours le fichier par le nom du fichier
             $address->setImage($filename);
 
+            $address->setStatus('pending');
+
             $entityManager = $this->getDoctrine()->getManager();
 
             $entityManager->persist($address);
@@ -85,7 +86,7 @@ class AjaxController extends AbstractController
 
             $this->addFlash('success', 'Adresse ajoutée');
 
-            return $this->redirectToRoute('manageAddress');
+            return $this->redirectToRoute('viewAll');
 
         }
 

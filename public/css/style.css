@@ -109,3 +109,8 @@
 .oneShop{
 	padding: 0 20px;
 }
+
+/*Formulaire de modification sur la page http://localhost:8000/admin/manageAddress*/
+#addressForm{
+	display: none;
+}

@@ -18,6 +18,7 @@ class AddressType extends AbstractType
     {
         $builder
             ->add('name', TextType::class)
+            ->add('id', TextType::class)
             ->add('location', TextType::class )
             ->add('website', TextType::class)
             ->add('coordinates', TextType::class)
@@ -27,8 +28,12 @@ class AddressType extends AbstractType
                 'class' => SubCategory::class, 
                 'choice_label' => 'label'
             ])
-            ->add('image', FileType::class, ['required' => false])
+            ->add('image', FileType::class, [
+                'required' => false,
+                'data_class' => null
+            ])
             ->add('save', SubmitType::class)
+
         ;
     }
 
