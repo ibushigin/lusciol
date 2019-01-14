@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Manage Address{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-md-3" id="addressList">
+
+
+                {% for item in address %}
+                    <a href="#" class="linkToSingle">
+                        <article class="oneShop" data-id="{{ item.id }}">
+                            <h2 class="text-center">{{ item.name }}<br></h2>
+                            <p>
+                                <strong>Sous-Categorie :</strong> {{ item.subCategory.label }}<br>
+                                <strong>Categorie :</strong> {{ item.subCategory.category.label }}<br>
+                                <strong>Réduction :</strong> {{ item.discount }}<br>
+                            </p>
+                        </article>
+                    </a>
+                    <hr>
+                {% endfor %}
+
+            </div>
+            <div class="col-12 col-md-9">
+                <div id="map"></div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
