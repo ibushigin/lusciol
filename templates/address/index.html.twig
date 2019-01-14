@@ -5,23 +5,26 @@
 {% block body %}
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 col-md-3" id="addressList">
-            {% for item in address %}
-                <a href="{{ path('viewSingle', {id : item.id}) }}" class="linkToSingle">
-                <article class="oneShop">
-                    <strong>Nom :</strong> {{ item.name }}<br>
-                    <strong>Sous-Categorie :</strong> {{ item.subCategory.label }}<br>
-                    <strong>Categorie :</strong> {{ item.subCategory.category.label }}<br>
-                    <strong>Adresse :</strong> {{ item.location }}<br>
-                    {#<strong>Coordoonées géographiques :</strong> {{ item.coordinates }}<br>#}
-                    <strong>Tel :</strong> {{ item.tel }}<br>
-                    <strong>Site internet :</strong> {{ item.website }}<br>
-                    <strong>Réduction :</strong> {{ item.discount }}<br>
-                    {#<strong>Statut :</strong> {{ item.status }}<br>#}
-                </article>
-                </a>
-                <hr>
-            {% endfor %}
+            <div class="col-12 col-md-3">
+                <div class="addressSearch">
+                    <p>barre de recherche</p>
+                </div>
+                <div class="addressList">
+                    {% for item in address %}
+                        <a href="#" class="linkToSingle">
+                            <article class="oneShop" data-id="{{ item.id }}">
+                                <h2 class="text-center">{{ item.name }}<br></h2>
+                                <p>
+                                    <strong>Sous-Categorie :</strong> {{ item.subCategory.label }}<br>
+                                    <strong>Categorie :</strong> {{ item.subCategory.category.label }}<br>
+                                    <strong>Réduction :</strong> {{ item.discount }}<br>
+                                </p>
+                            </article>
+                        </a>
+                        <hr>
+                    {% endfor %}
+                </div>
+
             </div>
             <div class="col-12 col-md-9">
                 <div id="map"></div>
@@ -45,14 +48,16 @@
             let osmAttrib = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
             let osm = L.tileLayer(osmUrl, {maxZoom: 18, attribution: osmAttrib});
             //restriction géographique
-            var corner1 = L.latLng(44.8153, -0.6279);
-            var corner2 = L.latLng(44.8687, -0.5127);
+            var corner1 = L.latLng(44.7426, -0.7526);
+            var corner2 = L.latLng(44.9801, -0.2935);
             var bounds = L.latLngBounds(corner1, corner2);
 
 
 
             let map = L.map('map').setView(bordeaux, 14);
             map.setMaxBounds(bounds);
+            map.options.maxZoom = 18;
+            map.options.minZoom = 13;
 
 
 
@@ -73,6 +78,31 @@
                 iconUrl: '{{ asset("img/markerPosition.png") }}',
                 iconSize:     [20, 20], // size of the icon
             });
+            var basicMarker =  L.icon({
+                iconUrl: '{{ asset("img/marker-icon.png") }}',
+                iconSize:     [25, 41], // size of the icon
+
+            });
+            var markerCat1 = L.icon({
+                iconUrl: '{{ asset("img/") }}',
+                iconSize:     [20, 20], // size of the icon
+            });
+            var markerCat2 = L.icon({
+                iconUrl: '{{ asset("img/") }}',
+                iconSize:     [20, 20], // size of the icon
+            });
+            var markerCat3 = L.icon({
+                iconUrl: '{{ asset("img/") }}',
+                iconSize:     [20, 20], // size of the icon
+            });
+            var markerCat4 = L.icon({
+                iconUrl: '{{ asset("img/") }}',
+                iconSize:     [20, 20], // size of the icon
+            });
+            var markerPoint = L.icon({
+                iconUrl: '{{ asset("img/markerPoint.png") }}',
+                iconSize:     [30, 49], // size of the icon
+            });
 
             //Géolocalisation
 
@@ -82,7 +112,7 @@
             }
             map.on('locationfound', onLocationFound);
             function onLocationError(e) {
-                alert(e.message);
+                // alert(e.message);
             }
             map.on('locationerror', onLocationError);
 
@@ -108,43 +138,140 @@
 
                 {% set nbAddress = nbAddress-1 %}
 
+
             {% for i in 0..nbAddress %}
                 var marker{{ i }} = L.marker([latitude{{ i }}, longitude{{ i }}], {alt: item{{ i }}}).addTo(map);
+                marker{{ i }}.myCustomID ={{ i }};
             {% endfor %}
+
+            // Stockage des résultat de recherche dans une variable pour pouvoir revenir en ajax sur la page des
+            // résultats
+
+            //TODO QUAND UNE RECHERCHE OU APPLICATION DE FILTRE PAR L UTILISATEUR SERA EFFECTUE,
+            // IL FAUDRA INCLURE LA MISE A JOUR DE LA VARIABLE result-content
+
+            var result_content = $('#addressList').html();
 
             // Gestion du CSS dynamique pour le lien vers les pages boutique
 
-            $('.oneShop').on('mouseenter', function(){
-                $(this).css('background-color', '#a7abb2')});
-                $
-            $('.oneShop').on('mouseleave', function(){
-                $(this).css('background-color', '#d7dae0')});
-            $('.leaflet-marker-icon').on('click', function(){
 
-                // Requete AJAX :
+            var currentIcon;
+            var viewStatus = "all";
+
+            $('#addressList').on('mouseenter', '.oneShop', function(){
+                $(this).css('background-color', '#a7abb2');
+                let address_id = $(this).attr('data-id');
+                if(viewStatus === "all"){
+                currentIcon = $("img[alt='"+address_id+"']").attr('src');
+                $("img[alt='"+address_id+"']").attr('src', '{{ asset("img/markerPoint.png") }}');
+                }
+            });
+
+
+
+            $('#addressList').on('mouseleave', '.oneShop', function(){
+                $(this).css('background-color', '#d7dae0');
+                let address_id = $(this).attr('data-id');
+                if(viewStatus === "all") {
+                    $("img[alt='" + address_id + "']").attr('src', currentIcon);
+                }
+            });
+
+            // Surbrillance des infos boutique au survol de l'icone sur la carte
+
+            $('.leaflet-marker-icon').on('mouseenter', function(){
                 var address_id = $(this).attr('alt');
-                $.ajax({
-                    type: 'post',
-                    url: '{{ path("singleView") }}',
-                    data: 'address_id=' + address_id,
-                    datatype: 'html',
-                    success: function(result){
-                        $("#addressList").html(result);
-                    },
-                    error: function(error){
-                        console.log(error)
-                    },
+                $("article[data-id='"+address_id+"']").css('background-color', '#a7abb2');
+                if (viewStatus === "all"){
+                    currentIcon = $("img[alt='"+address_id+"']").attr('src');
+                    $("img[alt='"+address_id+"']").attr('src', '{{ asset("img/markerPoint.png") }}');
+                }
+
+            })
+
+            $('.leaflet-marker-icon').on('mouseleave', function(){
+                var address_id = $(this).attr('alt');
+                $("article[data-id='"+address_id+"']").css('background-color', '#d7dae0');
+                if (viewStatus === "all"){
+                    $("img[alt='"+address_id+"']").attr('src', currentIcon);
+                }
+            })
+
+
+                // Ajax => Info Boutique au clic sur le pointeur de la carte
+
+                $('.leaflet-marker-icon').on('click', function(){
+
+                    var address_id = $(this).attr('alt');
+
+                    // La vue passe en singleView par ajax, gestion du visuel
+                    console.log(viewStatus);
+                    if (viewStatus === "all"){
+                        // Requete AJAX :
+                        $.ajax({
+                            type: 'post',
+                            url: '{{ path("singleView") }}',
+                            data: 'address_id=' + address_id + '&result_content=' +result_content,
+                            datatype: 'html',
+                            success: function(result){
+                                $("#addressList").html(result);
+                            },
+                            error: function(error){
+                                console.log(error)
+                            },
+                        });
+                        viewStatus ="single";
+                    }
                 })
 
+                // Ajax => Info Boutique au clic sur la div du magasin
+                $('#addressList').on('click', '.oneShop', function(){
+                    // La vue passe en singleView par ajax, gestion du visuel
+                    viewStatus = "single";
+                    $('img[alt="https://unpkg.com/leaflet@1.4.0/dist/images/marker-icon.png"]').css('display', 'none');
+                    // https://unpkg.com/leaflet@1.4.0/dist/images/marker-icon.png
+
+                    var address_id = $(this).attr('data-id');
+                    $.ajax({
+                        type: 'post',
+                        url: '{{ path("singleView") }}',
+                        data: 'address_id=' + address_id,
+                        datatype: 'html',
+                        success: function(result){
+                            $("#addressList").html(result);
+                        },
+                        error: function(error){
+                            console.log(error)
+                        },
+                    });
+
+                })
+
+            // Ajax => Retourner sur l'affichage des résultats
+                $('#addressList').on('click', '#result_content', function(){
+
+                    // La vue revient sur les resultats par ajax, gestion du visuel
+                    viewStatus = "all";
+                    $('.leaflet-marker-icon').attr('src', currentIcon);
+                    $.ajax({
+                        type: 'post',
+                        url: '{{ path("returnToResult") }}',
+                        data: 'result_content=' + result_content,
+                        datatype: 'html',
+                        success: function(result){
+                            $("#addressList").html(result);
+                        },
+                        error: function(error){
+                            console.log(error)
+                        },
+                    });
+                })
 
                 // console.log(current_id);
                 {#path = "{{ path('viewSingle', {id : 0}) }}";#}
                 {#path = path.replace(0, current_id);#}
                 {#document.location.href=path;#}
-            })
-
-
-        });
+            });
 
 
 

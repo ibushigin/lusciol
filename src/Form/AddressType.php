@@ -8,6 +8,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use App\Entity\SubCategory; 
 
 class AddressType extends AbstractType
@@ -26,6 +28,8 @@ class AddressType extends AbstractType
                 'class' => SubCategory::class, 
                 'choice_label' => 'label'
             ])
+            ->add('image', FileType::class, ['required' => false])
+            ->add('save', SubmitType::class)
         ;
     }
 

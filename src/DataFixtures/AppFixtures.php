@@ -53,7 +53,7 @@ class AppFixtures extends Fixture
 
         }
 
-        for($i=1;$i<=10;$i++){
+        for($i=1;$i<=4;$i++){
 
             $categorie = new Category();
             $categorie->setLabel('categorie' . $i);
@@ -93,7 +93,7 @@ class AppFixtures extends Fixture
             $adresse->setDiscount($reductions[array_rand($reductions)]);
             $adresse->setStatus('valid');
             $adresse->setSubCategory($subCategories[array_rand($subCategories)]);
-
+            $adresse->setImage(' ');
             $manager->persist($adresse);
 
             $adresses[] = $adresse;

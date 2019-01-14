@@ -36,6 +36,19 @@
 	line-height: 4.5rem; 
 }
 
+.PictoConnect{
+	z-index: 2;
+	position:relative;
+	top: -12.5em;
+	left: 90em; 
+}
+
+.buttons{
+	text-align: center;
+}
+
+
+
 /*/adresse/all*/
 
 #map {

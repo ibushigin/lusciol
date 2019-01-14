@@ -43,6 +43,7 @@ class AddressController extends AbstractController
         $locations_lat = [];
         $locations_long = [];
         $address_ids = [];
+        $address_cat = [];
 
         foreach ($address as $adr){
 
@@ -53,18 +54,19 @@ class AddressController extends AbstractController
             $locations_lat[] = $lat;
             $locations_long[] = $long;
             $address_ids[] = $adr->getId();
+            $address_cat[] = $adr->getSubCategory()->getCategory()->getLabel();
             $nbAdress = count($locations_lat);
         }
 
-        return $this->render('address/index.html.twig', [
-            'address' => $address, 'locations_lat' => $locations_lat, 'locations_long' => $locations_long, 'nbAddress' =>$nbAdress, 'address_ids' => $address_ids
+        return $this->render('address/test.html.twig', [
+            'address' => $address, 'locations_lat' => $locations_lat, 'locations_long' => $locations_long, 'nbAddress' =>$nbAdress, 'address_ids' => $address_ids, 'address_cat' => $address_cat,
         ]);
     }
 
      /**
     *@Route("/address/add", name="addAddress")
     */
-    public function addAdress(Request $request){
+    public function addAdress(Request $request, FileUploader $fileuploader){
 
         $form = $this->createForm(AddressType::class);
 
@@ -83,13 +85,15 @@ class AddressController extends AbstractController
             //je remplace l'attribut imgae qui contient toujours le fichier par le nom du fichier
             $address->setImage($filename);
 
+            $entityManager = $this->getDoctrine()->getManager(); 
+
             $entityManager->persist($address);
 
             $entityManager->flush();
 
             $this->addFlash('success', 'Adresse ajoutée');
 
-            return $this->redirectToRoute('articles');
+            return $this->redirectToRoute('viewAll');
 
         }
 
