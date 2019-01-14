@@ -4,48 +4,43 @@
 
 {% block body %}
 
-
     <div class="container-fluid">
         <container>
             <div class="form-group col-6 col-md-3 mt-5 mx-auto">
-                <select id="pendingAddress" class="form-control">
+                <select id="selectPendingAddress" class="form-control" name="selectPendingAddress">
                     <option value="null">Adresses en attente de validation</option>
                     {% for address in pendingAddress %}
                         <option value="{{ address.id }}">{{ address.name }}</option>
                     {% endfor %}
                 </select>
             </div>
-            <div class="pendingResult">
-
+            <div id="pendingResult" class="col-6 col-md-3 mt-5 mx-auto">
             </div>
-
         </container>
     </div>
 
+{% endblock %}
 
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $('#selectPendingAddress').on('change', function(){
 
-    {#<div class="container-fluid">#}
-        {#<div class="row">#}
-            {#<h2>Magasins en attente de validation :</h2>#}
+            pendingAddressId = $('#selectPendingAddress option:selected').val();
+            console.log(pendingAddressId);
 
-            {#<div class="col-12 col-md-10" id="addressList">#}
-                {#{% for item in pendingAddress %}#}
-                        {#<article class="oneShop" data-id="{{ item.id }}">#}
-                            {#<h2 class="text-center">{{ item.name }}<br></h2>#}
-                            {#<p>#}
-                                {#<strong>Sous-Categorie :</strong> {{ item.subCategory.label }}<br>#}
-                                {#<strong>Categorie :</strong> {{ item.subCategory.category.label }}<br>#}
-                                {#<strong>Réduction :</strong> {{ item.discount }}<br>#}
-                            {#</p>#}
-                        {#</article>#}
-                    {#<hr>#}
-                {#{% endfor %}#}
-
-            {#</div>#}
-            {#<div class="col-12 col-md-9">#}
-                {#<div id="map"></div>#}
-            {#</div>#}
-        {#</div>#}
-    {#</div>#}
-
+            $.ajax({
+                type: 'post',
+                url: '{{ path("pendingResult") }}',
+                data: 'address_id=' + pendingAddressId,
+                datatype: 'html',
+                success: function(result){
+                    $("#pendingResult").html(result);
+                },
+                error: function(error){
+                    console.log(error)
+                },
+            });
+        })
+    </script>
 {% endblock %}

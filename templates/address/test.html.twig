@@ -13,7 +13,7 @@
                         <div class="form-row">
                             <div class="form-group col-12">
                                 <div class="input-group">
-                                    <input type="text" class="form-control border-secondary shadow-none" id="searchBar" aria-describedby="button-searchBar">
+                                    <input type="text" class="form-control border-secondary shadow-none" id="searchBar"  aria-describedby="button-searchBar">
                                     <div class="input-group-append">
                                         <button type="submit" class="btn btn-secondary" id="button-searchBar"><i class="fas fa-search"></i></button>
                                     </div>
@@ -29,19 +29,23 @@
                     </div>
                 </div>
                 </div>
-                {% for item in address %}
-                    <a href="#" class="linkToSingle">
-                        <article class="oneShop" data-id="{{ item.subCategory.category.label }}_{{ item.id }}">
-                            <h2 class="text-center">{{ item.name }}<br></h2>
-                            <p>
-                                <strong>Sous-Categorie :</strong> {{ item.subCategory.label }}<br>
-                                <strong>Categorie :</strong> {{ item.subCategory.category.label }}<br>
-                                <strong>Réduction :</strong> {{ item.discount }}<br>
-                            </p>
-                        </article>
-                    </a>
-                    <hr>
-                {% endfor %}
+                <div class="addressLoop" id="addressLoop">
+                    {% for item in address %}
+                        <a href="#" class="linkToSingle">
+                            <article class="oneShop" data-id="{{ item.subCategory.category.label }}_{{ item.id }}">
+                                <h2 class="text-center name">{{ item.name }}</h2><br>
+                                <p>
+                                    <strong>Sous-Categorie :</strong ><span class="subCat">{{ item.subCategory.label }}</span> <br>
+                                    <strong>Categorie :</strong><span class="cat">{{ item.subCategory.category.label }}</span> <br>
+                                    <strong>Réduction :</strong> {{ item.discount }}<br>
+                                </p>
+                            </article>
+                        </a>
+                        <hr>
+                    {% endfor %}
+
+                </div>
+
             </div>
             <div class="col-12 col-md-9">
                 <div id="map"></div>
@@ -197,12 +201,63 @@
 
             var result_content = $('#addressList').html();
 
+
             // Gestion du CSS dynamique pour le lien vers les pages boutique
 
 
-            var currentIcon;
-            var viewStatus = "all";
 
+
+            var currentIcon;
+            var viewStatus ="all";
+
+            //Barre de recherche
+            var searchBar = document.getElementById('searchBar');
+            searchBar.addEventListener('keyup', function(){
+                var input = document.getElementById('searchBar');
+                var filter = input.value.toUpperCase();
+                var div = document.getElementById('addressLoop');
+                var a = div.getElementsByTagName('a');
+                var i;
+                var cat, subCat, name;
+                var catValue, subCatValue, nameValue;
+                for (i = 0; i < a.length; i++) {
+                    console.log(i);
+                    cat = a[i].getElementsByClassName('cat')[0];
+                    subCat = a[i].getElementsByClassName('subCat')[0];
+                    name = a[i].getElementsByClassName('name')[0];
+                    console.log('1', cat, subCat, name);
+                    catValue = cat.textContent || cat.innerText;
+                    subCatValue = subCat.textContent || subCat.innerText;
+                    nameValue = name.textContent || name.innerText;
+                    console.log('2', catValue, subCatValue, nameValue);
+                    if(
+                        catValue.toUpperCase().indexOf(filter) > -1 ||
+                        subCatValue.toUpperCase().indexOf(filter) > -1 ||
+                        nameValue.toUpperCase().indexOf(filter) > -1
+                    ){
+                        a[i].style.display = "";
+                    }else{
+                        a[i].style.display = 'none';
+                    }
+
+
+                    // var input, filter, ul, li, a, i, txtValue;
+                    // input = document.getElementById("myInput");
+                    // filter = input.value.toUpperCase();
+                    // ul = document.getElementById("myUL");
+                    // li = ul.getElementsByTagName("li");
+                    // for (i = 0; i < li.length; i++) {
+                    //     a = li[i].getElementsByTagName("a")[0];
+                    //     txtValue = a.textContent || a.innerText;
+                    //     if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    //         li[i].style.display = "";
+                    //     } else {
+                    //         li[i].style.display = "none";
+                    //     }
+                    // }
+                }
+
+            })
 
             $('#addressList').on('mouseenter', '.oneShop', function(){
                 $(this).css('background-color', '#a7abb2');
@@ -342,6 +397,7 @@
                 $('.leaflet-shadow-pane').css('display','block');
                 $('.leaflet-marker-pane img').css('display','block');
             })
+
         });
     </script>
 {% endblock %}
