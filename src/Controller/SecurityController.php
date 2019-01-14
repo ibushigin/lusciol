@@ -69,11 +69,11 @@ class SecurityController extends AbstractController
                 return $this->redirectToRoute('home');
             }
             $url = $this->generateUrl('app_reset_password', array('token' => $token), UrlGeneratorInterface::ABSOLUTE_URL);
-            $message = (new \Swift_Message('Forgot Password'))
+            $message = (new \Swift_Message('Oubli mot de passe'))
                 ->setFrom('jeanmickhail@gmail.com')
                 ->setTo($user->getEmail())
                 ->setBody(
-                    "blablabla voici le token pour reseter votre mot de passe : " . $url,
+                    "Voici le token pour réinitialiser votre mot de passe : " . $url,
                     'text/html'
                 );
             $mailer->send($message);

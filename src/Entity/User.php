@@ -44,7 +44,7 @@ class User implements UserInterface
     protected $resetToken;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=50, unique=true)
      */
     private $email;
 
