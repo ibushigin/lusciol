@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+
+    <title>{% block title %}Welcome!{% endblock %}</title>
+
+    {% block stylesheets %}
+        {# Pictogrammes ICONES #}
+
+        {# Typographies GOOGLE FONT#}
+        <link href="https://fonts.googleapis.com/css?family=Baloo" rel="stylesheet">
+        {#Le css bootstrap#}
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
+        {#Fontawesome#}
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+        {#Leaflet OSM#}
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+              integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+              crossorigin=""/>
+        {#CSS custom #}
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    {% endblock %}
+
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link text-info" href="{{ path('home') }}">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-info" href="{{ path('viewAll') }}">Map</a>
+            </li>
+            {# crée un lien vers la page admin si on a le role admin #}
+            {% if is_granted('ROLE_ADMIN') %}
+                <li class="nav-item">
+                    <a class="nav-link text-warning" href="{{ path('admin') }}">Admin</a>
+                </li>
+            {% endif %}
+            {# liens login si je ne suis pas connecté ou logout si je suis connecté #}
+            {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+                {# je ne suis pas connecté#}
+                <li class="nav-item">
+                    <a class="nav-link text-success" href="{{ path('app_login') }}">Login</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link text-info" href="{{ path('userInfo') }}">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-danger" href="#">Logout</a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
+
+{% block body %}
+
+
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    {#JS Pour Leaflet#}
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+            integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+            crossorigin=""></script>
+{% endblock %}
+
+</body>
+
+</html>

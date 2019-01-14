@@ -66,7 +66,7 @@ class AddressController extends AbstractController
      /**
     *@Route("/address/add", name="addAddress")
     */
-    public function addAdress(Request $request){
+    public function addAdress(Request $request, FileUploader $fileuploader){
 
         $form = $this->createForm(AddressType::class);
 
@@ -85,13 +85,15 @@ class AddressController extends AbstractController
             //je remplace l'attribut imgae qui contient toujours le fichier par le nom du fichier
             $address->setImage($filename);
 
+            $entityManager = $this->getDoctrine()->getManager(); 
+
             $entityManager->persist($address);
 
             $entityManager->flush();
 
             $this->addFlash('success', 'Adresse ajoutée');
 
-            return $this->redirectToRoute('articles');
+            return $this->redirectToRoute('viewAll');
 
         }
 
