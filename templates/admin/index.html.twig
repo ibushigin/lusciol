@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'base-navbar.html.twig' %}
 
 {% block title %}Administration{% endblock %}
 
@@ -6,7 +6,7 @@
 
     <div class="container-fluid">
         <div class="container">
-            <div class="col-12 col-md-10">
+            <div class="col-12 offset-md-2 col-md-8 d-flex justify-content-between mt-5">
                 <a href="{{ path('manageAddress')}}">
                     <button class="btn btn-info">Gérer les magasins</button>
                 </a>

@@ -1,32 +1,51 @@
-{% extends 'base.html.twig' %}
+{% extends 'base-navbar.html.twig' %}
 
 {% block title %}Manage Address{% endblock %}
 
 {% block body %}
+
+
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-12 col-md-3" id="addressList">
-
-
-                {% for item in address %}
-                    <a href="#" class="linkToSingle">
-                        <article class="oneShop" data-id="{{ item.id }}">
-                            <h2 class="text-center">{{ item.name }}<br></h2>
-                            <p>
-                                <strong>Sous-Categorie :</strong> {{ item.subCategory.label }}<br>
-                                <strong>Categorie :</strong> {{ item.subCategory.category.label }}<br>
-                                <strong>Réduction :</strong> {{ item.discount }}<br>
-                            </p>
-                        </article>
-                    </a>
-                    <hr>
-                {% endfor %}
+        <container>
+            <div class="form-group col-6 col-md-3 m-auto">
+                <select id="pendingAddress" class="form-control">
+                    <option value="null">Adresses en attente de validation</option>
+                    {% for address in pendingAddress %}
+                        <option value="{{ address.id }}">{{ address.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class=" colpendingResult">
 
             </div>
-            <div class="col-12 col-md-9">
-                <div id="map"></div>
-            </div>
-        </div>
+
+        </container>
     </div>
+
+
+
+    {#<div class="container-fluid">#}
+        {#<div class="row">#}
+            {#<h2>Magasins en attente de validation :</h2>#}
+
+            {#<div class="col-12 col-md-10" id="addressList">#}
+                {#{% for item in pendingAddress %}#}
+                        {#<article class="oneShop" data-id="{{ item.id }}">#}
+                            {#<h2 class="text-center">{{ item.name }}<br></h2>#}
+                            {#<p>#}
+                                {#<strong>Sous-Categorie :</strong> {{ item.subCategory.label }}<br>#}
+                                {#<strong>Categorie :</strong> {{ item.subCategory.category.label }}<br>#}
+                                {#<strong>Réduction :</strong> {{ item.discount }}<br>#}
+                            {#</p>#}
+                        {#</article>#}
+                    {#<hr>#}
+                {#{% endfor %}#}
+
+            {#</div>#}
+            {#<div class="col-12 col-md-9">#}
+                {#<div id="map"></div>#}
+            {#</div>#}
+        {#</div>#}
+    {#</div>#}
 
 {% endblock %}
