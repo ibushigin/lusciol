@@ -28,4 +28,17 @@ class AjaxController extends AbstractController
             'address' => $address,
         ]);
     }
+
+    /**
+     * @Route("/ajax/returnToResult", name="returnToResult")
+     */
+
+    public function returnToResult(Request $request)
+    {
+        $result_content = $request->request->get('result_content', null);
+
+        return $this->render('ajax/returnToResult.html.twig', [
+            'result_content' => $result_content,
+        ]);
+    }
 }

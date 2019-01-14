@@ -49,6 +49,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
+     * @Assert\Image(maxSize="600k")
      */
     private $avatar;
 

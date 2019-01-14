@@ -36,11 +36,24 @@
 	line-height: 4.5rem; 
 }
 
-/*/adresse*/
+.PictoConnect{
+	z-index: 2;
+	position:relative;
+	top: -12.5em;
+	left: 90em; 
+}
+
+.buttons{
+	text-align: center;
+}
+
+
+
+/*/adresse/all*/
 
 #map {
-    height: 600px;
-    width: 800px;
+    height: 100vh;
+    width: 100%;
 	margin-top: 50px;
 }
 
