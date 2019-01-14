@@ -12,28 +12,19 @@
                     <form>
                         <div class="form-row">
                             <div class="form-group col-10 pr-0">
-                                <input type="text" class="form-control border-secondary shadow-none ">
+                                <input type="text" class="form-control border-secondary shadow-none" id="searchBar">
                             </div>
                             <div class="col-2  pl-0">
                                 <button type="submit" class="btn btn-secondary"><i class="fas fa-search"></i></button>
                             </div>
                         </div>
-                        <div class="form-row">
-                            <div class="form-group col-12">
-                                <div class="form-check-inline">
-                                    <input class="form-check-input" type="radio" name="searchCat" id="searchCat1" value="cat1">
-                                    <label class="form-check-label" for="searchCat1">Cat1</label>
-                                    <input class="form-check-input" type="radio" name="searchCat" id="searchCat2" value="cat2">
-                                    <label class="form-check-label" for="searchCat2">Cat2</label>
-                                    <input class="form-check-input" type="radio" name="searchCat" id="searchCat3" value="cat3">
-                                    <label class="form-check-label" for="searchCat3">Cat3</label>
-                                    <input class="form-check-input" type="radio" name="searchCat" id="searchCat4" value="cat4">
-                                    <label class="form-check-label" for="searchCat4">Cat4</label>
-                                </div>
-
-                            </div>
-                        </div>
                     </form>
+                    <div class="searchCat">
+                        <span id="searchCat1"><img src="{{ asset("img/marker-blue.png") }}" alt=""></span>
+                        <span id="searchCat2"><img src="{{ asset("img/marker-pink.png") }}" alt=""></span>
+                        <span id="searchCat3"><img src="{{ asset("img/marker-yellow.png") }}" alt=""></span>
+                        <span id="searchCat4"><img src="{{ asset("img/marker-green.png") }}" alt=""></span>
+                    </div>
                 </div>
                 </div>
                 {% for item in address %}
@@ -60,7 +51,7 @@
 
 {% block javascripts %}
     {{ parent() }}
-    {#<script src="{{ asset('js/map.js') }}"></script>#}
+    <script src="{{ asset('js/mapSearch.js') }}"></script>
     <script>
 
         $(function(){
