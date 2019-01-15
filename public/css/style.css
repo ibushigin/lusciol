@@ -100,6 +100,8 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr;
+  grid-gap: 30px;
+  border-style: 15px white; 
 }
 
 /*/adresse/all*/
