@@ -10,7 +10,7 @@
 }
 #addressList{
 	height: 100vh;
-	background-color: #d7dae0;
+	background-color: white;
 	overflow-y: scroll;
 	padding : 0;
 }
