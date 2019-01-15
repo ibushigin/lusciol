@@ -11,29 +11,15 @@
 	padding: 0 !important; 
 }
 
-/*CONTAIN*/
-
-.ConceptLUSCIOl h1{
-	color: rgb(88, 89,91);
-	margin-top: 50px; 
-	font-size: 3rem; 
-	font-family: 'TektonPro-BoldCond'; 
-	text-align: center;
-}
-
-.ConceptLUSCIOl p{
-	margin-top: 20px; 
-	font-family: 'PT Serif', serif;
-	text-align: justify;
-  	text-justify: inter-word;
-}
-
-.barre{
-	text-align: center; 
-}
-
-
 /*NAVBAR*/
+
+.background{
+	background-image: url('../img/fond1.jpg'); 
+	background-repeat: no-repeat; 
+	height: 800px;
+	z-index: 0; 
+	position: relative;
+}
 
 .Connect i{
 	font-size: 1.5rem;
@@ -64,14 +50,6 @@
 
 }
 
-.background{
-	background-image: url('../img/fond1.jpg'); 
-	background-repeat: no-repeat; 
-	height: 800px;
-	z-index: 0; 
-	position: relative;
-}
-
 .Arrow{
 	color: white;
 	text-align: center; 
@@ -79,6 +57,36 @@
 	z-index: 1; 
 	top: 730px;
 }
+
+/*CONTAIN*/
+
+.LOGO2LUSCIOL{
+	margin-top: 30px; 
+	text-align: center;
+}
+
+.ConceptLUSCIOl p{
+	margin-top: 30px; 
+	font-family: 'PT Serif', serif;
+	text-align: center; 
+}
+
+.grid {
+    display: grid;
+    grid-template-rows: 20% 20% 20%;
+    grid-template-columns: 200px 200px 200px 200px;
+    grid-column-gap: 84px;
+    grid-row-gap: 20px;
+}
+
+
+/*.wrapper {
+  display: grid;
+  grid-gap: 200px;
+  grid-template-rows: 10% 10% 10%;
+  grid-template-columns: 100px 200px;
+  grid-auto-flow: column;
+}*/
 
 /*/adresse/all*/
 

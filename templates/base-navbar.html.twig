@@ -6,8 +6,8 @@
     <title>{% block title %}Welcome!{% endblock %}</title>
 
     {% block stylesheets %}
-        {# Pictogrammes ICONES #}
-
+        {# FAVICON #}
+        <link rel="icon" href="{{ asset("img/favicon.ico") }}">
         {# Typographies GOOGLE FONT#}
         <link href="https://fonts.googleapis.com/css?family=Chivo" rel="stylesheet">
         {#Le css bootstrap#}
@@ -64,7 +64,7 @@
         </ul>
                {# Picto connexion#}
                 <div class="Connect">
-                    <i class="fas fa-user"></i>
+                    <a href="{{ path('app_login') }}"><i class="fas fa-user"></i></a>
                 </div>
     </div>
 </nav>
