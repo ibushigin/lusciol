@@ -53,28 +53,28 @@ class AppFixtures extends Fixture
 
         }
 
-        for($i=1;$i<=4;$i++){
-
-            $categorie = new Category();
-            $categorie->setLabel('categorie' . $i);
-
-            $manager->persist($categorie);
-
-            $categories[] = $categorie;
-
-        }
-
-        for($i=1;$i<=10;$i++){
-
-            $subCategorie = new SubCategory();
-            $subCategorie->setLabel('subCategorie' . $i);
-            $subCategorie->setCategory($categories[array_rand($categories)]);
-
-            $manager->persist($subCategorie);
-
-            $subCategories[] = $subCategorie;
-
-        }
+//        for($i=1;$i<=4;$i++){
+//
+//            $categorie = new Category();
+//            $categorie->setLabel('categorie' . $i);
+//
+//            $manager->persist($categorie);
+//
+//            $categories[] = $categorie;
+//
+//        }
+//
+//        for($i=1;$i<=10;$i++){
+//
+//            $subCategorie = new SubCategory();
+//            $subCategorie->setLabel('subCategorie' . $i);
+//            $subCategorie->setCategory($categories[array_rand($categories)]);
+//
+//            $manager->persist($subCategorie);
+//
+//            $subCategories[] = $subCategorie;
+//
+//        }
 
         $reductions = ['-10%', '-20%', '-30%', '-40%', '-50%', '-60%', '-70%'];
 
