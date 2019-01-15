@@ -16,7 +16,7 @@
         {#On recrée un data-id identique a celui de la boutique sur la page d'affichage de toutes les boutiques#}
         {#qui servira a trouver la reference de la boutique et donc l'image qui doit lui etre associé sur la#}
         {#carte lorsque la vue reviens en ALL#}
-<a href="#" id="result_content"  data-id="{{ address.subCategory.category.label }}_{{ address.id }}">
+<a id="result_content"  data-id="{{ address.subCategory.category.label }}_{{ address.id }}">
     <button class="btn btn-info">Retour à la liste des magasins</button>
 </a>
     </div>

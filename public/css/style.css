@@ -90,12 +90,16 @@
 
 /*/adresse/all*/
 
+
+
 #map {
     height: 100vh;
     width: 100%;
 	margin-top: 50px;
 }
-
+.searchCat > span:hover{
+	cursor: pointer;
+}
 #addressList{
 	margin-top: 50px;
 	height: 80vh;
@@ -112,6 +116,7 @@
 #addressList a:hover{
 	text-decoration: none;
 	color: black;
+	cursor: pointer;
 }
 
 .oneShop{
