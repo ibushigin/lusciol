@@ -213,13 +213,15 @@
                 var div = document.getElementById('addressLoop');
                 var a = div.getElementsByTagName('a');
                 var i;
-                var cat, subCat, name;
-                var catValue, subCatValue, nameValue;
+                var cat, subCat, name, article;
+                var catValue, subCatValue, nameValue, articleValue;
                 for (i = 0; i < a.length; i++) {
 
                     cat = a[i].getElementsByClassName('cat')[0];
                     subCat = a[i].getElementsByClassName('subCat')[0];
                     name = a[i].getElementsByClassName('name')[0];
+                    article = a[i].getElementsByTagName('article')[0];
+                    articleValue = article.getAttribute('data-id');
                     catValue = cat.textContent || cat.innerText;
                     subCatValue = subCat.textContent || subCat.innerText;
                     nameValue = name.textContent || name.innerText;
@@ -229,6 +231,7 @@
                         nameValue.toUpperCase().indexOf(filter) > -1
                     ){
                         a[i].style.display = "";
+                        console.log(articleValue);
                     }else{
                         a[i].style.display = 'none';
                     }
@@ -295,12 +298,15 @@
                 }
             })
 
-
+            var inputVal;
+            console.log('input= ', inputVal);
 
 
             // Ajax => Info Boutique au clic sur le pointeur de la carte
 
             $('.leaflet-marker-icon').on('click', function(){
+                inputVal = document.getElementById('searchBar').value;
+
                 var currentDataID = $(this).attr('alt');
                 var address_id = currentDataID.slice(11);
                 // On supprime toutes les icones qui ne sont pas celle de la boutique selectionnée:
@@ -329,8 +335,8 @@
 
             // Ajax => Info Boutique au clic sur la div du magasin
             $('#addressList').on('click', '.oneShop', function(){
-               var inputVal = $('#searchBar').val();
-               console.log('input valA=', inputVal);
+                inputVal = document.getElementById('searchBar').value;
+
                 // La vue passe en singleView par ajax, gestion du visuel
 
                 var currentDataID = $(this).attr('data-id');
@@ -348,6 +354,7 @@
                         datatype: 'html',
                         success: function(result){
                             $("#addressList").html(result);
+
                         },
                         error: function(error){
                             console.log(error)
@@ -370,6 +377,8 @@
                     datatype: 'html',
                     success: function(result){
                         $("#addressList").html(result);
+                        $("#searchBar").val(inputVal);
+                        search();
                     },
                     error: function(error){
                         console.log(error)
@@ -395,7 +404,9 @@
                 // On reaffiche tous les marker vu qu'on reviens a une vue ALL
                 $('.leaflet-shadow-pane').css('display','block');
                 $('.leaflet-marker-pane img').css('display','block');
-            })
+
+            });
+
 
         });
     </script>
