@@ -5,29 +5,33 @@
 
 /*HOME*/
 
-/*HEADER*/
-
-.container-fluid{
-	padding: 0 !important; 
-}
-
 /*NAVBAR*/
 
-.background{
-	background-image: url('../img/fond1.jpg'); 
-	background-repeat: no-repeat; 
-	height: 800px;
-	z-index: 0; 
-	position: relative;
+.LogoLusciol{
+	margin-top: 30px; 
+}
+
+.navbar{
+	position: absolute;
+	width: 100%;
+	z-index: 3; 
+	height: 50px;
 }
 
 .Connect i{
 	font-size: 1.5rem;
 	color: white;
+	margin-top: 30px; 
+	margin-right: 20px;
 }
 
-.nav-item a{
-	color: white;
+.navbar-nav{
+	margin-top: 35px; 
+}
+
+
+.MapLink{
+	color: white !important;
 	font-size: 1.5rem; 
 	font-family: 'TektonPro-BoldCond'; 
 	margin-left: 50px;
@@ -41,21 +45,42 @@
 	padding: 10px 0;
 }
 
-.nav-item a:hover{
+.MapLink:hover{
 	text-decoration: none;
 	border-top: 2px solid #d2d5db;
 	border-bottom: 2px solid #d2d5db;
 	padding: 2px 0; 
 	color: #d2d5db;
+}
 
+/*HEADER*/
+
+.container-fluid{
+	padding: 0 !important; 
 }
 
 .Arrow{
-	color: white;
 	text-align: center; 
 	position: relative; 
-	z-index: 1; 
-	top: 730px;
+	z-index: 4; 
+	top: 90vh;
+	transition: 1s ease;
+}
+
+.angleDown{
+	color:white;
+}
+
+.angleDown:hover{
+	color:#5cb5bd;
+}
+
+.background{
+	background-image: url('../img/fond1.png'); 
+	background-repeat: no-repeat; 
+	height: 100vh;
+	z-index: 0; 
+	position: relative;
 }
 
 /*CONTAIN*/
@@ -72,25 +97,12 @@
 }
 
 .grid {
-    display: grid;
-    grid-template-rows: 20% 20% 20%;
-    grid-template-columns: 200px 200px 200px 200px;
-    grid-column-gap: 84px;
-    grid-row-gap: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
 }
 
-
-/*.wrapper {
-  display: grid;
-  grid-gap: 200px;
-  grid-template-rows: 10% 10% 10%;
-  grid-template-columns: 100px 200px;
-  grid-auto-flow: column;
-}*/
-
 /*/adresse/all*/
-
-
 
 #map {
     height: 100vh;

@@ -26,7 +26,7 @@
 
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg">
     <a class="navbar-brand" href="{{ path('home') }}"></a>
     
     <div class="LogoLusciol">
@@ -40,7 +40,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link text-white" href="{{ path('viewAll') }}">Map</a>
+                <a class="MapLink" href="{{ path('viewAll') }}">Map</a>
             </li>
             {# crée un lien vers la page admin si on a le role admin #}
             {% if is_granted('ROLE_ADMIN') %}
@@ -69,7 +69,13 @@
     </div>
 </nav>
 
+
+
+
+
 {% block body %}
+
+
 
 
 
