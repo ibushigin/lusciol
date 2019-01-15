@@ -19,29 +19,56 @@
             </div>
         </container>
     </div>
+    <div id="results"></div>
 
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
     <script>
-        $('#selectPendingAddress').on('change', function(){
+        $(function(){
+            // Requete AJAX pour l'affichage d'une adresse a valider
+            $('#selectPendingAddress').on('change', function(){
 
-            pendingAddressId = $('#selectPendingAddress option:selected').val();
-            console.log(pendingAddressId);
+                pendingAddressId = $('#selectPendingAddress option:selected').val();
+                console.log(pendingAddressId);
 
-            $.ajax({
-                type: 'post',
-                url: '{{ path("pendingResult") }}',
-                data: 'address_id=' + pendingAddressId,
-                datatype: 'html',
-                success: function(result){
-                    $("#pendingResult").html(result);
-                },
-                error: function(error){
-                    console.log(error)
-                },
-            });
+                $.ajax({
+                    type: 'post',
+                    url: '{{ path("pendingResult") }}',
+                    data: 'address_id=' + pendingAddressId,
+                    datatype: 'html',
+                    success: function(result){
+                        $("#pendingResult").html(result);
+                    },
+                    error: function(error){
+                        console.log(error)
+                    },
+                });
+            })
+            // Affichage du formulaire pour modification
+            $('#pendingResult').on('click', '#modify', function(){
+                $('#addressForm').css('display', 'block');
+                $('#addressDescription').css('display', 'none');
+            })
+
+            $('#pendingResult').on('submit', '#validateAfterModif', function(e){
+                e.preventDefault();
+                var form_data = ($("#modifyAddressByAdmin").serialize());
+                console.log(form_data);
+
+            })
+
+
+
+
+
+
+
         })
+
+
+
+
     </script>
 {% endblock %}

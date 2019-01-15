@@ -107,7 +107,8 @@ class AddressController extends AbstractController
      * @Route("/address/validateAddress/{id}", name="valideAddress", requirements={"id"="[0-9]+"})
      */
 
-    public function validateAddress(){
+    public function validateAddress()
+    {
 
     }
 
