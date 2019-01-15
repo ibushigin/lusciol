@@ -103,21 +103,21 @@
             });
             var markerBlue = new CustomL({
                 iconUrl: '{{ asset("img/marker-blue.png") }}',
-                item_cat: 'categorie1',
+                item_cat: 'Shopping',
             });
 
             var markerPink = new CustomL({
                 iconUrl: '{{ asset("img/marker-pink.png") }}',
-                item_cat: 'categorie2',
+                item_cat: 'Soins',
             });
             var markerGreen = new CustomL({
                 iconUrl: '{{ asset("img/marker-green.png") }}',
-                item_cat: 'categorie3',
+                item_cat: 'Restauration',
             });
 
             var markerYellow = new CustomL({
                 iconUrl: '{{ asset("img/marker-yellow.png") }}',
-                item_cat: 'categorie4',
+                item_cat: 'Divertissement',
             });
             var markerPoint = L.icon({
                 iconUrl: '{{ asset("img/markerPoint.png") }}',
@@ -164,16 +164,16 @@
             {% for i in 0..nbAddress %}
 
             var markerIcon;
-            if(item_cat{{ i }} === 'categorie1'){
+            if(item_cat{{ i }} === 'Shopping'){
                 markerIcon = markerBlue;
             }
-            if(item_cat{{ i }} === 'categorie2'){
+            if(item_cat{{ i }} === 'Soins'){
                 markerIcon = markerPink;
             }
-            if(item_cat{{ i }} === 'categorie3'){
+            if(item_cat{{ i }} === 'Restauration'){
                 markerIcon = markerGreen;
             }
-            if(item_cat{{ i }} === 'categorie4'){
+            if(item_cat{{ i }} === 'Divertissement'){
                 markerIcon = markerYellow;
             }
 
@@ -209,7 +209,35 @@
 
             function search(){
                 var input = document.getElementById('searchBar');
-                var filter = input.value.toUpperCase();
+                function no_accent(my_string)
+                {
+                    // tableau accents
+                    var pattern_accent = new Array("À","Á","Â","Ã","Ä","Å","Æ","Ç","È","É","Ê","Ë",
+                        "Ì","Í","Î","Ï","Ð","Ñ","Ò","Ó","Ô","Õ","Ö","Ø","Ù","Ú","Û","Ü","Ý",
+                        "Þ","ß","à","á","â","ã","ä","å","æ","ç","è","é","ê","ë","ì","í","î",
+                        "ï","ð","ñ","ò","ó","ô","õ","ö","ø","ù","ú","û","ü","ý","ý","þ","ÿ");
+
+                    // tableau sans accents
+                    var pattern_replace_accent = new Array("A","A","A","A","A","A","A","C","E","E","E","E",
+                        "I","I","I","I","D","N","O","O","O","O","O","O","U","U","U","U","Y",
+                        "b","s","a","a","a","a","a","a","a","c","e","e","e","e","i","i","i",
+                        "i","d","n","o","o","o","o","o","o","u","u","u","u","y","y","b","y");
+
+                    //pour chaque caractere si accentué le remplacer par un non accentué
+                    for(var i=0;i<pattern_accent.length;i++)
+                    {
+                        // si on trouve un accent dans la chaine on le remplace par le caractere non accentué correspondant
+
+                        if( my_string.indexOf(pattern_accent[i]) )
+                        {
+                            my_string = my_string.replace(pattern_accent[i],pattern_replace_accent[i]);
+                        }
+                    }
+                    return my_string;
+                }
+                var filter1 = no_accent(input.value);
+                var filter2 = filter1.toUpperCase();
+                console.log(filter1);
                 var div = document.getElementById('addressLoop');
                 var a = div.getElementsByTagName('a');
                 var i;
@@ -226,9 +254,9 @@
                     subCatValue = subCat.textContent || subCat.innerText;
                     nameValue = name.textContent || name.innerText;
                     if(
-                        catValue.toUpperCase().indexOf(filter) > -1 ||
-                        subCatValue.toUpperCase().indexOf(filter) > -1 ||
-                        nameValue.toUpperCase().indexOf(filter) > -1
+                        no_accent(catValue).toUpperCase().indexOf(filter2) > -1 ||
+                        no_accent(subCatValue).toUpperCase().indexOf(filter2) > -1 ||
+                        no_accent(nameValue).toUpperCase().indexOf(filter2) > -1
                     ){
                         a[i].style.display = "";
                         $('.leaflet-marker-pane img[alt = "'+articleValue+'"]').css('display','');
@@ -244,19 +272,19 @@
             //filtres
 
             $('#addressList').on('click', '#searchCat1', function(){
-                $('#searchBar').val('Categorie1');
+                $('#searchBar').val('Restauration');
                 search();
             });
             $('#addressList').on('click', '#searchCat2', function(){
-                $('#searchBar').val('Categorie2');
+                $('#searchBar').val('Shopping');
                 search();
             });
             $('#addressList').on('click', '#searchCat3', function(){
-                $('#searchBar').val('Categorie3');
+                $('#searchBar').val('Soins');
                 search();
             });
             $('#addressList').on('click', '#searchCat4', function(){
-                $('#searchBar').val('Categorie4');
+                $('#searchBar').val('Divertissement');
                 search();
             });
 
