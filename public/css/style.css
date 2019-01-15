@@ -15,7 +15,7 @@
 	position: absolute;
 	width: 100%;
 	z-index: 3; 
-	height: 50px;
+	height: 80px;
 }
 
 .Connect i{
@@ -102,6 +102,14 @@
   grid-template-rows: 1fr 1fr;
   grid-gap: 30px;
   border-style: 15px white; 
+}
+
+/*Footer*/
+
+.FOOTERHome{
+	background-color: #343a40; 
+	height: 50px;
+	margin-top: 50px; 
 }
 
 /*/adresse/all*/
