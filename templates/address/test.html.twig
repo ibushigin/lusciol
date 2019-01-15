@@ -324,7 +324,7 @@
 
             $('.leaflet-marker-icon').on('mouseleave', function(){
                 var address_id = $(this).attr('alt');
-                $("article[data-id='"+address_id+"']").css('background-color', '#d7dae0');
+                $("article[data-id='"+address_id+"']").css('background-color', '#fff');
                 if (viewStatus === "all"){
                     $("img[alt='"+address_id+"']").attr('src', currentIcon);
                 }
