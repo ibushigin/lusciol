@@ -57,8 +57,9 @@ class AjaxController extends AbstractController
         if(empty($address_id) || !preg_match("#^\d+$#", $address_id)){
             $this->addFlash('notice', 'paramètre(s) invalide(s)');
             return $this->redirectToRoute('manageAddress');
-
         }
+
+        echo 'Address_id vaut :';
         var_dump($address_id);
 
         $address = $this->getDoctrine()
@@ -67,29 +68,6 @@ class AjaxController extends AbstractController
 
 
         $form = $this->createForm(UpdateAddressType::class, $address);
-
-        $form->handleRequest($request);
-
-//        if($form->isSubmitted() && $form->isValid()){
-//
-//            $address = $form->getData();
-//
-//            //$article->getImage() contient un objet qui représent le fichier image envoyé
-//            $file = $address->getImage();
-//
-//            $filename = $file ? $fileuploader->upload($file, $this->getParameter('shop_image_directory')) : '';
-//
-//            //je remplace l'attribut imgae qui contient toujours le fichier par le nom du fichier
-//            $address->setImage($filename);
-//
-//            $entityManager = $this->getDoctrine()->getManager();
-//
-//            $entityManager->flush();
-//
-//            $this->addFlash('success', 'Adresse ajoutée');
-//
-//            return $this->redirectToRoute('manageAddress');
-//        }
 
         return $this->render('ajax/pendingResult.html.twig', [
             'address' => $address, 'form' => $form->createView(),

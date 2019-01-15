@@ -37,7 +37,7 @@
                     {% endfor %}
                 </div>
             </div>
-            <div class="col-12 col-md-9">
+            <div class="col-12 col-md-9 p-0">
                 <div id="map"></div>
             </div>
         </div>
@@ -303,7 +303,7 @@
 
 
             $('#addressList').on('mouseleave', '.oneShop', function(){
-                $(this).css('background-color', '#d7dae0');
+                $(this).css('background-color', '#fff');
                 let address_id = $(this).attr('data-id');
                 if(viewStatus === "all") {
                     $("img[alt='" + address_id + "']").attr('src', currentIcon);
