@@ -26,6 +26,9 @@ class SecurityController extends AbstractController
                           GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $authenticator,
                           FileUploader $fileuploader): Response
     {
+
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user
@@ -46,6 +49,8 @@ class SecurityController extends AbstractController
                               UserPasswordEncoderInterface $passwordEncoder,
                               GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $authenticator,
                               FileUploader $fileuploader): Response{
+
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
         $form = $this->createForm(RegistrationFormType::class);
         $form->handleRequest($request);
@@ -174,10 +179,9 @@ class SecurityController extends AbstractController
             }else{
                 $this->addFlash('danger', 'Les mots de passe ne correspondent pas');
             }
-        }else {
+        }else{
             return $this->render('security/reset_password.html.twig', ['token' => $token]);
         }
     }
-
 
 }
