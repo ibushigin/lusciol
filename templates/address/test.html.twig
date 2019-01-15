@@ -190,7 +190,7 @@
             // IL FAUDRA INCLURE LA MISE A JOUR DE LA VARIABLE result-content
 
             var result_content = $('#addressList').html();
-            var inputVal;
+
 
 
             // Gestion du CSS dynamique pour le lien vers les pages boutique
@@ -203,10 +203,11 @@
 
             //Barre de recherche
 
+            $('#addressList').on('input', '#searchBar', search);
 
-            var searchBar = document.getElementById('searchBar');
-            var addressList = document.getElementById('addressList');
-            $('#addressList').on('input', '#searchBar', function(){
+
+
+            function search(){
                 var input = document.getElementById('searchBar');
                 var filter = input.value.toUpperCase();
                 var div = document.getElementById('addressLoop');
@@ -231,28 +232,27 @@
                     }else{
                         a[i].style.display = 'none';
                     }
-
-
-
                 }
-
-            });
-
+            };
             //filtres
 
-
             $('#addressList').on('click', '#searchCat1', function(){
-                $('#searchBar').val('Catégorie1');
+                $('#searchBar').val('Categorie1');
+                search();
             });
             $('#addressList').on('click', '#searchCat2', function(){
-                $('#searchBar').val('Catégorie2');
+                $('#searchBar').val('Categorie2');
+                search();
             });
             $('#addressList').on('click', '#searchCat3', function(){
-                $('#searchBar').val('Catégorie3');
+                $('#searchBar').val('Categorie3');
+                search();
             });
             $('#addressList').on('click', '#searchCat4', function(){
-                $('#searchBar').val('Catégorie4');
+                $('#searchBar').val('Categorie4');
+                search();
             });
+
 
 
 
@@ -301,8 +301,6 @@
             // Ajax => Info Boutique au clic sur le pointeur de la carte
 
             $('.leaflet-marker-icon').on('click', function(){
-                var inputVal = $('#searchBar').val();
-                console.log('input valM=', inputVal);
                 var currentDataID = $(this).attr('alt');
                 var address_id = currentDataID.slice(11);
                 // On supprime toutes les icones qui ne sont pas celle de la boutique selectionnée:
