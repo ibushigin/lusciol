@@ -102,15 +102,4 @@ class AddressController extends AbstractController
         return $this->render('address/add.html.twig', ['form' => $form->createView()]);
 
     }
-
-    /**
-     * @Route("/address/validateAddress/{id}", name="valideAddress", requirements={"id"="[0-9]+"})
-     */
-
-    public function validateAddress()
-    {
-
-    }
-
-
 }

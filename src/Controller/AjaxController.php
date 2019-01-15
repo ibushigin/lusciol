@@ -4,9 +4,11 @@ namespace App\Controller;
 
 use App\Entity\Address;
 use App\Form\AddressType;
+use App\Form\UpdateAddressType;
 use App\Service\FileUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AjaxController extends AbstractController
@@ -50,45 +52,44 @@ class AjaxController extends AbstractController
 
     public function pendingResult(Request $request, FileUploader $fileuploader)
     {
+
         $address_id = $request->request->get('address_id', null);
         if(empty($address_id) || !preg_match("#^\d+$#", $address_id)){
-            return new Response('Parametre(s) invalide(s)');
+            $this->addFlash('notice', 'paramètre(s) invalide(s)');
+            return $this->redirectToRoute('manageAddress');
+
         }
+        var_dump($address_id);
 
         $address = $this->getDoctrine()
             ->getRepository(Address::class)
             ->find($address_id);
 
-        $form = $this->createForm(AddressType::class, $address);
+
+        $form = $this->createForm(UpdateAddressType::class, $address);
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()){
-
-
-            $address = $form->getData();
-
-            //$article->getImage() contient un objet qui représent le fichier image envoyé
-            $file = $address->getImage();
-
-            $filename = $file ? $fileuploader->upload($file, $this->getParameter('shop_image_directory')) : '';
-
-            //je remplace l'attribut imgae qui contient toujours le fichier par le nom du fichier
-            $address->setImage($filename);
-
-            $address->setStatus('pending');
-
-            $entityManager = $this->getDoctrine()->getManager();
-
-            $entityManager->persist($address);
-
-            $entityManager->flush();
-
-            $this->addFlash('success', 'Adresse ajoutée');
-
-            return $this->redirectToRoute('viewAll');
-
-        }
+//        if($form->isSubmitted() && $form->isValid()){
+//
+//            $address = $form->getData();
+//
+//            //$article->getImage() contient un objet qui représent le fichier image envoyé
+//            $file = $address->getImage();
+//
+//            $filename = $file ? $fileuploader->upload($file, $this->getParameter('shop_image_directory')) : '';
+//
+//            //je remplace l'attribut imgae qui contient toujours le fichier par le nom du fichier
+//            $address->setImage($filename);
+//
+//            $entityManager = $this->getDoctrine()->getManager();
+//
+//            $entityManager->flush();
+//
+//            $this->addFlash('success', 'Adresse ajoutée');
+//
+//            return $this->redirectToRoute('manageAddress');
+//        }
 
         return $this->render('ajax/pendingResult.html.twig', [
             'address' => $address, 'form' => $form->createView(),

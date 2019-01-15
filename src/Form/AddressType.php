@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Address;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -18,24 +19,34 @@ class AddressType extends AbstractType
     {
         $builder
             ->add('name', TextType::class)
-            ->add('id', TextType::class)
+            ->add('id', TextType::class, [
+                'required' => false,
+            ])
             ->add('location', TextType::class )
             ->add('website', TextType::class)
             ->add('coordinates', TextType::class)
             ->add('tel', TextType::class)
+            ->add('status', TextType::class, [
+                'required' => false,
+            ])
             ->add('discount', TextType::class)
             ->add('subCategory',EntityType::class, [
-                'class' => SubCategory::class, 
+                'class' => SubCategory::class,
                 'choice_label' => 'label'
             ])
             ->add('image', FileType::class, [
                 'required' => false,
                 'data_class' => null
             ])
-            ->add('save', SubmitType::class)
+//            ->add('status', ChoiceType::class, [
+//                'choices'  => array(
+//                    'pending' => false,
+//                    'valid' => true
+//                )
+//            ])
 
-        ;
-    }
+            ->add('save', SubmitType::class)
+    ;}
 
     public function configureOptions(OptionsResolver $resolver)
     {
@@ -44,3 +55,5 @@ class AddressType extends AbstractType
         ]);
     }
 }
+
+
