@@ -49,7 +49,7 @@ class RegistrationController extends AbstractController
             //j'injecte le nom du fichier dans la propriété image
             $user->setAvatar($filename);
 
-            
+
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
@@ -65,11 +65,9 @@ class RegistrationController extends AbstractController
                 'main' // firewall name in security.yaml
             );
 
-
-
         }
 
-        return $this->render('registration/register.html.twig', [
+        return $this->render('security/login.html.twig', [
             'registrationForm' => $form->createView()
         ]);
     }

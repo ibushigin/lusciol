@@ -25,7 +25,7 @@
                 <div class="addressLoop" id="addressLoop">
                     {% for item in address %}
                         <a class="linkToSingle">
-                            <article class="oneShop" data-id="{{ item.subCategory.category.label }}_{{ item.id }}">
+                            <article class="oneShop" data-id="{{ item.subCategory.category.label }}_{{ item.id }}" data-coordinates="{{ item.coordinates }}">
                                 <h2 class="text-center name">{{ item.name }}</h2><br>
                                 <p>
                                     <strong>Sous-Categorie :</strong ><span class="subCat">{{ item.subCategory.label }}</span> <br>
@@ -90,8 +90,8 @@
              var CustomL = L.Icon.extend({
                  options: {
                      iconSize: [55, 60],
-                     shadowUrl: '{{ asset("img/marker-shadow.png") }}',
-                     shadowAnchor: [10, 20],
+                     //shadowUrl: '{{ asset("img/marker-shadow.png") }}',
+                     //shadowAnchor: [10, 20],
                      iconAnchor:   [20, 35],
                  }
             });
@@ -192,6 +192,7 @@
             var result_content = $('#addressList').html();
 
 
+
             // Gestion du CSS dynamique pour le lien vers les pages boutique
 
 
@@ -202,60 +203,64 @@
 
             //Barre de recherche
 
+            $('#addressList').on('input', '#searchBar', search);
 
-            var searchBar = document.getElementById('searchBar');
-            searchBar.addEventListener('input', function(){
+
+
+            function search(){
                 var input = document.getElementById('searchBar');
                 var filter = input.value.toUpperCase();
                 var div = document.getElementById('addressLoop');
                 var a = div.getElementsByTagName('a');
                 var i;
-                var cat, subCat, name;
-                var catValue, subCatValue, nameValue;
+                var cat, subCat, name, article;
+                var catValue, subCatValue, nameValue, articleValue;
                 for (i = 0; i < a.length; i++) {
 
                     cat = a[i].getElementsByClassName('cat')[0];
                     subCat = a[i].getElementsByClassName('subCat')[0];
                     name = a[i].getElementsByClassName('name')[0];
+                    article = a[i].getElementsByTagName('article')[0];
+                    articleValue = article.getAttribute('data-id');
                     catValue = cat.textContent || cat.innerText;
                     subCatValue = subCat.textContent || subCat.innerText;
                     nameValue = name.textContent || name.innerText;
-                    console.log('2', catValue, subCatValue, nameValue);
                     if(
                         catValue.toUpperCase().indexOf(filter) > -1 ||
                         subCatValue.toUpperCase().indexOf(filter) > -1 ||
                         nameValue.toUpperCase().indexOf(filter) > -1
                     ){
                         a[i].style.display = "";
+                        $('.leaflet-marker-pane img[alt = "'+articleValue+'"]').css('display','');
+
+
                     }else{
                         a[i].style.display = 'none';
+
+                        $('.leaflet-marker-pane img[alt = "'+articleValue+'"]').css('display','none');
                     }
-
-
-
                 }
-
-            });
-
+            };
             //filtres
-            let cat1 = document.getElementById("searchCat1");
-            let cat2 = document.getElementById("searchCat2");
-            let cat3 = document.getElementById("searchCat3");
-            let cat4 = document.getElementById("searchCat4");
-            let searchBar2 = document.getElementById("searchBar");
 
-            cat1.addEventListener("click", function () {
-                searchBar2.value = 'Categorie1';
+            $('#addressList').on('click', '#searchCat1', function(){
+                $('#searchBar').val('Categorie1');
+                search();
             });
-            cat2.addEventListener("click", function () {
-                searchBar2.value = 'Categorie2';
+            $('#addressList').on('click', '#searchCat2', function(){
+                $('#searchBar').val('Categorie2');
+                search();
             });
-            cat3.addEventListener("click", function () {
-                searchBar2.value = 'Categorie3';
+            $('#addressList').on('click', '#searchCat3', function(){
+                $('#searchBar').val('Categorie3');
+                search();
             });
-            cat4.addEventListener("click", function () {
-                searchBar2.value = 'Categorie4';
+            $('#addressList').on('click', '#searchCat4', function(){
+                $('#searchBar').val('Categorie4');
+                search();
             });
+
+
 
 
             $('#addressList').on('mouseenter', '.oneShop', function(){
@@ -297,17 +302,20 @@
                 }
             })
 
+            var inputVal;
 
 
 
             // Ajax => Info Boutique au clic sur le pointeur de la carte
 
             $('.leaflet-marker-icon').on('click', function(){
+                inputVal = document.getElementById('searchBar').value;
+
+
                 var currentDataID = $(this).attr('alt');
                 var address_id = currentDataID.slice(11);
                 // On supprime toutes les icones qui ne sont pas celle de la boutique selectionnée:
                 $('.leaflet-marker-pane img[alt != "'+currentDataID+'"]').css('display','none');
-                $('.leaflet-shadow-pane').css('display','none');
 
                 // La vue passe en singleView par ajax, gestion du visuel
                 // console.log(viewStatus);
@@ -331,6 +339,16 @@
 
             // Ajax => Info Boutique au clic sur la div du magasin
             $('#addressList').on('click', '.oneShop', function(){
+                inputVal = document.getElementById('searchBar').value;
+
+                var pointRaw = $(this).attr('data-coordinates');
+                var point = pointRaw.split( /\s*,\s*/ );
+
+                console.log('DataCoord=', point);
+                console.log(typeof point);
+
+                map.setView(point);
+
                 // La vue passe en singleView par ajax, gestion du visuel
 
                 var currentDataID = $(this).attr('data-id');
@@ -348,6 +366,7 @@
                         datatype: 'html',
                         success: function(result){
                             $("#addressList").html(result);
+
                         },
                         error: function(error){
                             console.log(error)
@@ -370,6 +389,9 @@
                     datatype: 'html',
                     success: function(result){
                         $("#addressList").html(result);
+                        $("#searchBar").val(inputVal);
+                        search();
+                        map.setView(bordeaux, 14);
                     },
                     error: function(error){
                         console.log(error)
@@ -395,7 +417,9 @@
                 // On reaffiche tous les marker vu qu'on reviens a une vue ALL
                 $('.leaflet-shadow-pane').css('display','block');
                 $('.leaflet-marker-pane img').css('display','block');
-            })
+
+            });
+
 
         });
     </script>
