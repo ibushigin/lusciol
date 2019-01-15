@@ -4,7 +4,7 @@
 
 {% block body %}
 
-    <div class="container-fluid">
+    <div class="container-fluid addressPage">
 
         <div class="row">
             <div class="col-12 col-md-3" id="addressList">
@@ -24,7 +24,7 @@
                 </div>
                 <div class="addressLoop" id="addressLoop">
                     {% for item in address %}
-                        <a href="#" class="linkToSingle">
+                        <a class="linkToSingle">
                             <article class="oneShop" data-id="{{ item.subCategory.category.label }}_{{ item.id }}">
                                 <h2 class="text-center name">{{ item.name }}</h2><br>
                                 <p>
@@ -201,6 +201,8 @@
             var viewStatus ="all";
 
             //Barre de recherche
+
+
             var searchBar = document.getElementById('searchBar');
             searchBar.addEventListener('input', function(){
                 var input = document.getElementById('searchBar');
