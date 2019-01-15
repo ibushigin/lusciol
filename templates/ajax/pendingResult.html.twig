@@ -17,68 +17,71 @@
     </div>
 </article>
 <article id="addressForm" class="mt-5">
-    <form action="{{ path('pendingResult', {id : address.id}) }}" method="get" id="modifyAddressByAdmin">
-        <input type="hidden" name="address_id" value="{{ address.id }}">
-    <div class="input-group mb-3">
-        <div class="'input-group-prepend">
-            <span id="label_name" class="input-group-text">Nom</span>
-        </div>
-        {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
-    </div>
+    {#<form action="{{ path('validateAddress', {id : address.id}) }}" method="get" id="modifyAddressByAdmin">#}
+        {#<input type="hidden" name="address_id" value="{{ address.id }}">#}
+    {#<div class="input-group mb-3">#}
+        {#<div class="'input-group-prepend">#}
+            {#<span id="label_name" class="input-group-text">Nom</span>#}
+        {#</div>#}
+        {#{{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}#}
+    {#</div>#}
     {#<div class="input-group mb-3">#}
         {#<div class="'input-group-prepend">#}
             {#<span id="label_id" class="input-group-text">ID</span>#}
         {#</div>#}
         {#{{ form_widget(form.id, {'attr': {'class': 'form-control'}}) }}#}
     {#</div>#}
-    <div class="input-group mb-3">
-        <div class="'input-group-prepend">
-            <span id="label_sub_category" class="input-group-text">Sous-catégorie</span>
-        </div>
-        {{ form_widget(form.subCategory, {'attr': {'class': 'form-control'}}) }}
-    </div>
-    <div class="input-group mb-3">
-        <div class="'input-group-prepend">
-            <span id="label_address" class="input-group-text">Adresse</span>
-        </div>
-        {{ form_widget(form.location, {'attr': {'class': 'form-control'}}) }}
-    </div>
-    <div class="input-group mb-3">
-        <div class="'input-group-prepend">
-            <span id="label_coordinates" class="input-group-text">Coordonnées géographique</span>
-        </div>
-        {{ form_widget(form.coordinates, {'attr': {'class': 'form-control'}}) }}
-    </div>
-    <div class="input-group mb-3">
-        <div class="'input-group-prepend">
-            <span id="label_tel" class="input-group-text">Téléphone</span>
-        </div>
-        {{ form_widget(form.tel, {'attr': {'class': 'form-control'}}) }}
-    </div>
-    <div class="input-group mb-3">
-        <div class="'input-group-prepend">
-            <span id="label_webiste" class="input-group-text">Site Web</span>
-        </div>
-        {{ form_widget(form.website, {'attr': {'class': 'form-control'}}) }}
-    </div>
-    <div class="input-group mb-3">
-        <div class="'input-group-prepend">
-            <span id="label_discount" class="input-group-text">Réductions</span>
-        </div>
-        {{ form_widget(form.discount, {'attr': {'class': 'form-control'}}) }}
-    </div>
-        <div class="input-group mb-3">
-            <div class="'input-group-prepend">
-                <span id="label_status" class="input-group-text">Statut</span>
-            </div>
-            {{ form_widget(form.status, {'attr': {'class': 'form-control'}}) }}
-        </div>
-        <div class="d-flex justify-content-around">
-            <a href="{{ path('pendingResult', {id : address.id}) }}"><button class="btn btn-success" id="validateAfterModif">Enregistrer et Valider</button></a>
-            TODO Ajouter confirmation
-            {{ address.id }}
-            <button class="btn btn-danger">Rejeter</button>
-        </div>
+    {#<div class="input-group mb-3">#}
+        {#<div class="'input-group-prepend">#}
+            {#<span id="label_sub_category" class="input-group-text">Sous-catégorie</span>#}
+        {#</div>#}
+        {#{{ form_widget(form.subCategory, {'attr': {'class': 'form-control'}}) }}#}
+    {#</div>#}
+    {#<div class="input-group mb-3">#}
+        {#<div class="'input-group-prepend">#}
+            {#<span id="label_address" class="input-group-text">Adresse</span>#}
+        {#</div>#}
+        {#{{ form_widget(form.location, {'attr': {'class': 'form-control'}}) }}#}
+    {#</div>#}
+    {#<div class="input-group mb-3">#}
+        {#<div class="'input-group-prepend">#}
+            {#<span id="label_coordinates" class="input-group-text">Coordonnées géographique</span>#}
+        {#</div>#}
+        {#{{ form_widget(form.coordinates, {'attr': {'class': 'form-control'}}) }}#}
+    {#</div>#}
+    {#<div class="input-group mb-3">#}
+        {#<div class="'input-group-prepend">#}
+            {#<span id="label_tel" class="input-group-text">Téléphone</span>#}
+        {#</div>#}
+        {#{{ form_widget(form.tel, {'attr': {'class': 'form-control'}}) }}#}
+    {#</div>#}
+    {#<div class="input-group mb-3">#}
+        {#<div class="'input-group-prepend">#}
+            {#<span id="label_webiste" class="input-group-text">Site Web</span>#}
+        {#</div>#}
+        {#{{ form_widget(form.website, {'attr': {'class': 'form-control'}}) }}#}
+    {#</div>#}
+    {#<div class="input-group mb-3">#}
+        {#<div class="'input-group-prepend">#}
+            {#<span id="label_discount" class="input-group-text">Réductions</span>#}
+        {#</div>#}
+        {#{{ form_widget(form.discount, {'attr': {'class': 'form-control'}}) }}#}
+    {#</div>#}
+        {#<div class="input-group mb-3">#}
+            {#<div class="'input-group-prepend">#}
+                {#<span id="label_status" class="input-group-text">Statut</span>#}
+            {#</div>#}
+            {#{{ form_widget(form.status, {'attr': {'class': 'form-control'}}) }}#}
+        {#</div>#}
+        {#<div class="d-flex justify-content-around">#}
+            {#<a href="{{ path('pendingResult', {id : address.id}) }}"><button class="btn btn-success" id="validateAfterModif">Enregistrer et Valider</button></a>#}
+            {#TODO Ajouter confirmation#}
+            {#{{ address.id }}#}
+            {#<button class="btn btn-danger">Rejeter</button>#}
+        {#</div>#}
+    {{ form_start(form, {"action": path('validateAddress', {id : address.id} )}) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
 </article>
 
 {#{{ path('validateAddress', {id : address.id}) }}#}
