@@ -25,7 +25,7 @@
                 <div class="addressLoop" id="addressLoop">
                     {% for item in address %}
                         <a class="linkToSingle">
-                            <article class="oneShop" data-id="{{ item.subCategory.category.label }}_{{ item.id }}">
+                            <article class="oneShop" data-id="{{ item.subCategory.category.label }}_{{ item.id }}" data-coordinates="{{ item.coordinates }}">
                                 <h2 class="text-center name">{{ item.name }}</h2><br>
                                 <p>
                                     <strong>Sous-Categorie :</strong ><span class="subCat">{{ item.subCategory.label }}</span> <br>
@@ -90,8 +90,8 @@
              var CustomL = L.Icon.extend({
                  options: {
                      iconSize: [55, 60],
-                     shadowUrl: '{{ asset("img/marker-shadow.png") }}',
-                     shadowAnchor: [10, 20],
+                     //shadowUrl: '{{ asset("img/marker-shadow.png") }}',
+                     //shadowAnchor: [10, 20],
                      iconAnchor:   [20, 35],
                  }
             });
@@ -231,9 +231,13 @@
                         nameValue.toUpperCase().indexOf(filter) > -1
                     ){
                         a[i].style.display = "";
-                        console.log(articleValue);
+                        $('.leaflet-marker-pane img[alt = "'+articleValue+'"]').css('display','');
+
+
                     }else{
                         a[i].style.display = 'none';
+
+                        $('.leaflet-marker-pane img[alt = "'+articleValue+'"]').css('display','none');
                     }
                 }
             };
@@ -299,7 +303,7 @@
             })
 
             var inputVal;
-            console.log('input= ', inputVal);
+
 
 
             // Ajax => Info Boutique au clic sur le pointeur de la carte
@@ -307,11 +311,11 @@
             $('.leaflet-marker-icon').on('click', function(){
                 inputVal = document.getElementById('searchBar').value;
 
+
                 var currentDataID = $(this).attr('alt');
                 var address_id = currentDataID.slice(11);
                 // On supprime toutes les icones qui ne sont pas celle de la boutique selectionnée:
                 $('.leaflet-marker-pane img[alt != "'+currentDataID+'"]').css('display','none');
-                $('.leaflet-shadow-pane').css('display','none');
 
                 // La vue passe en singleView par ajax, gestion du visuel
                 // console.log(viewStatus);
@@ -336,6 +340,14 @@
             // Ajax => Info Boutique au clic sur la div du magasin
             $('#addressList').on('click', '.oneShop', function(){
                 inputVal = document.getElementById('searchBar').value;
+
+                var pointRaw = $(this).attr('data-coordinates');
+                var point = pointRaw.split( /\s*,\s*/ );
+
+                console.log('DataCoord=', point);
+                console.log(typeof point);
+
+                map.setView(point);
 
                 // La vue passe en singleView par ajax, gestion du visuel
 
@@ -379,6 +391,7 @@
                         $("#addressList").html(result);
                         $("#searchBar").val(inputVal);
                         search();
+                        map.setView(bordeaux, 14);
                     },
                     error: function(error){
                         console.log(error)
