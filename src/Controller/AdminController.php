@@ -43,11 +43,9 @@ class AdminController extends AbstractController
     public function validateAddress(Request $request, FileUploader $fileuploader, Address $address)
     {
 
-//        dd($address);
         $form = $this->createForm(UpdateAddressType::class, $address);
 
         $form->handleRequest($request);
-
         if($form->isSubmitted() && $form->isValid()){
 
             $address = $form->getData();
@@ -61,10 +59,6 @@ class AdminController extends AbstractController
             //je remplace l'attribut imgae qui contient toujours le fichier par le nom du fichier
             $address->setImage($filename);
 
-//            $address_modify = $entityManager->getRepository(Address::class)->find($address->getId());
-//            dd($address_modify);
-
-//            $address_modify->setStatus($address->status);
             $entityManager = $this->getDoctrine()->getManager();
 
             $entityManager->flush();

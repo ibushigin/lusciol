@@ -28,6 +28,8 @@ class UpdateAddressType extends AbstractType
                 'required' => false,
             ])
             ->add('image', FileType::class, [
+                'label' => 'Fichier image',
+                'attr' => ['placeholder' => 'Choose file'],
                 'required' => false,
                 'data_class' => null
             ])
@@ -35,7 +37,7 @@ class UpdateAddressType extends AbstractType
                 'class' => SubCategory::class,
                 'choice_label' => 'label'
             ])
-            ->add('save', SubmitType::class)
+            ->add('enregistrer', SubmitType::class)
         ;
     }
 
@@ -46,3 +48,5 @@ class UpdateAddressType extends AbstractType
         ]);
     }
 }
+
+//TODO bootstrap_4_layout.html.twig a voir pour les fichier file : https://github.com/symfony/symfony/issues/27477#ref-pullrequest-328782629

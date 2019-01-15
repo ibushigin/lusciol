@@ -59,9 +59,6 @@ class AjaxController extends AbstractController
             return $this->redirectToRoute('manageAddress');
         }
 
-        echo 'Address_id vaut :';
-        var_dump($address_id);
-
         $address = $this->getDoctrine()
             ->getRepository(Address::class)
             ->find($address_id);
