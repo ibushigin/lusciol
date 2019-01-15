@@ -74,7 +74,6 @@ class AddressController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid()){
 
-
             $address = $form->getData();
 
             //$article->getImage() contient un objet qui représent le fichier image envoyé
