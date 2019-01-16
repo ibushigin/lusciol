@@ -27,13 +27,8 @@ class Comment
     private $rate;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Address", inversedBy="average")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $adress;
-
-    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Address", inversedBy="comment")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $address;
 
