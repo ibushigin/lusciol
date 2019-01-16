@@ -9,6 +9,8 @@
         {# FAVICON #}
         <link rel="icon" href="{{ asset("img/favicon.ico") }}">
         {# Typographies GOOGLE FONT#}
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Abril+Fatface" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Chivo" rel="stylesheet">
         {#Le css bootstrap#}
         <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
@@ -20,6 +22,7 @@
               crossorigin=""/>
         {#CSS custom #}
         <link rel="stylesheet" href="{{ asset('css/Home.css') }}">
+        {#JS custom #}
     {% endblock %}
 
 </head>
@@ -84,6 +87,7 @@
 {% block javascripts %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/Home.js') }}"></script>
     {#JS Pour Leaflet#}
     <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
             integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
