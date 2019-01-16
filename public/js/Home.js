@@ -8,19 +8,36 @@ $(function(){
           return false;
       });
 
-// Ecriture du slogan 
+// Ecriture du slogan
+var BUTTONMap = document.getElementById('BUTTONMap');
 var string = "Nurture makes and distributes video content.";
 var str = string.split("");
-var el = document.getElementById('SloganLUSICOL');
+var el = document.getElementById('SloganLUSCIOL');
 
 function animate() {
-str.length > 0 ? el.innerHTML += str.shift() : clearTimeout(running); 
+str.length > 0 ? el.innerHTML += str.shift() : clearTimeout(running);
 var running = setTimeout(animate, 90);
+// Cacher - Apparaitre ma DIV bouton
+//     if(el.innerText.length > 43){
+//         BUTTONMap.style.display = "block";
+//     }
 };
-
+// Lancement de l'annimation
 setTimeout(animate, 1000);
 
-// Cacher - Apparaitre ma DIV bouton 
+
+//Delay sur le bouton "trouver un bon plan"
+
+    setTimeout(function(){
+        $('#BUTTONMap').fadeIn( "slow" );
+    }, 4960)
+
+// Faire briller un point
+
+    // setInterval(function(){
+    //     $('#etoile').fadeIn(1000);
+    //     $('#etoile').fadeOut(1000);
+    // }, 2000);
 
 })
 
