@@ -42,9 +42,6 @@
 
     <div class="collapse navbar-collapse navbar-expand-lg bg-transparent" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="MapLink" href="{{ path('viewAll') }}">Map</a>
-            </li>
             {# crée un lien vers la page admin si on a le role admin #}
             {% if is_granted('ROLE_ADMIN') %}
                 <li class="nav-item">
