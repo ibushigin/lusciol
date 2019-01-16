@@ -45,9 +45,12 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=50, unique=true)
+     * @Assert\Email(
+     *     message = "Votre email '{{ value }}' est invalide."
+     *     )
      */
     private $email;
-
+//TODO supprimer le téléphone car inutile
     /**
      * @ORM\Column(type="string", length=20, nullable=true)
      */
