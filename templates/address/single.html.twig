@@ -1,20 +1,3 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}{% endblock %}
-
-{% block body %}
-
-    {#DIV pour OSM#}
-    <div id="map"></div>
-
-    <p>
-
-Latitude : {{ lat }} ,Longitude: {{ long }}
-
-
-    </p>
-
-
     {% for item in address %}
         <article>
 
@@ -33,8 +16,4 @@ Latitude : {{ lat }} ,Longitude: {{ long }}
 
     {% endfor %}
 
-{% endblock %}
 
-{% block javascripts %}
-    {{ parent() }}
-{% endblock %}
