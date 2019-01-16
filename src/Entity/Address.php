@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AddressRepository")
@@ -30,6 +31,9 @@ class Address
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Url(
+     *     message = "L\'url '{{ value }}' est invalide."
+     * )
      */
     private $website;
 
@@ -40,6 +44,9 @@ class Address
 
     /**
      * @ORM\Column(type="string", length=20, nullable=true)
+     * @Assert\Regex("^(?:(?:\+|00)33[\s.-]{0,3}(?:\(0\)[\s.-]{0,3})?|0)[1-9](?:(?:[\s.-]?\d{2}){4}|\d{2}(?:[\s.-]?\d{3}){2})$",
+     *     message = "Le téléphone {{ value }} est invalide."
+     * )
      */
     private $tel;
 
@@ -50,6 +57,9 @@ class Address
 
     /**
      * @ORM\Column(type="string", length=10)
+     * @Assert\Regex("/^valid|pending$/",
+     *     message = "Le statut est invalide."
+     * )
      */
     private $status;
 
