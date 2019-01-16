@@ -14,20 +14,24 @@
     <div class="col-12 d-flex justify-content-center">
         <img src="https://placebeard.it/300x300" alt="" class="img-fluid">
     </div>
-
-
-    <article>
-
-
-        <p>
-            <strong>Sous-Categorie :</strong> {{ address.subCategory.label }}<br>
-            <strong>Categorie :</strong> {{ address.subCategory.category.label }}<br>
-            <strong>Adresse :</strong> {{ address.location }}<br>
-            <strong>Tel :</strong> {{ address.tel }}<br>
-            <strong>Site internet :</strong> {{ address.website }}<br>
-            <strong>Réduction :</strong> {{ address.discount }}<br>
-        </p>
-    </article>
-
+    <div class="col-12 d-flex flex-column">
+        <div class="d-flex flex-row">
+                <span class="col-1"><i class="fas fa-map-marker"></i></span>
+                <span class="col-11">{{ address.location }}</span>
+        </div>
+        <div class="row">
+            <span class="col-1"><i class="fas fa-phone-square"></i></span>
+            <span class="col-11">{{ address.tel }}</span>
+        </div>
+        <div class="row">
+            <span class="col-1"><i class="fas fa-globe-europe"></i></span>
+            <span class="col-11"><a href="{{ address.website }}" target="_blank">{{ address.website }}</a></span>
+        </div>
+        <div class="row">
+            <span class="col-1"><i class="fas fa-euro-sign"></i></span>
+            <span class="col-11">{{ address.discount }}</span>
+        </div>
+    </div>
 </div>
+
 
