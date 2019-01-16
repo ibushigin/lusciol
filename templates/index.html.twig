@@ -13,10 +13,25 @@
 	<!--HEADER-->
 
 	<div class="container-fluid">
+
+		<div class="VIDEOMap">
+			<video width="1600" height="888" autoplay="true" loop="true">
+				<source src="{{ asset("video/map-bg.mp4") }}" type="video/mp4" />
+			</video>
+		</div>
+
 		<div class="background">
 			<div class="Arrow">
-				<a class="angleDown" href="#LOGO2LUSCIOL"><i class="fas fa-angle-down fa-3x"></i></a>
+				<a class="angleDown" href="#ScrollDown"><i class="fas fa-angle-down fa-3x" id="buttonscrolldown" ></i></a>
 			</div>
+
+			<div class="container2">
+				<div class="SloganLUSICOL" id="SloganLUSICOL">
+				</div>
+			</div>	
+				<div class="BUTTONMap" id="BUTTONMap">
+					<a class="ButtonMap" href="{{ path('viewAll') }}">TROUVE TON BON PLAN</a>
+				</div>
 		</div>
 	</div>
 	
@@ -25,7 +40,8 @@
 
 	<div class="container">
 		<div class="ConceptLUSCIOl">
-			<div class="LOGO2LUSCIOL" id="LOGO2LUSCIOL">	
+			<div class="LOGO2LUSCIOL">	
+				<a id="ScrollDown" name="ScrollDown"></a>
 				<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 			width="195.117px" height="69.35px" viewBox="0 0 195.117 69.35" enable-background="new 0 0 195.117 69.35" xml:space="preserve">
 				<g id="Calque_2">
@@ -124,7 +140,7 @@
 				</g>
 				</g>
 				</g>
-				</svg>
+				</svg></a>
 			</div>
 
 			<!--Description du concept LUSCIOL-->
@@ -133,8 +149,18 @@
 
 			<!--Les meilleurs plans de la semaine/mois (à déterminer)-->
 
-		<div class="PlanLUSCIOL">
-			<h1>Vos meilleurs plans</h1>
+		<div class="BESTPlans">
+			<svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 		width="379.333px" height="12.259px" viewBox="0 0 379.333 12.259" enable-background="new 0 0 379.333 12.259"
+			 xml:space="preserve">
+			<line fill="none" stroke="#343A40" stroke-width="1.5" stroke-miterlimit="10" x1="0" y1="6.452" x2="379.333" y2="6.452"/>
+			</svg>
+			<span>Vos meilleurs plans</span>
+			<svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 		width="379.333px" height="12.259px" viewBox="0 0 379.333 12.259" enable-background="new 0 0 379.333 12.259"
+			 xml:space="preserve">
+			<line fill="none" stroke="#343A40" stroke-width="1.5" stroke-miterlimit="10" x1="0" y1="6.452" x2="379.333" y2="6.452"/>
+			</svg>
 		</div>
 
 		<div class="grid">
