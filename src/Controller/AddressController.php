@@ -58,7 +58,7 @@ class AddressController extends AbstractController
             $nbAdress = count($locations_lat);
         }
 
-        return $this->render('address/test.html.twig', [
+        return $this->render('address/index.html.twig', [
             'address' => $address, 'locations_lat' => $locations_lat, 'locations_long' => $locations_long, 'nbAddress' =>$nbAdress, 'address_ids' => $address_ids, 'address_cat' => $address_cat,
         ]);
     }
@@ -73,7 +73,6 @@ class AddressController extends AbstractController
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
-
 
             $address = $form->getData();
 

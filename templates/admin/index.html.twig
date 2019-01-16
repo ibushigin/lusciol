@@ -6,21 +6,17 @@
 
     <div class="container-fluid">
         <div class="container">
-            <div class="col-12 offset-md-2 col-md-8 d-flex justify-content-between">
-                <a href="{{ path('manageAddress')}}">
-                    <button class="btn btn-info">Gérer les magasins</button>
-                </a>
-                <a href="{{ path('manageAddress')}}">
-                    <button class="btn btn-info">Gérer les utilisateurs</button>
-                </a>
-                <a href="{{ path('manageAddress')}}">
-                    <button class="btn btn-info">Gérer le Blog</button>
-                </a>
-                <a href="{{ path('manageAddress')}}">
-                    <button class="btn btn-info">Messagerie</button>
-                </a>
+            <div class="d-flex justify-content-around">
+                <a href="{{ path('manageAddress')}}" class="mt-5 col-3 text-center"><button id="manageShops" class="btn btn-info px-4 py-4">Gérer les magasins</button></a>
+                <a href="{{ path('manageAddress')}}" class="mt-5 col-3 text-center"><button class="btn btn-info px-4 py-4">Gérer les utilisateurs</button></a>
+                <a href="{{ path('manageAddress')}}" class="mt-5 col-3 text-center"><button class="btn btn-info px-5 py-4">Gérer le Blog</button></a>
+                <a href="{{ path('manageAddress')}}" class="mt-5 col-3 text-center"><button class="btn btn-info px-5 py-4">Messagerie</button></a>
+            </div>
+            <div id="adminResultContent">
+
             </div>
         </div>
     </div>
 
 {% endblock %}
+

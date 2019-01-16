@@ -3,27 +3,62 @@
 {% block title %}View All Shops{% endblock %}
 
 {% block body %}
-    <div class="container-fluid">
+
+    <div class="container-fluid addressPage">
+
         <div class="row">
-            <div class="col-12 col-md-3" id="addressList">
+            <div class="col-12 col-md-3 d-flex flex-column" id="addressList">
+                <div id="resultAjax">
+                    <div class="searchGroup">
+                        <div class="search input-group col-12 pt-3">
+                            <div class="input-group-prepend ">
+                                <span class="input-group-text" id="input-addon"><i class="fas fa-search"></i></span>
+                            </div>
+                            <input type="text" class="form-control border-secondary shadow-none" id="searchBar" aria-describedby="input-addon">
+                        </div>
+                        <div class="searchCat col-12 pt-3 pr-0 pl-0 text-center justify-content-between d-flex flex-row flex-wrap">
+                            <div class="d-flex flex-column col-6 col-md-3 pr-0 pl-0">
+                                <span id="searchCat1"><img src="{{ asset("img/pictorond/restaurant.png") }}" alt="" class="img-fluid"></span>
+                                <span>Restauration</span>
+                            </div>
+                            <div class="d-flex flex-column col-6 col-md-3 pr-0 pl-0">
+                                <span id="searchCat2"><img src="{{ asset("img/pictorond/shop.png") }}" alt="" class="img-fluid"></span>
+                                <span>Shopping</span>
+                            </div>
+                            <div class="d-flex flex-column col-6 col-md-3 pr-0 pl-0">
+                                <span id="searchCat3"><img src="{{ asset("img/pictorond/soins.png") }}" alt="" class="img-fluid"></span>
+                                <span>Soins</span>
+                            </div>
+                            <div class="d-flex flex-column col-6 col-md-3 pr-0 pl-0">
+                                <span id="searchCat4"><img src="{{ asset("img/pictorond/sortie.png") }}" alt="" class="img-fluid"></span>
+                                <span>Divertissement</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="addressLoop pt-3" id="addressLoop">
+                        {% for item in address %}
+                            <a class="linkToSingle">
+                                <article class="oneShop" data-id="{{ item.subCategory.category.label }}_{{ item.id }}" data-coordinates="{{ item.coordinates }}">
+                                    <div class="row hoverItem mt-1 mb-1">
+                                        <div class="col-4">
+                                            <img src="https://placezombie.com/200x200" alt="" class="img-fluid">
+                                        </div>
+                                        <div class="col-8 text-left pl-3">
+                                            <h2 class="name">{{ item.name }}</h2>
+                                            <p class="subCat">{{ item.subCategory.label }}</p>
+                                            <p class="cat d-none">{{ item.subCategory.category.label }}</p>
+                                            <p>{{ item.discount }}</p>
+                                            {#<p>{{ item.average }}</p>#}
+                                        </div>
+                                    </div>
+                                </article>
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
+                </div>
 
-
-                    {% for item in address %}
-                        <a href="#" class="linkToSingle">
-                            <article class="oneShop" data-id="{{ item.id }}">
-                                <h2 class="text-center">{{ item.name }}<br></h2>
-                                <p>
-                                    <strong>Sous-Categorie :</strong> {{ item.subCategory.label }}<br>
-                                    <strong>Categorie :</strong> {{ item.subCategory.category.label }}<br>
-                                    <strong>Réduction :</strong> {{ item.discount }}<br>
-                                </p>
-                            </article>
-                        </a>
-                        <hr>
-                    {% endfor %}
-
-            </div>
-            <div class="col-12 col-md-9">
+            <div class="col-12 col-md-9 p-0">
                 <div id="map"></div>
             </div>
         </div>
@@ -33,8 +68,17 @@
 
 {% block javascripts %}
     {{ parent() }}
-    {#<script src="{{ asset('js/map.js') }}"></script>#}
+    {#JS custom pour le scroll#}
+    <script src="{{ asset('js/jquery.mCustomScrollbar.js') }}"></script>
     <script>
+        (function($){
+            $(window).on("load",function(){
+                $("#addressList").mCustomScrollbar({theme:"minimal-dark"});
+            });
+        })(jQuery);
+    </script>
+    <script>
+
         $(function(){
             //Initialisation de la carte
             //Ne pas toucher sous peine de torture
@@ -70,31 +114,39 @@
 
 
 
+            //Heritage de la classe L.icon pour passer des attributs customs :
+            // Non recupérable dans la balise img
+             var CustomL = L.Icon.extend({
+                 options: {
+                     iconSize: [55, 60],
+                     //shadowUrl: '{{ asset("img/marker-shadow.png") }}',
+                     //shadowAnchor: [10, 20],
+                     iconAnchor:   [20, 35],
+                 }
+            });
+
             //Création des icones
             var markerPosition = L.icon({
                 iconUrl: '{{ asset("img/markerPosition.png") }}',
                 iconSize:     [20, 20], // size of the icon
             });
-            var basicMarker =  L.icon({
-                iconUrl: '{{ asset("img/marker-icon.png") }}',
-                iconSize:     [25, 41], // size of the icon
+            var markerBlue = new CustomL({
+                iconUrl: '{{ asset("img/marker-blue.png") }}',
+                item_cat: 'Shopping',
+            });
 
+            var markerPink = new CustomL({
+                iconUrl: '{{ asset("img/marker-pink.png") }}',
+                item_cat: 'Soins',
             });
-            var markerCat1 = L.icon({
-                iconUrl: '{{ asset("img/") }}',
-                iconSize:     [20, 20], // size of the icon
+            var markerGreen = new CustomL({
+                iconUrl: '{{ asset("img/marker-green.png") }}',
+                item_cat: 'Restauration',
             });
-            var markerCat2 = L.icon({
-                iconUrl: '{{ asset("img/") }}',
-                iconSize:     [20, 20], // size of the icon
-            });
-            var markerCat3 = L.icon({
-                iconUrl: '{{ asset("img/") }}',
-                iconSize:     [20, 20], // size of the icon
-            });
-            var markerCat4 = L.icon({
-                iconUrl: '{{ asset("img/") }}',
-                iconSize:     [20, 20], // size of the icon
+
+            var markerYellow = new CustomL({
+                iconUrl: '{{ asset("img/marker-yellow.png") }}',
+                item_cat: 'Divertissement',
             });
             var markerPoint = L.icon({
                 iconUrl: '{{ asset("img/markerPoint.png") }}',
@@ -120,25 +172,44 @@
 
 
             {% for key, latitude in locations_lat %}
-                let latitude{{ key }} = {{ latitude }};
+            let latitude{{ key }} = {{ latitude }};
             {% endfor %}
 
             {% for key, longitude in locations_long %}
-                    let longitude{{ key }} = {{ longitude }};
+            let longitude{{ key }} = {{ longitude }};
             {% endfor %}
 
             {% for key, address_id in address_ids %}
-                let item{{ key }} = {{ address_id }};
+            let item{{ key }} = {{ address_id }};
             {% endfor %}
 
+            {% for key, cat in address_cat %}
+            let item_cat{{ key }} = '{{ cat }}';
+            {% endfor %}
 
-
-                {% set nbAddress = nbAddress-1 %}
+            {% set nbAddress = nbAddress-1 %}
 
 
             {% for i in 0..nbAddress %}
-                var marker{{ i }} = L.marker([latitude{{ i }}, longitude{{ i }}], {alt: item{{ i }}}).addTo(map);
-                marker{{ i }}.myCustomID ={{ i }};
+
+            var markerIcon;
+            if(item_cat{{ i }} === 'Shopping'){
+                markerIcon = markerBlue;
+            }
+            if(item_cat{{ i }} === 'Soins'){
+                markerIcon = markerPink;
+            }
+            if(item_cat{{ i }} === 'Restauration'){
+                markerIcon = markerGreen;
+            }
+            if(item_cat{{ i }} === 'Divertissement'){
+                markerIcon = markerYellow;
+            }
+
+            var param = item_cat{{ i }} + '_' + item{{ i }};
+
+
+            var marker{{ i }} = L.marker([latitude{{ i }}, longitude{{ i }}], {icon: markerIcon, alt: param}).addTo(map);
             {% endfor %}
 
             // Stockage des résultat de recherche dans une variable pour pouvoir revenir en ajax sur la page des
@@ -149,25 +220,119 @@
 
             var result_content = $('#addressList').html();
 
+
+
             // Gestion du CSS dynamique pour le lien vers les pages boutique
 
 
+
+
             var currentIcon;
-            var viewStatus = "all";
+            var viewStatus ="all";
+
+            //Barre de recherche
+
+            $('#addressList').on('input', '#searchBar', search);
+
+
+
+            function search(){
+                var input = document.getElementById('searchBar');
+                function no_accent(my_string)
+                {
+                    // tableau accents
+                    var pattern_accent = new Array("À","Á","Â","Ã","Ä","Å","Æ","Ç","È","É","Ê","Ë",
+                        "Ì","Í","Î","Ï","Ð","Ñ","Ò","Ó","Ô","Õ","Ö","Ø","Ù","Ú","Û","Ü","Ý",
+                        "Þ","ß","à","á","â","ã","ä","å","æ","ç","è","é","ê","ë","ì","í","î",
+                        "ï","ð","ñ","ò","ó","ô","õ","ö","ø","ù","ú","û","ü","ý","ý","þ","ÿ");
+
+                    // tableau sans accents
+                    var pattern_replace_accent = new Array("A","A","A","A","A","A","A","C","E","E","E","E",
+                        "I","I","I","I","D","N","O","O","O","O","O","O","U","U","U","U","Y",
+                        "b","s","a","a","a","a","a","a","a","c","e","e","e","e","i","i","i",
+                        "i","d","n","o","o","o","o","o","o","u","u","u","u","y","y","b","y");
+
+                    //pour chaque caractere si accentué le remplacer par un non accentué
+                    for(var i=0;i<pattern_accent.length;i++)
+                    {
+                        // si on trouve un accent dans la chaine on le remplace par le caractere non accentué correspondant
+
+                        if( my_string.indexOf(pattern_accent[i]) )
+                        {
+                            my_string = my_string.replace(pattern_accent[i],pattern_replace_accent[i]);
+                        }
+                    }
+                    return my_string;
+                }
+                var filter1 = no_accent(input.value);
+                var filter2 = filter1.toUpperCase();
+                console.log(filter1);
+                var div = document.getElementById('addressLoop');
+                var a = div.getElementsByTagName('a');
+                var i;
+                var cat, subCat, name, article;
+                var catValue, subCatValue, nameValue, articleValue;
+                for (i = 0; i < a.length; i++) {
+
+                    cat = a[i].getElementsByClassName('cat')[0];
+                    subCat = a[i].getElementsByClassName('subCat')[0];
+                    name = a[i].getElementsByClassName('name')[0];
+                    article = a[i].getElementsByTagName('article')[0];
+                    articleValue = article.getAttribute('data-id');
+                    catValue = cat.textContent || cat.innerText;
+                    subCatValue = subCat.textContent || subCat.innerText;
+                    nameValue = name.textContent || name.innerText;
+                    if(
+                        no_accent(catValue).toUpperCase().indexOf(filter2) > -1 ||
+                        no_accent(subCatValue).toUpperCase().indexOf(filter2) > -1 ||
+                        no_accent(nameValue).toUpperCase().indexOf(filter2) > -1
+                    ){
+                        a[i].style.display = "";
+                        $('.leaflet-marker-pane img[alt = "'+articleValue+'"]').css('display','');
+
+
+                    }else{
+                        a[i].style.display = 'none';
+
+                        $('.leaflet-marker-pane img[alt = "'+articleValue+'"]').css('display','none');
+                    }
+                }
+            };
+            //filtres
+
+            $('#addressList').on('click', '#searchCat1', function(){
+                $('#searchBar').val('Restauration');
+                search();
+            });
+            $('#addressList').on('click', '#searchCat2', function(){
+                $('#searchBar').val('Shopping');
+                search();
+            });
+            $('#addressList').on('click', '#searchCat3', function(){
+                $('#searchBar').val('Soins');
+                search();
+            });
+            $('#addressList').on('click', '#searchCat4', function(){
+                $('#searchBar').val('Divertissement');
+                search();
+            });
+
+
+
 
             $('#addressList').on('mouseenter', '.oneShop', function(){
-                $(this).css('background-color', '#a7abb2');
+                // $(this).css('background-color', '#a7abb2');
                 let address_id = $(this).attr('data-id');
                 if(viewStatus === "all"){
-                currentIcon = $("img[alt='"+address_id+"']").attr('src');
-                $("img[alt='"+address_id+"']").attr('src', '{{ asset("img/markerPoint.png") }}');
+                    currentIcon = $("img[alt='"+address_id+"']").attr('src');
+                    $("img[alt='"+address_id+"']").attr('src', '{{ asset("img/markerPoint.png") }}');
                 }
             });
 
 
 
             $('#addressList').on('mouseleave', '.oneShop', function(){
-                $(this).css('background-color', '#d7dae0');
+                // $(this).css('background-color', '#fff');
                 let address_id = $(this).attr('data-id');
                 if(viewStatus === "all") {
                     $("img[alt='" + address_id + "']").attr('src', currentIcon);
@@ -188,91 +353,132 @@
 
             $('.leaflet-marker-icon').on('mouseleave', function(){
                 var address_id = $(this).attr('alt');
-                $("article[data-id='"+address_id+"']").css('background-color', '#d7dae0');
+                $("article[data-id='"+address_id+"']").css('background-color', '#fff');
                 if (viewStatus === "all"){
                     $("img[alt='"+address_id+"']").attr('src', currentIcon);
                 }
             })
 
+            var inputVal;
 
-                // Ajax => Info Boutique au clic sur le pointeur de la carte
 
-                $('.leaflet-marker-icon').on('click', function(){
 
-                    var address_id = $(this).attr('alt');
+            // Ajax => Info Boutique au clic sur le pointeur de la carte
 
-                    // La vue passe en singleView par ajax, gestion du visuel
-                    console.log(viewStatus);
-                    if (viewStatus === "all"){
-                        // Requete AJAX :
-                        $.ajax({
-                            type: 'post',
-                            url: '{{ path("singleView") }}',
-                            data: 'address_id=' + address_id + '&result_content=' +result_content,
-                            datatype: 'html',
-                            success: function(result){
-                                $("#addressList").html(result);
-                            },
-                            error: function(error){
-                                console.log(error)
-                            },
-                        });
-                        viewStatus ="single";
-                    }
-                })
+            $('.leaflet-marker-icon').on('click', function(){
+                inputVal = document.getElementById('searchBar').value;
 
-                // Ajax => Info Boutique au clic sur la div du magasin
-                $('#addressList').on('click', '.oneShop', function(){
-                    // La vue passe en singleView par ajax, gestion du visuel
-                    viewStatus = "single";
-                    $('img[alt="https://unpkg.com/leaflet@1.4.0/dist/images/marker-icon.png"]').css('display', 'none');
-                    // https://unpkg.com/leaflet@1.4.0/dist/images/marker-icon.png
 
-                    var address_id = $(this).attr('data-id');
+                var currentDataID = $(this).attr('alt');
+                var splitCurrentDataID = currentDataID.split('_');
+                var address_id = splitCurrentDataID[1];
+                // On supprime toutes les icones qui ne sont pas celle de la boutique selectionnée:
+                $('.leaflet-marker-pane img[alt != "'+currentDataID+'"]').css('display','none');
+
+                // La vue passe en singleView par ajax, gestion du visuel
+                // console.log(viewStatus);
+                if (viewStatus === "all"){
+                    // Requete AJAX :
+                    $.ajax({
+                        type: 'post',
+                        url: '{{ path("singleView") }}',
+                        data: 'address_id=' + address_id + '&result_content=' +result_content,
+                        datatype: 'html',
+                        success: function(result){
+                            $("#resultAjax").html(result);
+                        },
+                        error: function(error){
+                            console.log(error)
+                        },
+                    });
+                    viewStatus ="single";
+                }
+            })
+
+            // Ajax => Info Boutique au clic sur la div du magasin
+            $('#addressList').on('click', '.oneShop', function(){
+                inputVal = document.getElementById('searchBar').value;
+
+                var pointRaw = $(this).attr('data-coordinates');
+                var point = pointRaw.split( /\s*,\s*/ );
+
+                console.log('DataCoord=', point);
+                console.log(typeof point);
+
+                map.setView(point);
+
+                // La vue passe en singleView par ajax, gestion du visuel
+
+                var currentDataID = $(this).attr('data-id');
+                var splitCurrentDataID = currentDataID.split('_');
+                var address_id = splitCurrentDataID[1];
+                // On supprime toutes les icones qui ne sont pas celle de la boutique selectionnée:
+                $('.leaflet-marker-pane img[alt != "'+currentDataID+'"]').css('display','none');
+                $('.leaflet-shadow-pane').css('display','none');
+
+                if(viewStatus === "all"){
+                    //Requete AJAX
                     $.ajax({
                         type: 'post',
                         url: '{{ path("singleView") }}',
                         data: 'address_id=' + address_id,
                         datatype: 'html',
                         success: function(result){
-                            $("#addressList").html(result);
+                            $("#resultAjax").html(result);
+
                         },
                         error: function(error){
                             console.log(error)
                         },
                     });
-
-                })
+                    viewStatus = "single";
+                }
+            })
 
             // Ajax => Retourner sur l'affichage des résultats
-                $('#addressList').on('click', '#result_content', function(){
+            $('#addressList').on('click', '#result_content', function(){
 
-                    // La vue revient sur les resultats par ajax, gestion du visuel
-                    viewStatus = "all";
-                    $('.leaflet-marker-icon').attr('src', currentIcon);
-                    $.ajax({
-                        type: 'post',
-                        url: '{{ path("returnToResult") }}',
-                        data: 'result_content=' + result_content,
-                        datatype: 'html',
-                        success: function(result){
-                            $("#addressList").html(result);
-                        },
-                        error: function(error){
-                            console.log(error)
-                        },
-                    });
-                })
+                // La vue revient sur les resultats par ajax, gestion du visuel
+                viewStatus = "all";
 
-                // console.log(current_id);
-                {#path = "{{ path('viewSingle', {id : 0}) }}";#}
-                {#path = path.replace(0, current_id);#}
-                {#document.location.href=path;#}
+                $.ajax({
+                    type: 'post',
+                    url: '{{ path("returnToResult") }}',
+                    data: 'result_content=' + result_content,
+                    datatype: 'html',
+                    success: function(result){
+                        $("#resultAjax").html(result);
+                        $("#searchBar").val(inputVal);
+                        search();
+                        map.setView(bordeaux, 14);
+                    },
+                    error: function(error){
+                        console.log(error)
+                    },
+                });
+                // On remet l'icone qu'avait le magasin sur la carte avant que l'on clic dessus
+                // Depuis le data ID genéré depuis ajax/returnToResult.html.twig
+                var dataID = $(this).attr('data-id');
+                var cat = dataID.slice(0,3);
+                var markerAddress = $("img[alt='"+dataID+"']");
+                if(cat ==='Sho'){
+                    markerAddress.attr('src', '{{ asset("img/marker-blue.png") }}');
+                }
+                if(cat ==='Soi'){
+                    markerAddress.attr('src', '{{ asset("img/marker-pink.png") }}');
+                }
+                if(cat ==='Res'){
+                    markerAddress.attr('src', '{{ asset("img/marker-green.png") }}');
+                }
+                if(cat ==='Div'){
+                    markerAddress.attr('src', '{{ asset("img/marker-yellow.png") }}');
+                }
+                // On reaffiche tous les marker vu qu'on reviens a une vue ALL
+                $('.leaflet-marker-pane img').css('display','block');
+
             });
 
 
-
-
-
+        });
     </script>
 {% endblock %}

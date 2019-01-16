@@ -4,28 +4,32 @@
 #map {
     height: 100vh;
     width: 100%;
-	margin-top: 50px;
 }
-.searchCat > span:hover{
+.searchCat > div:hover{
 	cursor: pointer;
 }
 #addressList{
-	margin-top: 50px;
-	height: 80vh;
-	background-color: #d7dae0;
+	height: 100vh;
+	max-height: 100vh;
+	background-color: white;
 	overflow-y: scroll;
 	padding : 0;
 }
 
-.linkToSingle, #addressList a:hover {
-	text-decoration: none;
-	color: black;
+
+
+.linkToSingle p{
+	margin: 0;
+}
+.hoverItem:hover{
+	background-color: #E9ECEF;
 }
 
 #addressList a:hover{
 	text-decoration: none;
 	color: black;
 	cursor: pointer;
+
 }
 
 .oneShop{

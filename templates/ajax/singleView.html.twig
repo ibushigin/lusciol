@@ -1,24 +1,33 @@
 <div class="container">
-<article>
-    <h2 class="text-center">Nom du magasin : {{ address.name }}</h2>
-    <hr>
-    <p>
-        <strong>Sous-Categorie :</strong> {{ address.subCategory.label }}<br>
-        <strong>Categorie :</strong> {{ address.subCategory.category.label }}<br>
-        <strong>Adresse :</strong> {{ address.location }}<br>
-        <strong>Tel :</strong> {{ address.tel }}<br>
-        <strong>Site internet :</strong> {{ address.website }}<br>
-        <strong>Réduction :</strong> {{ address.discount }}<br>
-    </p>
-</article>
-    <div class="col-6 m-auto">
-
-        {#On recrée un data-id identique a celui de la boutique sur la page d'affichage de toutes les boutiques#}
-        {#qui servira a trouver la reference de la boutique et donc l'image qui doit lui etre associé sur la#}
-        {#carte lorsque la vue reviens en ALL#}
-<a id="result_content"  data-id="{{ address.subCategory.category.label }}_{{ address.id }}">
-    <button class="btn btn-info">Retour à la liste des magasins</button>
-</a>
+    {#On recrée un data-id identique a celui de la boutique sur la page d'affichage de toutes les boutiques#}
+    {#qui servira a trouver la reference de la boutique et donc l'image qui doit lui etre associé sur la#}
+    {#carte lorsque la vue reviens en ALL#}
+    <div class="col-12 d-flex justify-content-between align-items-baseline pt-2">
+        <div class="d-flex flex-column">
+            <h2 class="text-center">{{ address.name }}</h2>
+            <p class="wrap">{{ address.subCategory.label }}</p>
+        </div>
+        <a id="result_content"  data-id="{{ address.subCategory.category.label }}_{{ address.id }}">
+            <button class="btn btn-info"><i class="fas fa-undo-alt"></i></button>
+        </a>
     </div>
+    <div class="col-12 d-flex justify-content-center">
+        <img src="https://placebeard.it/300x300" alt="" class="img-fluid">
+    </div>
+
+
+    <article>
+
+
+        <p>
+            <strong>Sous-Categorie :</strong> {{ address.subCategory.label }}<br>
+            <strong>Categorie :</strong> {{ address.subCategory.category.label }}<br>
+            <strong>Adresse :</strong> {{ address.location }}<br>
+            <strong>Tel :</strong> {{ address.tel }}<br>
+            <strong>Site internet :</strong> {{ address.website }}<br>
+            <strong>Réduction :</strong> {{ address.discount }}<br>
+        </p>
+    </article>
+
 </div>
 
