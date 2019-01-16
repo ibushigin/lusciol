@@ -29,10 +29,11 @@ class AdminController extends AbstractController
     public function manageAddress(){
         $repository = $this->getDoctrine()->getRepository(Address::class);
         $pendingAddress = $repository->pendingAddress();
+        $allAddress = $repository->findAll();
 
 
         return $this->render('admin/manageAddress.html.twig', [
-            'pendingAddress' => $pendingAddress,
+            'pendingAddress' => $pendingAddress, 'allAddress' => $allAddress
         ]);
     }
 

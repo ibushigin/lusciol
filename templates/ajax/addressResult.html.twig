@@ -1,0 +1,85 @@
+{% if address %}
+    <article id="addressDescription">
+        <strong>Nom :</strong> {{ address.name }}<br>
+        <strong>ID :</strong> {{ address.id }}<br>
+        <strong>Categorie :</strong> {{ address.subCategory.category.label }}<br>
+        <strong>Sous-Categorie :</strong> {{ address.subCategory.label }}<br>
+        <strong>Adresse :</strong> {{ address.location }}<br>
+        <strong>Coordoonées géographiques :</strong> {{ address.coordinates }}<br>
+        <strong>Tel :</strong> {{ address.tel }}<br>
+        <strong>Site internet :</strong> {{ address.website }}<br>
+        <strong>Réduction :</strong> {{ address.discount }}<br>
+        <strong>Statut :</strong> {{ address.status }}<br>
+        <div class="col-12 d-flex justify-content-around mt-5">
+            <button id="modify" class="btn btn-warning">Modifier</button>
+            <a href="{{ path('rejectAddress', {id : address.id}) }}"><button id="deny" class="btn btn-danger">Rejeter</button></a>
+        </div>
+    </article>
+    <article id="addressForm" class="mt-5">
+        {{ form_start(form, {"action": path('validateAddress', {id : address.id} )}) }}
+        <div class="input-group mb-3">
+            <div class="'input-group-prepend">
+                <span id="label_name" class="input-group-text">Nom</span>
+            </div>
+            {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="input-group mb-3">
+            <div class="'input-group-prepend">
+                <span id="label_sub_category" class="input-group-text">Sous-catégorie</span>
+            </div>
+            {{ form_widget(form.subCategory, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="input-group mb-3">
+            <div class="'input-group-prepend">
+                <span id="label_address" class="input-group-text">Adresse</span>
+            </div>
+            {{ form_widget(form.location, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="input-group mb-3">
+            <div class="'input-group-prepend">
+                <span id="label_coordinates" class="input-group-text">Coordonnées géographique</span>
+            </div>
+            {{ form_widget(form.coordinates, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="input-group mb-3">
+            <div class="'input-group-prepend">
+                <span id="label_tel" class="input-group-text">Téléphone</span>
+            </div>
+            {{ form_widget(form.tel, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="input-group mb-3">
+            <div class="'input-group-prepend">
+                <span id="label_webiste" class="input-group-text">Site Web</span>
+            </div>
+            {{ form_widget(form.website, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="input-group mb-3">
+            <div class="'input-group-prepend">
+                <span id="label_discount" class="input-group-text">Réductions</span>
+            </div>
+            {{ form_widget(form.discount, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="input-group mb-3">
+            <div class="'input-group-prepend">
+                <span id="label_status" class="input-group-text">Statut</span>
+            </div>
+            {{ form_widget(form.status, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="input-group mb-3">
+            <div class="'input-group-prepend">
+                <span id="label_file" class="input-group-text">Image</span>
+            </div>
+            {{ form_widget(form.image, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="d-flex justify-content-around">
+            <a href="{{ path('pendingResult', {id : address.id}) }}">{{ form_widget(form.enregistrer, {'attr': {'class': 'btn btn-success'}}) }}</a>
+            {#TODO Ajouter confirmation#}
+            <a href="{{ path('rejectAddress', {id : address.id}) }}"><button type="button" id="deny2" class="btn btn-danger">Rejeter</button></a>
+        </div>
+        {{ form_end(form) }}
+    </article>
+{% else %}
+    <article>
+    </article>
+
+{% endif %}
