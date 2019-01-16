@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Address;
+use App\Entity\User;
 use App\Form\AddressType;
 use App\Form\UpdateAddressType;
+use App\Form\UpdateUserType;
 use App\Service\FileUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -49,7 +51,7 @@ class AjaxController extends AbstractController
     /**
      * @Route("/ajax/pendingResult", name="pendingResult")
      */
-    // ROUTE POUR LA VALIDATION DES ADDRESSES EN ATTENTE
+    // ROUTE POUR LA GENERATION DU FORMULAIRE DE VALIDATION DES ADDRESSES EN ATTENTE
     public function pendingResult(Request $request, FileUploader $fileuploader)
     {
 
@@ -74,7 +76,7 @@ class AjaxController extends AbstractController
     /**
      * @Route("/ajax/addressResult", name="addressResult")
      */
-    // ROUTE POUR LA MODIFICATION DES ADDRESSES
+    // ROUTE POUR LA GENERATION DU FORMULAIRE DE MODIFICATION DES ADDRESSES
     public function addressResult(Request $request, FileUploader $fileuploader)
     {
 
@@ -93,6 +95,32 @@ class AjaxController extends AbstractController
 
         return $this->render('ajax/addressResult.html.twig', [
             'address' => $address, 'form' => $form->createView(),
+        ]);
+    }
+
+    // ROUTE POUR L AFFICHAGE DES UTILISATEURS A MODIFIER
+
+    /**
+     * @Route("/ajax/userResult", name="userResult")
+     */
+    // ROUTE POUR LA MODIFICATION DES UTILISATEURS
+    public function usersResult(Request $request, FileUploader $fileuploader)
+    {
+        $user_id = $request->request->get('user_id', null);
+        if(empty($user_id) || !preg_match("#^\d+$#", $user_id)){
+            $this->addFlash('notice', 'paramètre(s) invalide(s) (user)');
+            return $this->redirectToRoute('manageUsers');
+        }
+
+        $user = $this->getDoctrine()
+            ->getRepository(User::class)
+            ->find($user_id);
+
+
+        $form = $this->createForm(UpdateUserType::class, $user);
+
+        return $this->render('ajax/userResults.html.twig', [
+            'user' => $user, 'form' => $form->createView(),
         ]);
     }
 }

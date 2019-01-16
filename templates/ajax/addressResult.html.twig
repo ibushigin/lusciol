@@ -72,7 +72,7 @@
             {{ form_widget(form.image, {'attr': {'class': 'form-control'}}) }}
         </div>
         <div class="d-flex justify-content-around">
-            <a href="{{ path('pendingResult', {id : address.id}) }}">{{ form_widget(form.enregistrer, {'attr': {'class': 'btn btn-success'}}) }}</a>
+            <a>{{ form_widget(form.enregistrer, {'attr': {'class': 'btn btn-success'}}) }}</a>
             {#TODO Ajouter confirmation#}
             <a href="{{ path('rejectAddress', {id : address.id}) }}"><button type="button" id="deny2" class="btn btn-danger">Rejeter</button></a>
         </div>

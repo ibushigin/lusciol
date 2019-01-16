@@ -1,0 +1,53 @@
+{% if user %}
+<article id="userDescription">
+    <strong>Nom d'utilisateur :</strong> {{ user.username }}<br>
+    <strong>ID :</strong> {{ user.id }}<br>
+    <strong>Email :</strong> {{ user.email }}<br>
+    <strong>Roles :</strong>
+    {% for role in user.roles %}
+        {{ role }} -
+    {% endfor %}
+    <br>
+    <strong>Avatar :</strong> <img src="{{ asset('uploads/user/avatar/' ~ user.avatar) }}" alt="avateur de l'utilisateur"><br>
+    <div class="col-12 d-flex justify-content-around mt-5">
+        <button id="modify" class="btn btn-warning">Modifier</button>
+        <a href="{{ path('deleteUser', {id : user.id}) }}"><button id="deleteUser" class="btn btn-danger">Supprimer</button></a>
+    </div>
+</article>
+    <article id="updateUserForm" class="mt-5">
+        {{ form_start(form, {"action": path('validateUpdateUser', {id : user.id} )}) }}
+        <div class="input-group mb-3">
+            <div class="'input-group-prepend">
+                <span id="label_username" class="input-group-text">Nom</span>
+            </div>
+            {{ form_widget(form.username, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="input-group mb-3">
+            <div class="'input-group-prepend">
+                <span id="label_email" class="input-group-text">Sous-catégorie</span>
+            </div>
+            {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="input-group mb-3">
+            <div class="'input-group-prepend">
+                <span id="label_role" class="input-group-text">Adresse</span>
+            </div>
+            {{ form_widget(form.roles, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="input-group mb-3">
+            <div class="'input-group-prepend">
+                <span id="label_avatar" class="input-group-text">Image</span>
+            </div>
+            {{ form_widget(form.avatar, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="d-flex justify-content-around">
+            <a>{{ form_widget(form.enregistrer, {'attr': {'class': 'btn btn-success'}}) }}</a>
+            {#TODO Ajouter confirmation#}
+            <a href="{{ path('deleteUser', {id : user.id}) }}"><button type="button" id="deny2" class="btn btn-danger">Rejeter</button></a>
+        </div>
+        {{ form_end(form) }}
+    </article>
+{% else %}
+    <article>
+    </article>
+{% endif %}
