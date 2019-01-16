@@ -16,20 +16,30 @@
     </div>
     <div class="col-12 d-flex flex-column">
         <div class="d-flex flex-row">
+            <span class="col-12 text-center">Rate Average</span>
+        </div>
+        <div class="d-flex flex-row">
                 <span class="col-1"><i class="fas fa-map-marker"></i></span>
                 <span class="col-11">{{ address.location }}</span>
         </div>
-        <div class="row">
+        <div class="d-flex flex-row">
             <span class="col-1"><i class="fas fa-phone-square"></i></span>
             <span class="col-11">{{ address.tel }}</span>
         </div>
-        <div class="row">
+        <div class="d-flex flex-row">
             <span class="col-1"><i class="fas fa-globe-europe"></i></span>
             <span class="col-11"><a href="{{ address.website }}" target="_blank">{{ address.website }}</a></span>
         </div>
-        <div class="row">
+        <div class="d-flex flex-row">
             <span class="col-1"><i class="fas fa-euro-sign"></i></span>
             <span class="col-11">{{ address.discount }}</span>
+        </div>
+        <div class="d-flex">
+            <p>Ajouter un commentaire</p>
+        </div>
+        <div>
+            <span>Liste des commentaires</span>
+            
         </div>
     </div>
 </div>
