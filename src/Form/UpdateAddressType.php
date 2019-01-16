@@ -6,6 +6,7 @@ use App\Entity\Address;
 use App\Entity\SubCategory;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
@@ -24,8 +25,11 @@ class UpdateAddressType extends AbstractType
             ->add('coordinates', TextType::class)
             ->add('tel', TelType::class)
             ->add('discount', TextType::class)
-            ->add('status', TextType::class,[
-                'required' => false,
+            ->add('status', ChoiceType::class,[
+                'choices' => [
+                    'Valid' => 'valid',
+                    'Pending' => 'pending',
+                ]
             ])
             ->add('image', FileType::class, [
                 'label' => 'Fichier image',

@@ -71,4 +71,40 @@ class AdminController extends AbstractController
         return $this->redirectToRoute('home');
 
     }
+
+    /**
+     * @Route("/admin/validateAddressDirectly/{id}", name="validateAddressDirectly", requirements={"id"="[0-9]+"})
+     */
+
+    public function validateAddressDirectly(Request $request, Address $address)
+    {
+
+            $address->setStatus('valid');
+
+            $entityManager = $this->getDoctrine()->getManager();
+
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Adresse ajoutée');
+
+            return $this->redirectToRoute('manageAddress');
+    }
+
+    /**
+     * @Route("/admin/rejectAddress/{id}", name="rejectAddress", requirements={"id"="[0-9]+"})
+     */
+
+    public function rejectAddress (Request $request, Address $address)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        // Je veux supprimer cet article
+        $entityManager->remove($address);
+        // Pour valider la suppression
+        $entityManager->flush();
+
+        // génération d'un message flash
+        $this->addFlash('warning', 'Article supprimé');
+
+        return $this->redirectToRoute('manageAddress');
+    }
 }
