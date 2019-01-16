@@ -20,6 +20,7 @@ var running = setTimeout(animate, 90);
 
 setTimeout(animate, 1000);
 
+// Cacher - Apparaitre ma DIV bouton 
 
 })
 
