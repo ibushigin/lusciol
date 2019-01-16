@@ -70,7 +70,7 @@
 	top: 5vh;
 }
 
-#SloganLUSICOL{
+#SloganLUSCIOL{
 	font-family: 'Abril Fatface', cursive;
 	color: white;
 	float: right;
@@ -90,7 +90,22 @@
 	z-index: 3;
 	top: 53vh;
 	right: 15vw;
-	padding: 15px 200px
+	padding: 15px 200px;
+	display: none;
+}
+
+/*ANIMATION LUCIOLES*/
+
+/*#etoile{*/
+	/*position: absolute;*/
+	/*top: 10vh;*/
+	/*right: 20vw;*/
+/*}*/
+
+#contour_lumineux{
+	position: absolute;
+	top : 0vh;
+	display: none;
 }
 
 /* ANIMATION BODER BUTTON */
