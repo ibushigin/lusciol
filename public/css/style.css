@@ -5,7 +5,7 @@
     height: 100vh;
     width: 100%;
 }
-.searchCat > span:hover{
+.searchCat > div:hover{
 	cursor: pointer;
 }
 #addressList{
@@ -19,11 +19,15 @@
 	text-decoration: none;
 	color: black;
 }
+.linkToSingle:hover{
+	background-color: #E8E0D8;
+}
 
 #addressList a:hover{
 	text-decoration: none;
 	color: black;
 	cursor: pointer;
+
 }
 
 .oneShop{
