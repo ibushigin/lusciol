@@ -102,6 +102,12 @@
 	/*right: 20vw;*/
 /*}*/
 
+#contour_lumineux{
+	position: absolute;
+	top : 0vh;
+	display: none;
+}
+
 /* ANIMATION BODER BUTTON */
 
 @keyframes bg {

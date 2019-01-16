@@ -33,11 +33,13 @@ setTimeout(animate, 1000);
     }, 4960)
 
 // Faire briller un point
+setTimeout(function(){
+    setInterval(function(){
+        $('#contour_lumineux').fadeIn(3000);
+        $('#contour_lumineux').fadeOut(3000);
+    }, 6000);
+}, 1960)
 
-    // setInterval(function(){
-    //     $('#etoile').fadeIn(1000);
-    //     $('#etoile').fadeOut(1000);
-    // }, 2000);
 
 })
 
