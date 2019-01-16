@@ -1,0 +1,66 @@
+{% extends 'base-navbar.html.twig' %}
+
+{% block title %}Manage Users{% endblock %}
+
+{% block body %}
+
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label }}">{{ message}}</div>
+        {% endfor %}
+    {% endfor %}
+
+<div class="container-fluid">
+    <container>
+        <div class="row">
+            <div class="col-12">
+                <h2 class="text-secondary mt-5 text-center"><span class="badge badge-info p-3">Gestion des utilisateurs</span></h2>
+                <div class="form-group col-6 col-md-3 mt-5 mx-auto">
+                    <select id="selectUser" class="form-control" name="selectUser">
+                        <option value="">Utilisateurs...</option>
+                        {% for user in users %}
+                            <option value="{{ user.id }}">{{ user.username }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div id="results" class="col-6 col-md-3 mt-5 mx-auto">
+        </div>
+    </container>
+</div>
+<div id="results"></div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+<script>
+    $(function() {
+        // Requete AJAX pour l'affichage d'une adresse a valider
+        $('#selectUser').on('change', function () {
+
+            userId = $('#selectUser option:selected').val();
+
+            $.ajax({
+                type: 'post',
+                url: '{{ path("userResult") }}',
+                data: 'user_id=' + userId,
+                datatype: 'html',
+                success: function (result) {
+                    $("#results").html(result);
+                },
+                error: function (error) {
+                    console.log(error)
+                },
+            });
+        })
+
+        // Affichage du formulaire pour la modification d'utilisateur
+
+        $('#results').on('click', '#modify', function(){
+            $('#updateUserForm').css('display', 'block');
+            $('#userDescription').css('display', 'none');
+        })
+    })
+</script>
+{% endblock %}
