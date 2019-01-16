@@ -49,7 +49,7 @@ class AjaxController extends AbstractController
     /**
      * @Route("/ajax/pendingResult", name="pendingResult")
      */
-
+    // ROUTE POUR LA VALIDATION DES ADDRESSES EN ATTENTE
     public function pendingResult(Request $request, FileUploader $fileuploader)
     {
 
@@ -71,4 +71,28 @@ class AjaxController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/ajax/addressResult", name="addressResult")
+     */
+    // ROUTE POUR LA MODIFICATION DES ADDRESSES
+    public function addressResult(Request $request, FileUploader $fileuploader)
+    {
+
+        $address_id = $request->request->get('address_id', null);
+        if(empty($address_id) || !preg_match("#^\d+$#", $address_id)){
+            $this->addFlash('notice', 'paramètre(s) invalide(s)');
+            return $this->redirectToRoute('manageAddress');
+        }
+
+        $address = $this->getDoctrine()
+            ->getRepository(Address::class)
+            ->find($address_id);
+
+
+        $form = $this->createForm(UpdateAddressType::class, $address);
+
+        return $this->render('ajax/addressResult.html.twig', [
+            'address' => $address, 'form' => $form->createView(),
+        ]);
+    }
 }

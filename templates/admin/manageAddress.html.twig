@@ -12,14 +12,30 @@
 
     <div class="container-fluid">
         <container>
-            <h2 class="text-center text-secondary mt-5"><span class="badge badge-info p-3">Valider l'enregistrement d'un magasin</span></h2>
-            <div class="form-group col-6 col-md-3 mt-5 mx-auto">
-                <select id="selectPendingAddress" class="form-control" name="selectPendingAddress">
-                    <option value="9999">Adresses en attente de validation</option>
-                    {% for address in pendingAddress %}
-                        <option value="{{ address.id }}">{{ address.name }}</option>
-                    {% endfor %}
-                </select>
+            <div class="row">
+                <div class="col-6">
+                    <h2 class="text-secondary mt-5 text-center"><span class="badge badge-info p-3">Valider l'enregistrement d'un magasin</span></h2>
+                    <div class="form-group col-6 col-md-8 mt-5 mx-auto">
+                        <select id="selectPendingAddress" class="form-control" name="selectPendingAddress">
+                            <option value="9999">Magasins en attente de validation...</option>
+                            {% for address in pendingAddress %}
+                                <option value="{{ address.id }}">{{ address.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <h2 class="text-secondary mt-5 text-center"><span class="badge badge-info p-3">Modifier un magasin</span></h2>
+                    <div class="form-group col-6 col-md-6 mt-5 mx-auto">
+                        <select id="selectAddress" class="form-control" name="selectAddress">
+                            <option value="9999">Magasins...</option>
+                            {% for address in allAddress %}
+                                <option value="{{ address.id }}">{{ address.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                </div>
             </div>
             <div id="pendingResult" class="col-6 col-md-3 mt-5 mx-auto">
             </div>
@@ -63,6 +79,27 @@
                 var form_data = ($("#modifyAddressByAdmin").serialize());
                 console.log(form_data);
 
+            })
+
+            // Menu de droite modifier un magasin
+
+            $('#selectAddress').on('change', function(){
+
+                AddressId = $('#selectAddress option:selected').val();
+                console.log(pendingAddressId);
+
+                $.ajax({
+                    type: 'post',
+                    url: '{{ path("addressResult") }}',
+                    data: 'address_id=' + AddressId,
+                    datatype: 'html',
+                    success: function(result){
+                        $("#pendingResult").html(result);
+                    },
+                    error: function(error){
+                        console.log(error)
+                    },
+                });
             })
 
 
