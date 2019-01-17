@@ -64,11 +64,6 @@ class Address
     private $status;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="adress", orphanRemoval=true)
-     */
-    private $average;
-
-    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\SubCategory", inversedBy="address")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -84,9 +79,13 @@ class Address
      */
     private $image;
 
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $average;
+
     public function __construct()
     {
-        $this->average = new ArrayCollection();
         $this->comment = new ArrayCollection();
     }
 
@@ -178,37 +177,7 @@ class Address
 
         return $this;
     }
-
-    /**
-     * @return Collection|Comment[]
-     */
-    public function getAverage(): Collection
-    {
-        return $this->average;
-    }
-
-    public function addAverage(Comment $average): self
-    {
-        if (!$this->average->contains($average)) {
-            $this->average[] = $average;
-            $average->setAdress($this);
-        }
-
-        return $this;
-    }
-
-    public function removeAverage(Comment $average): self
-    {
-        if ($this->average->contains($average)) {
-            $this->average->removeElement($average);
-            // set the owning side to null (unless already changed)
-            if ($average->getAdress() === $this) {
-                $average->setAdress(null);
-            }
-        }
-
-        return $this;
-    }
+    
 
     public function getSubCategory(): ?SubCategory
     {
@@ -262,5 +231,17 @@ class Address
     {
         $this->image = $image; 
         return $this; 
+    }
+
+    public function getAverage(): ?float
+    {
+        return $this->average;
+    }
+
+    public function setAverage(?float $average): self
+    {
+        $this->average = $average;
+
+        return $this;
     }
 }

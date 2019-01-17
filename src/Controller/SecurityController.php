@@ -106,7 +106,15 @@ class SecurityController extends AbstractController
      */
     public function resetPassword(Request $request, string $token, UserPasswordEncoderInterface $passwordEncoder)
     {
-        
+
+        $repository = $this->getDoctrine()->getRepository(User::class);
+
+        $user = $repository->findByResetToken($token);
+
+        if(empty($user)){
+            return $this->redirectToRoute('home');
+        }
+
         if ($request->isMethod('POST')) {
             $entityManager = $this->getDoctrine()->getManager();
             $user = $entityManager->getRepository(User::class)->findOneByResetToken($token);
