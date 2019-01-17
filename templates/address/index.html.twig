@@ -46,6 +46,7 @@
                                         <div class="col-8 text-left pl-3">
                                             <h2 class="name">{{ item.name }}</h2>
                                             <p class="subCat">{{ item.subCategory.label }}</p>
+                                            <p>Average</p>
                                             <p class="cat d-none">{{ item.subCategory.category.label }}</p>
                                             <p>{{ item.discount }}</p>
                                             {#<p>{{ item.average }}</p>#}
@@ -88,12 +89,12 @@
             let osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
             let osmAttrib = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
             let osm = L.tileLayer(osmUrl, {maxZoom: 18, attribution: osmAttrib});
+
+
             //restriction géographique
             var corner1 = L.latLng(44.7426, -0.7526);
             var corner2 = L.latLng(44.9801, -0.2935);
             var bounds = L.latLngBounds(corner1, corner2);
-
-
 
             let map = L.map('map').setView(bordeaux, 14);
             map.setMaxBounds(bounds);
@@ -104,11 +105,12 @@
 
 
 
+
             L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
                 attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
                 maxZoom: 18,
                 id: 'mapbox.streets',
-                accessToken: 'pk.eyJ1IjoiaWJ1c2hpZ2luIiwiYSI6ImNqcXJ1d3lwdjBnZXo0MmxqZWRyMGIzdmEifQ.MAtmFHO16MD5osbZotlXYw'
+                accessToken: 'pk.eyJ1IjoiaWJ1c2hpZ2luIiwiYSI6ImNqcXJ1d3lwdjBnZXo0MmxqZWRyMGIzdmEifQ.MAtmFHO16MD5osbZotlXYw',
             }).addTo(map);
 
 
