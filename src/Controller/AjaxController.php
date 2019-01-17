@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Address;
+use App\Entity\Comment;
 use App\Entity\User;
 use App\Form\AddressType;
+use App\Form\CommentType;
 use App\Form\UpdateAddressType;
 use App\Form\UpdateUserType;
 use App\Service\FileUploader;
@@ -31,9 +33,56 @@ class AjaxController extends AbstractController
             ->find($address_id);
 
         return $this->render('ajax/singleView.html.twig', [
-            'address' => $address,
-        ]);
+            'address' => $address]);
+
     }
+
+    /**
+     * @Route("/ajax/addComment/{id}", name="addComment", requirements={"id"="[0-9]+"})
+     */
+    public function addComment(Request $request, Address $address){
+
+        if(!empty($request->request->all())){
+
+            $content = $request->request->get('content');
+            $comment = new Comment();
+
+            $comment->setDateenvoi(New \DateTime(date('bite')));
+
+            $comment->setUser($this->getUser());
+
+            $comment->setAddress($address);
+
+            $comment->setContent($content);
+
+            $entityManager = $this->getDoctrine()->getManager();
+
+            $entityManager->persist($comment);
+
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Commentaire posté');
+
+            return $this->render('ajax/singleView.html.twig', [
+                'address' => $address, ]);
+
+        }else{
+
+            return $this->redirectToRoute('home');
+
+        }
+
+        //----- AFFICHAGE DES COMMENTAIRES -----//
+
+//        $repository = $this->getDoctrine()->getRepository(Comment::class);
+//
+//        $comments = $repository->findAll();
+
+        return $this->render('ajax/singleView.html.twig', [
+            'address' => $address]);
+//        , 'comments' => $comments
+    }
+
 
     /**
      * @Route("/ajax/returnToResult", name="returnToResult")

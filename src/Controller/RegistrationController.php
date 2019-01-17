@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class RegistrationController extends AbstractController
 {
@@ -20,10 +21,15 @@ class RegistrationController extends AbstractController
      */
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder,
                              GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $authenticator,
-                             FileUploader $fileuploader): Response
+                             FileUploader $fileuploader, AuthenticationUtils $authenticationUtils): Response
     {
 
         $form = $this->createForm(RegistrationFormType::class);
+
+        $error = $authenticationUtils->getLastAuthenticationError();
+        // last username entered by the user
+        $lastUsername = $authenticationUtils->getLastUsername();
+
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
@@ -44,12 +50,12 @@ class RegistrationController extends AbstractController
 
             //traitement du formulaire d'upload d'image
             //on m'a envoyé une image
+            if($user->getAvatar()){
             $filename = $fileuploader->upload($user->getAvatar(),
                 $this->getParameter('user_avatar_directory'));
             //j'injecte le nom du fichier dans la propriété image
             $user->setAvatar($filename);
-
-
+            }
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
@@ -67,7 +73,8 @@ class RegistrationController extends AbstractController
 
         }
 
-        return $this->render('security/login.html.twig', [
+        return $this->render('security/login.html.twig', ['last_username' => $lastUsername,
+            'error' => $error,
             'registrationForm' => $form->createView()
         ]);
     }
