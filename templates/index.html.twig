@@ -4,38 +4,67 @@
 
 {% block body %}
 
-	{% for label, messages in app.flashes %}
-		{% for message in messages %}
-			<div class="alert alert-{{ label }}">{{ message}}</div>
-		{% endfor %}
-	{% endfor %}
+<!-- {% for label, messages in app.flashes %}
+	{% for message in messages %} -->
+	<!-- <div class="alert alert-{{ label }}">{{ message}}</div> -->
+<!-- {% endfor %}
+	{% endfor %} -->
 
 	<!--HEADER-->
 
-	<div class="container-fluid m-0 p-0">
-
-		<div class="d-none d-md-block" id="gifMAP">
-			<img src="{{ asset("img/gifmap.gif") }}" alt="GifMap">
-		</div>
-
-		<div class="" id="mainbg">
-			<img id="mainbgimg" src="{{ asset("img/fond1.png") }}" alt="Fond_degrade">	
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-12" id="mainbg">
+				<img id="mainbgimg" src="{{ asset("img/fond1.png") }}" alt="Fond_degrade" class="img-fluid col-12">
+				<img id="mainbgimg2" src="{{ asset("img/fond1shine.png") }}" alt="Fond_degrade" class="img-fluid col-12">
+				<div class="d-none d-md-block" id="gifMAP">
+					<img src="{{ asset("img/gifmap.gif") }}" alt="GifMap" id="gifMAPimg" class="img-fluid">
+				</div>
+				<div class=" offset-md-6 col-md-6">	
+					<div class="row">
+						<div class="SloganLUSCIOL offset-md-1 col-md-8" id="SloganLUSCIOL">
+						</div>
+					</div>
+					<div class="row">
+						<div id="BUTTONMap" class="offset-md-1 col-md-8">
+							<a class"col-12" href="{{ path('viewAll') }}">
+								<button class="btn col-11 py-3 mt-3">
+									TROUVE TON BON PLAN
+								</button> 
+							</a>
+						</div>
+					</div>	
+				</div>	
+			</div>
 		</div>
 	</div>
-
-<!-- <div class="BUTTONMap" id="BUTTONMap">
-					<a class="ButtonMap" href="{{ path('viewAll') }}">TROUVE TON BON PLAN</a>
-				</div> -->
-
-	<!-- <div class="container2">
-				<div class="SloganLUSCIOL" id="SloganLUSCIOL">
-				</div>
-			</div>	 -->
 	
+
+
+
+	<!-- </div> -->
+
+
+
+
 <!-- <div class="Arrow">
 				<a class="angleDown" href="#ScrollDown"><i class="fas fa-angle-down fa-3x" id="buttonscrolldown" ></i></a>
 			</div> -->
-	<!--CONTAIN-->
+			<!--CONTAIN-->
 	<!-- {#<img id="etoile" src="{{ asset("img/markerPosition.png") }}" alt="test">#}
-			<img id="contour_lumineux" src="{{ asset("img/contour_lumineux.png") }}" alt="contour lumineux"> -->
-{% endblock %}
+		<img id="contour_lumineux" src="{{ asset("img/contour_lumineux.png") }}" alt="contour lumineux"> -->
+		{% endblock %}
+
+		{% block javascripts %}
+		{{ parent() }}
+		<script type="text/javascript">
+			let setBG = function(){
+				let $Wwidth = $(window).width();
+				console.log($Wwidth);
+				if ($Wwidth < 1300 ){
+					$('#mainbgimg').attr('src', '{{ asset("img/fond2.png") }}')
+				}
+			}
+			setBG();
+		</script>
+		{% endblock %}

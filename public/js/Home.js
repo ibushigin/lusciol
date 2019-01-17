@@ -35,9 +35,9 @@ setTimeout(animate, 1000);
 // Faire briller un point
 setTimeout(function(){
     setInterval(function(){
-        $('#contour_lumineux').fadeIn(3000);
-        $('#contour_lumineux').fadeOut(3000);
-    }, 6000);
+        $('#mainbgimg2').fadeIn(1000);
+        $('#mainbgimg2').fadeOut(1000);
+    }, 2000);
 }, 1960)
 
 
