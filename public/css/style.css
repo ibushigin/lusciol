@@ -85,11 +85,13 @@ span.starsSingle span {
 /*Responsive MAP*/
 @media only screen and (max-width: 991px) {
 	#map{
-		max-height: 80vh;
+		height: 70vh;
+		float: left;
 	}
 	#addressList{
 
 		overflow-y: visible;
+		float: left;
 
 	}
 	
