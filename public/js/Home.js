@@ -10,7 +10,7 @@ $(function(){
 
 // Ecriture du slogan
 var BUTTONMap = document.getElementById('BUTTONMap');
-var string = "Nurture makes and distributes video content.";
+var string = "Tous les bons plans étudiant à portée de clic!";
 var str = string.split("");
 var el = document.getElementById('SloganLUSCIOL');
 
