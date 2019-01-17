@@ -198,9 +198,8 @@
 	color: rgb(52, 58, 64) ;
 }
 
-.background{
-	background-image: url('../img/fond1.png'); 
-	background-repeat: no-repeat; 
+#background{
+	/*background-image: url('../img/fond1.png'); */
 	height: 100vh;
 	z-index: 0; 
 	position: relative;

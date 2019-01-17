@@ -13,28 +13,29 @@
 	<!--HEADER-->
 
 	<div class="container-fluid">
-        <div class="row">
-            <div class="VIDEOMap">
-                <video width="1600" height="888" autoplay="true" loop="true">
-                    <source src="{{ asset("video/map-bg.mp4") }}" type="video/mp4" />
-                </video>
-            </div>
-            <div class="background">
-                <div class="Arrow">
-                    <a class="angleDown" href="#ScrollDown"><i class="fas fa-angle-down fa-3x" id="buttonscrolldown" ></i></a>
-                </div>
 
-                <div class="container2">
-                    <div class="SloganLUSCIOL" id="SloganLUSCIOL">
-                    </div>
-                </div>
-                <div class="BUTTONMap" id="BUTTONMap">
-                    <a class="ButtonMap" href="{{ path('viewAll') }}">TROUVE TON BON PLAN</a>
-                </div>
-                {#<img id="etoile" src="{{ asset("img/markerPosition.png") }}" alt="test">#}
-                <img id="contour_lumineux" src="{{ asset("img/contour_lumineux.png") }}" alt="contour lumineux">
-            </div>
-        </div>
+		<div class="VIDEOMap">
+			<video width="1600" height="888" autoplay="true" loop="true">
+				<source src="{{ asset("video/map-bg.mp4") }}" type="video/mp4" />
+			</video>
+		</div>
+
+		<div class="background">
+			<img id="background" src="{{ asset("img/fond1.png") }}" alt="Fonddegrade">
+			<div class="Arrow">
+				<a class="angleDown" href="#ScrollDown"><i class="fas fa-angle-down fa-3x" id="buttonscrolldown" ></i></a>
+			</div>
+
+			<div class="container2">
+				<div class="SloganLUSCIOL" id="SloganLUSCIOL">
+				</div>
+			</div>	
+				<div class="BUTTONMap" id="BUTTONMap">
+					<a class="ButtonMap" href="{{ path('viewAll') }}">TROUVE TON BON PLAN</a>
+				</div>
+			{#<img id="etoile" src="{{ asset("img/markerPosition.png") }}" alt="test">#}
+			<img id="contour_lumineux" src="{{ asset("img/contour_lumineux.png") }}" alt="contour lumineux">
+		</div>
 	</div>
 	
 
