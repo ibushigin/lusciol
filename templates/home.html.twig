@@ -6,37 +6,37 @@
     <title>{% block title %}Welcome!{% endblock %}</title>
 
     {% block stylesheets %}
-        {# FAVICON #}
-        <link rel="icon" href="{{ asset("img/favicon.ico") }}">
-        {# Typographies GOOGLE FONT#}
-        <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Abril+Fatface" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Chivo" rel="stylesheet">
-        {#Le css bootstrap#}
-        <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
-        {#Fontawesome#}
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-        {#Leaflet OSM#}
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
-              integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
-              crossorigin=""/>
-        {#CSS custom #}
-        <link rel="stylesheet" href="{{ asset('css/Home.css') }}">
-        {#JS custom #}
+    {# FAVICON #}
+    <link rel="icon" href="{{ asset('img/favicon.ico') }}">
+    {# Typographies GOOGLE FONT#}
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Abril+Fatface" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Chivo" rel="stylesheet">
+    {#Le css bootstrap#}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
+    {#Fontawesome#}
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    {#Leaflet OSM#}
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+    integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+    crossorigin=""/>
+    {#CSS custom #}
+    <link rel="stylesheet" href="{{ asset('css/homev2.css') }}">
+    {#JS custom #}
     {% endblock %}
 
 </head>
 
 <body>
 
-<nav class="navbar navbar-expand-lg">
-    <a class="navbar-brand" href="{{ path('home') }}"></a>
-    
-    <div class="LogoLusciol">
-         <img src="{{ asset("img/logo.png") }}" alt="LusciolLogo" width="120">
-    </div>
+    <nav class="navbar navbar-expand-lg">
+        <a class="navbar-brand" href="{{ path('home') }}"></a>
 
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <div class="LogoLusciol">
+           <img src="{{ asset('img/logo.png') }}" alt="LusciolLogo">
+       </div>
+
+       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 
@@ -44,33 +44,30 @@
         <ul class="navbar-nav mr-auto">
             {# crée un lien vers la page admin si on a le role admin #}
             {% if is_granted('ROLE_ADMIN') %}
-                <li class="nav-item">
-                    <a class="nav-link text-warning" href="{{ path('admin') }}">Admin</a>
-                </li>
+            <li class="nav-item">
+                <a class="nav-link text-warning" href="{{ path('admin') }}">Admin</a>
+            </li>
             {% endif %}
             {# liens login si je ne suis pas connecté ou logout si je suis connecté #}
             {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
-                {# je ne suis pas connecté#}
+            {# je ne suis pas connecté#}
             {% else %}
-                <li class="nav-item">
-                    <a class="nav-link text-info" href="{{ path('userInfo') }}">Profile</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-danger" href="{{ path('logout') }}">Logout</a>
-                </li>
+            <li class="nav-item">
+                <a class="nav-link text-info" href="{{ path('userInfo') }}">Profile</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-danger" href="{{ path('logout') }}">Logout</a>
+            </li>
 
-                </li>
-            {% endif %}
-        </ul>
-               {# Picto connexion#}
-                <div class="Connect">
-                    <a href="{{ path('app_login') }}"><i class="fas fa-user"></i></a>
-                </div>
+    
+        {% endif %}
+    </ul>
+    {# Picto connexion#}
+    <div class="Connect">
+        <a href="{{ path('app_login') }}"><i class="fas fa-user"></i></a>
     </div>
+</div>
 </nav>
-
-
-
 
 
 {% block body %}
@@ -82,13 +79,13 @@
 {% endblock %}
 
 {% block javascripts %}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('js/Home.js') }}"></script>
-    {#JS Pour Leaflet#}
-    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
-            integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
-            crossorigin=""></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('js/Home.js') }}"></script>
+{#JS Pour Leaflet#}
+<script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+crossorigin=""></script>
 {% endblock %}
 
 </body>
