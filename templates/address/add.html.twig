@@ -11,6 +11,7 @@
 		{{ form_row(form.subCategory) }}
 		{{ form_row(form.name) }}
 		{{ form_row(form.location) }}
+	<button id="btnCoord">chercher coordonnées</button>
 		{{ form_row(form.website) }}
 		{{ form_row(form.coordinates) }}
 		{{ form_row(form.tel) }}
@@ -18,4 +19,10 @@
 		{{ form_row(form.image) }}
 		{{ form_row(form.save) }}
 	{{ form_end(form) }}
+{% endblock %}
+
+
+{% block javascripts %}
+	{{ parent() }}
+<script src="{{ asset('js/app.js') }}"></script>
 {% endblock %}
