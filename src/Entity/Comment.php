@@ -37,6 +37,11 @@ class Comment
      */
     private $user;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $dateenvoi;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -98,6 +103,18 @@ class Comment
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getDateenvoi(): ?\DateTimeInterface
+    {
+        return $this->dateenvoi;
+    }
+
+    public function setDateenvoi(\DateTimeInterface $dateenvoi): self
+    {
+        $this->dateenvoi = $dateenvoi;
 
         return $this;
     }
