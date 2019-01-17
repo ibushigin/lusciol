@@ -61,10 +61,17 @@
                 </li>
             {% endif %}
         </ul>
+            {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+                {# Picto connexion#}
+                <div class="Connect">
+                    <a href="{{ path('app_login') }}"><i class="fas fa-user"></i></a>
+                </div>
+            {% else %}
             {# Picto connexion#}
-            <div class="Connect">
-                <a href="{{ path('app_login') }}"><i class="fas fa-user"></i></a>
-            </div>
+                <div class="Profile">
+                    <a href="{{ path('userInfo') }}"><i class="fas fa-user"></i></a>
+                </div>
+            {% endif %}
     </div>
 </nav>
 

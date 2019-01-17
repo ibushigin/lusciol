@@ -8,14 +8,14 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20190116174158 extends AbstractMigration
+final class Version20190117085148 extends AbstractMigration
 {
     public function up(Schema $schema) : void
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE message ADD subject VARCHAR(255) NOT NULL');
+        $this->addSql('ALTER TABLE comment DROP adress_id');
     }
 
     public function down(Schema $schema) : void
@@ -23,6 +23,6 @@ final class Version20190116174158 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE message DROP subject');
+        $this->addSql('ALTER TABLE comment ADD adress_id INT NOT NULL');
     }
 }
