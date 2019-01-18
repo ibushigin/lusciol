@@ -22,12 +22,12 @@ class RegistrationFormType extends AbstractType
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'invalid_message' => 'Les mots de passe ne correspondent pas.',
-                'first_options' => ['label' => 'Mot de passe'],
-                'second_options' => ['label' => 'Répétez le mot de passe']
+                'first_options' => ['label' => false, 'attr' => ['placeholder' => 'Mot de passe : ', 'class' => 'form-control font-italic']],
+                'second_options' => ['label' => false, 'attr' => ['placeholder' => 'Confirmer le mot de passe :',  'class' => 'form-control font-italic']]
             ])
             ->add('email', EmailType::class)
             ->add('tel', TelType::class)
-            ->add('avatar', FileType::class, ['required' => false])
+            ->add('avatar', FileType::class, ['required' => false, 'attr' => ['placeholder' => 'Image de profil :', 'class' => 'form-control font-italic']])
         ;
     }
 

@@ -19,16 +19,10 @@ class AddressType extends AbstractType
     {
         $builder
             ->add('name', TextType::class)
-            ->add('id', TextType::class, [
-                'required' => false,
-            ])
             ->add('location', TextType::class )
             ->add('website', TextType::class)
             ->add('coordinates', TextType::class)
             ->add('tel', TextType::class)
-            ->add('status', TextType::class, [
-                'required' => false,
-            ])
             ->add('discount', TextType::class)
             ->add('subCategory',EntityType::class, [
                 'class' => SubCategory::class,

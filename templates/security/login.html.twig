@@ -2,59 +2,83 @@
 
 {% block title %}Log in!{% endblock %}
 
-{% block body %}
-    <form method="post">
-        {% if error %}
-            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-        {% endif %}
+    {% block body %}
+        <div class="container-fluid" id="idLOGIN">   
+            <form method="post">
+                {% if error %}
+                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}                                       
 
-        <div class="container-fluid">
-            <div class=" text-center mt-5">
-            <img src="{{ asset('img/Logo2.png') }}" alt="Logo2LUSCIOL">
-            </div>
-        </div>
-
-        <div class="container">
-            <div class="row">
-                <div class=" form-group col-12 col-md-6 mt-5 mx-auto">
-                    <h1 class="h1 font-weight-bold text-center" id="LOGINPolice">Please sign in : </h1><br>
-                        {# Formulaire #}
-                        <label for="inputEmail" class="sr-only">Email : </label>
-                        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control font-italic" placeholder="Email : " required autofocus>
-
-                        <label for="inputPassword" class="sr-only">Password : </label>
-                            <input type="password" name="password" id="inputPassword" class="form-control font-italic" placeholder="Password : " required>
-                            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-                        {# Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.See https://symfony.com/doc/current/security/remember_me.html
-                            <div class="checkbox mb-3">
-                                <label>
-                                    input type="checkbox" name="_remember_me"> Remember me
-                                </label>
-                            </div> #}
-                            <br>
-
-                    <div class=" form-group col-12 col-md-6 mx-auto">
-                        <button class="btn btn-info btn-block" type="submit">Sign in</button><br>
-                            <div class="text-center font-italic">
-                                <a href="{{ path('app_forgotten_password') }}">Mot de passe oublié ?</a>
-                            </div>
+                <div class="container">
+                    <div class="row">
+                        <div class=" text-center col-12 col-md-12" id="LOGOLOGIN">
+                            <img src="{{ asset('img/Logo3.png') }}" alt="Logo2LUSCIOL">
+                        </div>
                     </div>
                 </div>
-            </div>
+
+
+                <div class="row mt-5">
+                    <div class=" form-group col-12 col-md-4 mx-auto">
+                        <h1 class="h1 font-weight-bold text-center text-white" id="LOGINPolice">Connexion :</h1><br>
+                        {# Formulaire #}
+                        <label for="inputEmail" class="sr-only">Email : </label>
+                        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control font-italic" placeholder="Email : " required autofocus><br>
+
+                        <label for="inputPassword" class="sr-only">Password : </label>
+                        <input type="password" name="password" id="inputPassword" class="form-control font-italic" placeholder="Password : " required>
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                            {# Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.See https://symfony.com/doc/current/security/remember_me.html
+                            <div class="checkbox mb-3">
+                            <label>
+                            input type="checkbox" name="_remember_me"> Remember me
+                            </label>
+                            </div> #}
+                            <br>
+                            <div class=" form-group col-12 col-md-4 mx-auto my-auto">
+                                <button class="btn btn-light btn-block" type="submit">Connexion</button><br>
+                            </div>
+
+                            <div id="MDPLOST" class="text-center font-italic">
+                                <a href="{{ path('app_forgotten_password') }}">Mot de passe oublié ?</a>
+                            </div>
+
+            </form>           
+                    </div> 
+
+                    <div class=" form-group col-12 col-md-4 mx-auto">                               
+                        <h1 class="h1 font-weight-bold text-center text-white" id="LOGINPolice2">S'enregistrer :</h1><br>
+
+                        {{ form_start(registrationForm,
+                        {"action": path('app_register')} ) }}
+                        {{ form_row(registrationForm.username, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Pseudo : '}}) }}
+                        {{ form_row(registrationForm.email, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Email : '}}) }}
+                        {{ form_row(registrationForm.tel, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Téléphone : '}}) }}
+                        {{ form_row(registrationForm.avatar, {'label': false,}) }}
+                        {{ form_row(registrationForm.plainPassword, {'label': false, 'attr': {'class': 'form-control font-italic', 'placeholder': 'Mot de passe : '}}) }}
+
+                        <div class=" form-group col-12 col-md-4 mx-auto my-auto">
+                            <button class="btn btn-light btn-block">S'enregistrer</button>
+                                    {{ form_end(registrationForm) }}
+                        </div>
+
+                        <div class="col-12" id="DEMILOGO">
+                            <img class="d-none d-lg-block" src="{{ asset("img/fond3.png") }}" alt="LUEUR">
+                        </div>
+
+
+                    </div>
+                </div>
         </div>
-    </form>
 
-    <h1>Page d'enregistrement : </h1>
-    {{ form_start(registrationForm,
-        {"action": path('app_register')} ) }}
-    {{ form_row(registrationForm.username) }}
-    {{ form_row(registrationForm.email) }}
-    {{ form_row(registrationForm.tel) }}
-    {{ form_row(registrationForm.avatar) }}
-    {{ form_row(registrationForm.plainPassword) }}
+    {% endblock %}
 
-    <button class="btn btn-info">S'enregistrer</button>
-    {{ form_end(registrationForm) }}
-
-
+{% block javascripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('js/Login.js') }}"></script>
+{#JS Pour Leaflet#}
+<script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+crossorigin=""></script>
 {% endblock %}
