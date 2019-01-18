@@ -32,8 +32,14 @@ class AjaxController extends AbstractController
             ->getRepository(Address::class)
             ->find($address_id);
 
+        //----- AFFICHAGE DES COMMENTAIRES -----//
+
+        $repository = $this->getDoctrine()->getRepository(Comment::class);
+
+        $comments = $repository->findAllCommentsByAddress($address);
+
         return $this->render('ajax/singleView.html.twig', [
-            'address' => $address]);
+            'address' => $address, 'comments' => $comments]);
 
     }
 
@@ -45,9 +51,12 @@ class AjaxController extends AbstractController
         if(!empty($request->request->all())){
 
             $content = $request->request->get('content');
+
+            $note = $request->request->get('note');
+
             $comment = new Comment();
 
-            $comment->setDateenvoi(New \DateTime(date('bite')));
+            $comment->setDateenvoi(New \DateTime(date('Y-m-d H:i:s')));
 
             $comment->setUser($this->getUser());
 
@@ -55,16 +64,22 @@ class AjaxController extends AbstractController
 
             $comment->setContent($content);
 
+            $comment->setRate($note);
+
             $entityManager = $this->getDoctrine()->getManager();
 
             $entityManager->persist($comment);
 
             $entityManager->flush();
 
+            $repository = $this->getDoctrine()->getRepository(Comment::class);
+
+            $comments = $repository->findAllCommentsByAddress($address);
+
             $this->addFlash('success', 'Commentaire posté');
 
             return $this->render('ajax/singleView.html.twig', [
-                'address' => $address, ]);
+                'address' => $address, 'comments' => $comments]);
 
         }else{
 
@@ -72,15 +87,6 @@ class AjaxController extends AbstractController
 
         }
 
-        //----- AFFICHAGE DES COMMENTAIRES -----//
-
-//        $repository = $this->getDoctrine()->getRepository(Comment::class);
-//
-//        $comments = $repository->findAll();
-
-        return $this->render('ajax/singleView.html.twig', [
-            'address' => $address]);
-//        , 'comments' => $comments
     }
 
 

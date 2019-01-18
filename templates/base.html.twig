@@ -7,10 +7,14 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
 
         {% block stylesheets %}
+            {# FAVICON #}
+            <link rel="icon" href="{{ asset('img/favicon.ico') }}">
             {# Pictogrammes ICONES #}
 
             {# Typographies GOOGLE FONT#}
             <link href="https://fonts.googleapis.com/css?family=Baloo" rel="stylesheet">
+            <link href="https://fonts.googleapis.com/css?family=Chivo" rel="stylesheet">
+            <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
             {#Le css bootstrap#}
             <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
             {#Fontawesome#}

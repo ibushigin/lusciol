@@ -71,18 +71,6 @@ class Comment
         return $this;
     }
 
-    public function getAdress(): ?Address
-    {
-        return $this->adress;
-    }
-
-    public function setAdress(?Address $adress): self
-    {
-        $this->adress = $adress;
-
-        return $this;
-    }
-
     public function getAddress(): ?Address
     {
         return $this->address;
