@@ -3,6 +3,10 @@
  src: url("../typo/TektonPro-BoldCond.otf") format("otf");
 }
 
+*{
+	overflow-x: visible;
+}
+
 /*NAVBAR*/
 
 .LogoLusciol{
@@ -74,16 +78,20 @@
 #mainbgimg, #mainbgimg2{
 	position: absolute;
 	height: 100vh;
-	width: 100vw;
-	min-width: 1903px;
-	min-height: 966px;
+	width: 810px;
+	/*min-width: 1903px;*/
+	/*min-height: 966px;*/
 	z-index:1;  
 	padding : 0;
 }
 
-#mainbgimg2{
-	position: relative
-	z-index: 1
+#fondseul{
+	position: absolute;
+	margin-left: 810px;
+	width: 56.9vw;
+	height: 100vh;
+	z-index: 1;
+	padding: 0;
 }
 
 #mainViewHeight{
@@ -170,3 +178,13 @@
 	height: 50px;
 	margin-top: 50px; 
 }*/
+
+@media all and (min-width: 1200px) and (max-width: 1500px){
+	#SloganLUSCIOL, #BUTTONMap{
+		padding-left: 80px!important;
+	}
+
+	#SloganLUSCIOL{
+		margin-top: 20vh;
+	}
+}
