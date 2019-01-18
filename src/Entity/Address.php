@@ -31,9 +31,6 @@ class Address
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\Url(
-     *     message = "L\'url '{{ value }}' est invalide."
-     * )
      */
     private $website;
 

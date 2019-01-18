@@ -29,42 +29,133 @@
 
 <body>
 
-    <nav class="navbar navbar-expand-lg">
-        <div class="LogoLusciol">
-           <img src="{{ asset('img/logo.png') }}" alt="LusciolLogo">
-       </div>
-       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+<div class="container-fluid">
+    <div class="row">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" id="navbarHompage">
+            <a class="navbar-brand" href="#"><img src="{{ asset('img/logo.png') }}" alt="LusciolLogo"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#HomenavbarContent" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="HomenavbarContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link allNavItems px-4" href="{{ path('viewAll') }}">Map</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link allNavItems px-4" href="{{ path('addAddress') }}">Proposer un bon plan</a>
+                    </li>
+                    {# crée un lien vers la page admin si on a le role admin #}
+                    {% if is_granted('ROLE_ADMIN') %}
+                    <li class="nav-item">
+                        <a class="nav-link allNavItems px-4" href="{{ path('admin') }}">Admin</a>
+                    </li>
+                    {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link allNavItems px-4" href="{{ path('logout') }}">Logout</a>
+                    </li>
 
-    <div class="collapse navbar-collapse navbar-expand-lg bg-transparent" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            {# crée un lien vers la page admin si on a le role admin #}
-            {% if is_granted('ROLE_ADMIN') %}
-            <li class="nav-item">
-                <a class="nav-link text-warning" href="{{ path('admin') }}">Admin</a>
-            </li>
-            {% endif %}
-            {# liens login si je ne suis pas connecté ou logout si je suis connecté #}
-            {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
-            {# je ne suis pas connecté#}
-            {% else %}
-            <li class="nav-item">
-                <a class="nav-link text-info" href="{{ path('userInfo') }}">Profile</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-danger" href="{{ path('logout') }}">Logout</a>
-            </li>
+                    {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+                        {# Picto connexion#}
+                        <div class="connectHome">
+                            <a href="{{ path('app_login') }}"><i class="fas fa-user"></i></a>
+                        </div>
+                    {% else %}
+                        {# Picto connexion#}
+                        <div class="connectHome">
+                            <a href="{{ path('userInfo') }}"><i class="fas fa-user"></i></a>
+                        </div>
+                    {% endif %}
 
-    
-        {% endif %}
-    </ul>
-    {# Picto connexion#}
-    <div class="Connect">
-        <a href="{{ path('app_login') }}"><i class="fas fa-user"></i></a>
+
+
+                    {#<li class="nav-item" id="connect">#}
+                        {#<a href="{{ path('app_login') }}"><i class="fas fa-user pl-3"></i></a>#}
+                    {#</li>#}
+                </ul>
+            </div>
+        </nav>
     </div>
 </div>
-</nav>
+
+
+
+    {#<nav class="navbar navbar-expand-lg">#}
+        {#<div class="LogoLusciol">#}
+           {#<img src="{{ asset('img/logo.png') }}" alt="LusciolLogo">#}
+       {#</div>#}
+       {#<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">#}
+        {#<span class="navbar-toggler-icon"></span>#}
+    {#</button>#}
+
+    {#<div class="collapse navbar-collapse navbar-expand-lg bg-transparent" id="navbarSupportedContent">#}
+        {#<ul class="navbar-nav mr-auto">#}
+
+            {# liens login si je ne suis pas connecté ou logout si je suis connecté #}
+            {#{% if not is_granted('IS_AUTHENTICATED_FULLY') %}#}
+            {# je ne suis pas connecté#}
+            {#{% else %}#}
+            {#<li class="nav-item">#}
+                {#<a class="nav-link text-info" href="{{ path('userInfo') }}">Profile</a>#}
+            {#</li>#}
+            {#<li class="nav-item">#}
+                {#<a class="nav-link text-danger" href="{{ path('logout') }}">Logout</a>#}
+            {#</li>#}
+
+    {##}
+        {#{% endif %}#}
+    {#</ul>#}
+    {# Picto connexion#}
+    {#<div class="Connect">#}
+        {#<a href="{{ path('app_login') }}"><i class="fas fa-user"></i></a>#}
+    {#</div>#}
+{#</div>#}
+{#</nav>#}
+
+
+
+
+
+{#SVG#}
+
+{#<nav class="navbar navbar-expand-lg">#}
+{#<div class="LogoLusciol">#}
+{#<img src="{{ asset('img/logo.png') }}" alt="LusciolLogo">#}
+{#</div>#}
+{#<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">#}
+{#<span class="navbar-toggler-icon"></span>#}
+{#</button>#}
+
+{#<div class="collapse navbar-collapse navbar-expand-lg bg-transparent" id="navbarSupportedContent">#}
+{#<ul class="navbar-nav mr-auto">#}
+{# crée un lien vers la page admin si on a le role admin #}
+{#{% if is_granted('ROLE_ADMIN') %}#}
+{#<li class="nav-item">#}
+{#<a class="nav-link text-warning" href="{{ path('admin') }}">Admin</a>#}
+{#</li>#}
+{#{% endif %}#}
+{# liens login si je ne suis pas connecté ou logout si je suis connecté #}
+{#{% if not is_granted('IS_AUTHENTICATED_FULLY') %}#}
+{# je ne suis pas connecté#}
+{#{% else %}#}
+{#<li class="nav-item">#}
+{#<a class="nav-link text-info" href="{{ path('userInfo') }}">Profile</a>#}
+{#</li>#}
+{#<li class="nav-item">#}
+{#<a class="nav-link text-danger" href="{{ path('logout') }}">Logout</a>#}
+{#</li>#}
+
+{##}
+{#{% endif %}#}
+{#</ul>#}
+{# Picto connexion#}
+{#<div class="Connect">#}
+{#<a href="{{ path('app_login') }}"><i class="fas fa-user"></i></a>#}
+{#</div>#}
+{#</div>#}
+{#</nav>#}
+
+
+
 
 
 {% block body %}
