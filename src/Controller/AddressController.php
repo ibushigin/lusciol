@@ -76,13 +76,13 @@ class AddressController extends AbstractController
 
             $address = $form->getData();
 
-            //$article->getImage() contient un objet qui représent le fichier image envoyé
-            $file = $address->getImage();
-
-            $filename = $file ? $fileuploader->upload($file, $this->getParameter('shop_image_directory')) : '';
-
-            //je remplace l'attribut imgae qui contient toujours le fichier par le nom du fichier
-            $address->setImage($filename);
+            if($address->getImage()){
+                $filename = $fileuploader->upload($address->getImage(),
+                    $this->getParameter('shop_image_directory'));
+                $address->setImage($filename);
+            }else{
+                $address->setImage('avatar.jpg');
+            }
 
             $address->setStatus('pending');
 

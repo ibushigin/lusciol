@@ -78,8 +78,8 @@ class AjaxController extends AbstractController
 
             $this->addFlash('success', 'Commentaire posté');
 
-            return $this->render('ajax/singleView.html.twig', [
-                'address' => $address, 'comments' => $comments]);
+            return $this->render('ajax/comments.html.twig', [
+                'comments' => $comments]);
 
         }else{
 
@@ -88,7 +88,6 @@ class AjaxController extends AbstractController
         }
 
     }
-
 
     /**
      * @Route("/ajax/returnToResult", name="returnToResult")

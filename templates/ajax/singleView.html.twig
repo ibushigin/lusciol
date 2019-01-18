@@ -12,7 +12,7 @@
         </a>
     </div>
     <div class="col-12 d-flex justify-content-center">
-        <img src="https://placebeard.it/300x300" alt="" class="img-fluid rounded">
+        <img src="{{ asset("uploads/shop/image/"~item.image) }}" alt="" class="img-fluid rounded">
     </div>
     <div class="col-12 d-flex flex-column">
         <div class="d-flex flex-row justify-content-center">
@@ -88,13 +88,15 @@
 
         {% endif %}
 
-        <div class="commentaires">
+        <div class="commentaires" id="commentaires">
 
             <br>
             <span>Liste des commentaires</span>
 
             {% for comment in comments %}
-                <p><span class="starsSingle">{{ comment.rate }}</span> {{ comment.content }}, envoyé le {{ comment.dateenvoi|date('d/m/Y')}} à {{ comment.dateenvoi|date('H:i') }} par {{ comment.user.username }}</p><br>
+                <p><span class="starsSingle">{{ comment.rate }}</span> {{ comment.content }},
+                    envoyé le {{ comment.dateenvoi|date('d/m/Y')}} à {{ comment.dateenvoi|date('H:i') }}
+                    par {{ comment.user.username }}</p><br>
             {% endfor %}
 
 
@@ -126,7 +128,7 @@
                     datatype: 'html',
                     data: 'content='+commentaire+'&note='+note,
                     success: function(comments){
-                        $("#resultAjax").html(comments);
+                        $("#commentaires").html(comments);
                     },
                     error: function(error){
                         console.log(error);
