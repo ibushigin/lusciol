@@ -18,7 +18,6 @@ class MessageType extends AbstractType
                 'choices' => [
                     'Signaler un bug' => null,
                     'Signaler une adresse' => null,
-                    ''
                     'Contacter un administrateur' => null,
                 ]
             ])
