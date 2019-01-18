@@ -130,16 +130,16 @@ span.starsSingle span {
 }
 
 .rating label:last-child .icon {
-	color: #000;
+	color: white;
 }
 
 .rating:not(:hover) label input:checked ~ .icon,
 .rating:hover label:hover input ~ .icon {
-	color: #09f;
+	color: #CCC644;
 }
 
 .rating label input:focus:not(:checked) ~ .icon:last-child {
-	color: #000;
+	color: white;
 	text-shadow: 0 0 5px #09f;
 }
 
