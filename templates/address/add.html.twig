@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Ajout d'adresse{% endblock %}
+{% block title %}Lusciol - Ajout d'adresse{% endblock %}
 
 {% block body %}
 	{#{{ form_start(form) }}#}
@@ -12,8 +12,8 @@
 		{{ form_row(form.name) }}
 		{{ form_row(form.location) }}
 	<button id="btnCoord">chercher coordonnées</button>
-		{{ form_row(form.website) }}
 		{{ form_row(form.coordinates) }}
+	{{ form_row(form.website) }}
 		{{ form_row(form.tel) }}
 		{{ form_row(form.discount) }}
 		{{ form_row(form.image) }}

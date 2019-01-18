@@ -34,32 +34,78 @@
             <span class="col-1"><i class="fas fa-euro-sign"></i></span>
             <span class="col-11">{{ address.discount }}</span>
         </div>
-        <div class="d-flex flex-row">
-            <div id="result"></div>
-            <form method="post">
-                <div class="form-group">
 
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control" id="comment" placeholder="Écrire un commentaire...">
-                </div>
-                <input type="hidden" name="address_id" value="{{ address.id }}">
-                <button type="submit" class="btn btn-white theme-color" id="envoiComment">Envoyer</button>
-            </form>
-        </div>
-        <div>
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+
+            <div class="d-flex flex-row">
+                <div id="result"></div>
+                <form method="post">
+
+                    <div class="form-group rating">
+
+                        <label>
+                            <input type="radio" name="stars" value="1" />
+                            <span class="icon">★</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="stars" value="2" />
+                            <span class="icon">★</span>
+                            <span class="icon">★</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="stars" value="3" />
+                            <span class="icon">★</span>
+                            <span class="icon">★</span>
+                            <span class="icon">★</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="stars" value="4" />
+                            <span class="icon">★</span>
+                            <span class="icon">★</span>
+                            <span class="icon">★</span>
+                            <span class="icon">★</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="stars" value="5" />
+                            <span class="icon">★</span>
+                            <span class="icon">★</span>
+                            <span class="icon">★</span>
+                            <span class="icon">★</span>
+                            <span class="icon">★</span>
+                        </label>
+
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="comment" placeholder="Écrire un commentaire...">
+                    </div>
+
+                    <input type="hidden" name="address_id" value="{{ address.id }}">
+                    <button type="submit" class="btn bg-white theme-color" id="envoiComment">Envoyer</button>
+
+                </form>
+            </div>
+
+        {% endif %}
+
+        <div class="commentaires">
+
             <br>
             <span>Liste des commentaires</span>
 
             {% for comment in comments %}
-                <p>{{ comment.content }}, envoyé le {{ comment.dateenvoi|date('d/m/Y')}}</p><br>
+                <p><span class="starsSingle">{{ comment.rate }}</span> {{ comment.content }}, envoyé le {{ comment.dateenvoi|date('d/m/Y')}} à {{ comment.dateenvoi|date('H:i') }} par {{ comment.user.username }}</p><br>
             {% endfor %}
 
 
         </div>
     </div>
 </div>
+
+
+
 <script>
+
     $(function() {
         $('span.starsSingle').stars();
 
@@ -69,7 +115,7 @@
 
             let commentaire = $("#comment").val();
 
-            console.log(commentaire);
+            let note = $("input[name=stars]:checked").val();
 
             if(commentaire.length != 0){
 
@@ -78,13 +124,9 @@
                     type: 'post',
                     url: '{{ path('addComment', {id : address.id}) }}',
                     datatype: 'html',
-                    data: 'content='+commentaire,
-                    success: function(){
-
-                        $("#result").empty();
-                        $("#result").append($("<div class='success'>").html("commentaire ajouté"));
-
-
+                    data: 'content='+commentaire+'&note='+note,
+                    success: function(comments){
+                        $("#resultAjax").html(comments);
                     },
                     error: function(error){
                         console.log(error);
@@ -92,12 +134,18 @@
                 })
 
             }else{
-                $("#result").empty();
+                alert('Commentaire vide');
             }
 
         })
 
     });
+
+    // ----- ÉTOILES COMMENTAIRES ----- //
+
+    // $(':radio').change(function() {
+    //     console.log(this.value);
+    // });
 
 </script>
 
