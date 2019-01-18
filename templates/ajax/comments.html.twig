@@ -1,0 +1,16 @@
+<br>
+<span>Liste des commentaires</span>
+
+{% for comment in comments %}
+    <p><span class="starsSingle">{{ comment.rate }}</span> {{ comment.content }},
+        envoyé le {{ comment.dateenvoi|date('d/m/Y')}} à {{ comment.dateenvoi|date('H:i') }}
+        par {{ comment.user.username }}</p><br>
+{% endfor %}
+
+<script>
+
+    $(function () {
+        $('span.starsSingle').stars();
+    })
+
+</script>
