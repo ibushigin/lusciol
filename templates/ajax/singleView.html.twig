@@ -8,7 +8,7 @@
             <p class="wrap">{{ address.subCategory.label }}</p>
         </div>
         <a id="result_content"  data-id="{{ address.subCategory.category.label }}_{{ address.id }}">
-            <button class="btn btn-info"><i class="fas fa-undo-alt"></i></button>
+            <button class="btn bg-white theme-color"><i class="fas fa-undo-alt"></i></button>
         </a>
     </div>
     <div class="col-12 d-flex justify-content-center">
@@ -44,7 +44,7 @@
                     <input type="text" class="form-control" id="comment" placeholder="Écrire un commentaire...">
                 </div>
                 <input type="hidden" name="address_id" value="{{ address.id }}">
-                <button type="submit" class="btn btn-success" id="envoiComment">Envoyer</button>
+                <button type="submit" class="btn btn-white theme-color" id="envoiComment">Envoyer</button>
             </form>
         </div>
         <div>

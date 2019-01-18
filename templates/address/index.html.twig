@@ -4,7 +4,7 @@
 
 {% block body %}
 
-    <div class="container-fluid addressPage">
+    <div class="container-fluid addressPage roboto">
         <div class="row d-flex flex-column flex-lg-row">
             <div class="col-12 col-lg-3 d-flex flex-column order-last order-lg-first theme-bg" id="addressList">
                 <div id="resultAjax">
@@ -37,7 +37,7 @@
                     <div class="addressLoop pt-3" id="addressLoop">
                         {% for item in address %}
                             <a class="linkToSingle">
-                                <article class="oneShop hoverItem " data-id="{{ item.subCategory.category.label }}_{{ item.id }}" data-coordinates="{{ item.coordinates }}">
+                                <article class="oneShop hoverItem roboto " data-id="{{ item.subCategory.category.label }}_{{ item.id }}" data-coordinates="{{ item.coordinates }}">
                                     <div class="row mt-1 mb-1">
                                         <div class="col-4">
                                             <img src="https://placezombie.com/200x200" alt="" class="img-fluid rounded">

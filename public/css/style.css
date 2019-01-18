@@ -1,8 +1,13 @@
 /*GLOBAL*/
+.roboto{
+	font-family: 'Roboto', sans-serif;
+}
 .theme-bg{
 	background-color: #083346;
 	color: white;
-	font-family: 'Roboto Condensed', sans-serif;
+}
+.theme-color{
+	color: #083346;
 }
 /* Navbar */
 
@@ -45,6 +50,9 @@
 }
 .oneShop:hover{
 	cursor: pointer;
+}
+#resultAjax a{
+	color: white;
 }
 
 /*DISPLAY AVERAGE*/
