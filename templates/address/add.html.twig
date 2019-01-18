@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'base-navbar.html.twig' %}
 
 {% block stylesheets %}
 	{{ parent() }}
@@ -21,8 +21,8 @@
 			{{ form_start(form) }}
 			{{ form_row(form.subCategory, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Sous-catégorie : '}}) }}
 			{{ form_row(form.name, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Nom du magasin : '}}) }}
-			{{ form_row(form.location, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Adresse : '}}) }}
-			<button id="btnCoord" class="btn btn-info offset-md-3 col-md-6 mb-3">chercher coordonnées</button>
+			{{ form_row(form.location, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Adresse (ensuite appuyez sur "Chercher coordonées) : '}}) }}
+			<button id="btnCoord" class="btn btn-secondary offset-md-3 col-md-6 mb-3 align-middle"><i class="fas fa-crosshairs fa-2x"></i><span id="getgeo">Chercher  coordonnées</span></button>
 			{{ form_row(form.coordinates, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Coordonées géographiques : '}}) }}
 			{{ form_row(form.website, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Site internet : '}}) }}
 			{{ form_row(form.tel, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Téléphone : '}}) }}
@@ -30,8 +30,11 @@
 			{{ form_row(form.image, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Image (optionnelle) : '}}) }}
 			{{ form_row(form.save, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Sous-catégorie : '}}) }}
 			<div class="form-group col-12 col-md-6 mx-auto my-auto">
-				<button class="btn btn-success btn-block">Valider</button>
+				<button class="btn bg-white btn-block">Valider</button>
 				{{ form_end(form) }}
+			</div>
+			<div class="col-12" id="DEMILOGO">
+				<img class="d-none d-lg-block" src="{{ asset("img/fond3.png") }}" alt="LUEUR">
 			</div>
 
 
@@ -46,4 +49,5 @@
 {% block javascripts %}
 	{{ parent() }}
 <script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ asset('js/Login.js') }}"></script>
 {% endblock %}

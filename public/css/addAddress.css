@@ -54,11 +54,27 @@
 
 #DEMILOGO{
     position: absolute;
-    z-index: 1;
-    top: 30.8vh;
-    right: 48vw;
+    z-index: -1;
+    top: 35.8vh;
+    right: 29vw;
 }
 
 #address_save{
     display: none;
+}
+
+#getgeo{
+    font-size: 1rem;
+    font-weight: normal;
+    vertical-align: super;
+    display: inline-block;
+}
+
+#btnCoord{
+    padding: inherit;
+}
+
+#btnCoord .fa-crosshairs::before{
+    position: relative;
+    left: -2vw;
 }
