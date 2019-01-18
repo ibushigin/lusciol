@@ -3,8 +3,10 @@
 
 {% for comment in comments %}
     <div class="mt-3">
-        <div class="row">
-            <img src="{{ asset("uploads/user/avatar/"~comment.user.avatar) }}" alt="" class="col-4 rounded img-fluid">
+        <div class="row flex-nowrap">
+            <div class="col-4">
+                <img src="{{ asset("uploads/user/avatar/"~comment.user.avatar) }}" alt="" class=" rounded img-fluid">
+            </div>
             <div class="col-8 pr-0">
                 <span class="col-12">{{ comment.user.username }}</span>
                 <div class="col-12"><span class="starsSingle">{{ comment.rate }}</span></div>
