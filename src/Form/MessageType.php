@@ -18,7 +18,9 @@ class MessageType extends AbstractType
                 'choices' => [
                     'Signaler un bug' => null,
                     'Signaler une adresse' => null,
+                    'Signaler un utilisateur' => null,
                     'Contacter un administrateur' => null,
+                    'Signaler un abus' => null,
                 ]
             ])
             ->add('content', TextareaType::class)

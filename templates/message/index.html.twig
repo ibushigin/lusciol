@@ -1,9 +1,19 @@
-{% extends 'base-navbar.html.twig' %}
+{#{% extends 'base-navbar.html.twig' %}#}
 
 {% block title %}Page de message{% endblock %}
 
 {% block body %}
 
-    
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label }}">{{ message}}</div>
+        {% endfor %}
+    {% endfor %}
+
+    {{ form_start(messageForm) }}
+    {{ form_row(messageForm.subject) }}
+    {{ form_row(messageForm.content) }}
+    <button type="submit" class="btn btn-danger">Envoyer</button>
+    {{ form_end(messageForm) }}
 
 {% endblock %}
