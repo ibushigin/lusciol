@@ -16,11 +16,11 @@ class MessageType extends AbstractType
         $builder
             ->add('subject', ChoiceType::class, [
                 'choices' => [
-                    'Signaler un bug' => null,
-                    'Signaler une adresse' => null,
-                    'Signaler un utilisateur' => null,
-                    'Contacter un administrateur' => null,
-                    'Signaler un abus' => null,
+                    'Signaler un bug' => 'Signalement de bug',
+                    'Signaler une adresse' => 'Singalement d\'adresse',
+                    'Signaler un utilisateur' => 'Signalement d\'utilisateur',
+                    'Contacter un administrateur' => 'Contact admin',
+                    'Signaler un abus' => 'Singalement d\'abus',
                 ]
             ])
             ->add('content', TextareaType::class)

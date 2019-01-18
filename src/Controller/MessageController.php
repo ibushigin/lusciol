@@ -17,8 +17,7 @@ class MessageController extends AbstractController
     public function index(Request $request, \Swift_Mailer $mailer): Response
     {
 
-        $entityManager = $this->getDoctrine()->getManager();
-        $user = $entityManager->getRepository(User::class);
+        $user = $this->getUser();
 
         $form = $this->createForm(MessageType::class);
 
@@ -27,23 +26,21 @@ class MessageController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
 
             $message = $form->getData();
-
-            $message->setSubject();
-
-            $message->setContent();
-
-            $mail = (new \Swift_Mailer($request->request->get('subject')))
+            $mail = (new \Swift_Message($message->getSubject()))
                 ->setFrom($user->getEmail())
-                //TODO créer un mail pour recevoir les messages
-                ->setTo('inbehis@gmail.com')
+                ->setTo($this->getParameter('mail'))
                 ->setBody(
-                    $request->request->get('content'),
+                    'envoyé par ' . $user->getEmail() . '<br>' . $message->getContent(),
                     "text/html"
                 );
 
             $mailer->send($mail);
             $this->addFlash('notice', 'Message envoyé');
-            return $this->redirectToRoute('message');
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($message);
+
+           return $this->redirectToRoute('message');
 
         }
 
