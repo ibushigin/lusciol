@@ -55,6 +55,8 @@ class RegistrationController extends AbstractController
                 $this->getParameter('user_avatar_directory'));
             //j'injecte le nom du fichier dans la propriété image
             $user->setAvatar($filename);
+            }else{
+                $user->setAvatar('avatar.jpg');
             }
 
             $entityManager = $this->getDoctrine()->getManager();

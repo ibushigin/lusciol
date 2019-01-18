@@ -14,6 +14,14 @@ class HomeController extends AbstractController
     {
         return $this->render('index.html.twig', [
             'controller_name' => 'HomeController',
-        ]);
+        ]); 
+    }
+
+    /**
+     * @Route("/concept", name="concept")
+     */
+    public function concept()
+    {
+        return $this->render('concept.html.twig'); 
     }
 }

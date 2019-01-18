@@ -14,6 +14,10 @@ body{
 	background: transparent!important;
 }
 
+#toplowR{
+	display: none;
+}
+
 .connectHome i{
 	font-size: 1.5rem;
 	color: white;
@@ -44,28 +48,17 @@ padding: 8px 0;
 color: white;
 }
 
-/*.MapLink{*/
-
-	/*padding-bottom: 10px;*/
-	/*transition: 0.3s ease;*/
-	/*border-top: 1px solid red;*/
-	/*border-bottom: 1px solid red;*/
-	/*padding: 10px 0;*/
-/*}*/
-
-
-
 /*FOND DE CARTE GIF*/
 
 #gifMAP{
 	position: absolute;
 	z-index: -10;
 	top: 64px;
-	left : 205px;
+	left : 200px;
 }
 
 #gifMAP img{
-	height: 900px;
+	height: 920px;
 	width: auto;
 }
 
@@ -75,13 +68,17 @@ color: white;
 	padding: 0;
 }
 
-#mainbgimg, #mainbgimg2{
+#mainbgimg, #mainbgimg2, #fondseul{
 	position: absolute;
-	height: 100vh;
-	min-width: 1903px;
-	min-height: 966px;
+	width: 1920px;
+	height: 969px;
 	z-index:1;  
 	padding : 0;
+}
+
+#fondseul{
+	position: absolute;
+	top: 969px;
 }
 
 #mainViewHeight{
@@ -112,25 +109,6 @@ color: white;
 	background-color: #fff;
 }
 
-.Arrow{
-	text-align: center; 
-	position: absolute;
-	z-index: 4;
-	top: 90vh;
-	transition: 1s ease;
-}
-
-.ScrollDown{
-	transition: 1s ease;
-}
-
-.angleDown{
-	color:white;
-}
-
-.angleDown:hover{
-	color: rgb(52, 58, 64) ;
-}
 
 /*CONTAIN*/
 
@@ -160,7 +138,141 @@ color: white;
 
 /*MEDIA QUERY*/
 
+@media all and (max-width: 1800px){
+	#mainbgimg, #mainbgimg2{
+		width: 1800px;
+		height: 908px;
+	}
 
+	#gifMAP{
+		top: 63px;
+		left : 176px;
+	}
+
+	#gifMAP img{
+		height: 862px;
+		width: auto;
+	}
+
+	#fondseul{
+		position: absolute;
+		top: 908px;
+	}
+}
+
+@media all and (max-width: 1700px){
+	#mainbgimg, #mainbgimg2{
+		width: 1700px;
+		height: 859px;
+	}
+
+	#gifMAP{
+		top: 61px;
+		left : 168px;
+	}
+
+	#gifMAP img{
+		height: 815px;
+		width: auto;
+	}
+
+	#fondseul{
+		position: absolute;
+		top: 859px;
+	}
+}
+
+@media all and (max-width: 1600px){
+	/* Rattrapage du decallage en low Résolution*/
+	#toplowR{
+		display: block;
+		height: 50px;
+		width: 1600px;
+	}
+
+
+	#mainbgimg, #mainbgimg2{
+		width: 1600px;
+		height: 807px;
+	}
+	#gifMAP{
+		top: 61px;
+		left : 162px;
+	}
+
+	#gifMAP img{
+		height: 766px;
+		width: auto;
+	}
+
+	#fondseul{
+		position: absolute;
+		top: 807px;
+	}
+	#SloganLUSCIOL{
+
+		margin-top: 15vh;
+		font-size: 4rem;
+	}
+
+}
+
+@media all and (max-width: 1500px){
+
+	#mainbgimg, #mainbgimg2{
+		width: 1500px;
+		height: 757px;
+	}
+	#gifMAP{
+		top: 46px;
+		left : 144px;
+	}
+
+	#gifMAP img{
+		height: 719px;
+		width: auto;
+	}
+
+	#fondseul{
+		position: absolute;
+		top: 755px;
+	}
+}
+
+@media all and (max-width: 1400px){
+
+	#toplowR{
+		display: block;
+		height: 50px;
+		width: 2000px;
+	}
+
+	#mainbgimg, #mainbgimg2{
+		width: 1400px;
+		height: 706px;
+	}
+	#gifMAP{
+		top: 38px;
+		left : 131px;
+	}
+
+	#gifMAP img{
+		height: 671px;
+		width: auto;
+	}
+
+	#fondseul{
+		position: absolute;
+		top: 706px;
+	}
+}
+
+@media all and (max-width: 1200px){
+	#mainbgimg, #mainbgimg2{
+		width: 1700px;
+		height: 859px;
+	}
+}
 
 /*@media all and (min-width: 1200px) and (max-width: 1500px){*/
 	/*#SloganLUSCIOL, #BUTTONMap{*/
