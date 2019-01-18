@@ -1,24 +1,45 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+	{{ parent() }}
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/addAddress.css') }}">
+{% endblock %}
+
 {% block title %}Lusciol - Ajout d'adresse{% endblock %}
 
 {% block body %}
-	{#{{ form_start(form) }}#}
-	{#{{ form_widget(form) }}#}
-	{#{{ form_end(form) }}#}
+ <div class="container-fluid" id="idLOGIN">
+	<div class="container">
+		<div class="row">
+			<div class=" text-center col-12 col-md-12" id="LOGOLOGIN">
+				<a href="{{ path('home') }}"><img src="{{ asset('img/Logo3.png') }}" alt="Logo2LUSCIOL"></a>
+			</div>
+		</div>
 
-	{{ form_start(form) }}
-		{{ form_row(form.subCategory) }}
-		{{ form_row(form.name) }}
-		{{ form_row(form.location) }}
-	<button id="btnCoord">chercher coordonnées</button>
-		{{ form_row(form.coordinates) }}
-	{{ form_row(form.website) }}
-		{{ form_row(form.tel) }}
-		{{ form_row(form.discount) }}
-		{{ form_row(form.image) }}
-		{{ form_row(form.save) }}
-	{{ form_end(form) }}
+		<div class="row">
+			<div class="col-12 offset-md-2 col-md-8">
+			{{ form_start(form) }}
+			{{ form_row(form.subCategory, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Sous-catégorie : '}}) }}
+			{{ form_row(form.name, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Nom du magasin : '}}) }}
+			{{ form_row(form.location, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Adresse : '}}) }}
+			<button id="btnCoord" class="btn btn-info offset-md-3 col-md-6 mb-3">chercher coordonnées</button>
+			{{ form_row(form.coordinates, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Coordonées géographiques : '}}) }}
+			{{ form_row(form.website, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Site internet : '}}) }}
+			{{ form_row(form.tel, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Téléphone : '}}) }}
+			{{ form_row(form.discount, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Réduction étudiante proposée : '}}) }}
+			{{ form_row(form.image, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Image (optionnelle) : '}}) }}
+			{{ form_row(form.save, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Sous-catégorie : '}}) }}
+			<div class="form-group col-12 col-md-6 mx-auto my-auto">
+				<button class="btn btn-success btn-block">Valider</button>
+				{{ form_end(form) }}
+			</div>
+
+
+			</div>
+		</div>
+	</div>
+ </div>
+
 {% endblock %}
 
 

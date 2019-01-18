@@ -29,8 +29,13 @@ btn.addEventListener('click', function (e) {
             alert('Erreur API Coordonnées ' + err);
         } else {
             console.log(data);
-            result0 = data[0].geojson.coordinates[0];
-            result1 = data[0].geojson.coordinates[1];
+            if (data[0].geojson.coordinates.length > 1){
+                result0 = data[0].geojson.coordinates[0][0];
+                result1 = data[0].geojson.coordinates[0][1];
+            }else{
+                result0 = data[0].geojson.coordinates[0];
+                result1 = data[0].geojson.coordinates[1];
+            }
             result = result1 + ', ' + result0;
             console.log(result);
             target.value = result;

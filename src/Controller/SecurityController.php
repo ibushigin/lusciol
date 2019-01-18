@@ -76,7 +76,7 @@ class SecurityController extends AbstractController
             /* @var $user User */
             if ($user === null) {
                 $this->addFlash('danger', 'Email Inconnu');
-                return $this->redirectToRoute('home');
+                return $this->redirectToRoute('message');
             }
             $token = $tokenGenerator->generateToken();
             try{
@@ -96,7 +96,7 @@ class SecurityController extends AbstractController
                 );
             $mailer->send($message);
             $this->addFlash('notice', 'Mail envoyé');
-            return $this->redirectToRoute('home');
+            return $this->redirectToRoute('message');
         }
         return $this->render('security/forgotten_password.html.twig');
     }

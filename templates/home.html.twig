@@ -50,9 +50,6 @@
                         <a class="nav-link allNavItems mx-4" href="{{ path('admin') }}">Admin</a>
                     </li>
                     {% endif %}
-                    <li class="nav-item">
-                        <a class="nav-link allNavItems mx-4" href="{{ path('logout') }}">Logout</a>
-                    </li>
 
                     {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
                         {# Picto connexion#}
@@ -60,6 +57,9 @@
                             <a href="{{ path('app_login') }}"><i class="fas fa-user"></i></a>
                         </div>
                     {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link allNavItems mx-4" href="{{ path('logout') }}">Logout</a>
+                        </li>
                         {# Picto connexion#}
                         <div class="connectHome">
                             <a href="{{ path('userInfo') }}"><i class="fas fa-user"></i></a>
