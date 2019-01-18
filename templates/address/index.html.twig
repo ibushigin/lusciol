@@ -6,7 +6,7 @@
 
     <div class="container-fluid addressPage">
         <div class="row d-flex flex-column flex-lg-row">
-            <div class="col-12 col-lg-3 d-flex flex-column order-last order-lg-first" id="addressList">
+            <div class="col-12 col-lg-3 d-flex flex-column order-last order-lg-first theme-bg" id="addressList">
                 <div id="resultAjax">
                     <div class="searchGroup">
                         <div class="search input-group col-12 pt-3">
@@ -37,10 +37,10 @@
                     <div class="addressLoop pt-3" id="addressLoop">
                         {% for item in address %}
                             <a class="linkToSingle">
-                                <article class="oneShop" data-id="{{ item.subCategory.category.label }}_{{ item.id }}" data-coordinates="{{ item.coordinates }}">
-                                    <div class="row hoverItem mt-1 mb-1">
+                                <article class="oneShop hoverItem " data-id="{{ item.subCategory.category.label }}_{{ item.id }}" data-coordinates="{{ item.coordinates }}">
+                                    <div class="row mt-1 mb-1">
                                         <div class="col-4">
-                                            <img src="https://placezombie.com/200x200" alt="" class="img-fluid">
+                                            <img src="https://placezombie.com/200x200" alt="" class="img-fluid rounded">
                                         </div>
                                         <div class="col-8 text-left pl-3">
                                             <h2 class="name">{{ item.name }}</h2>
@@ -83,6 +83,7 @@
             return $(this).each(function() {
                 // Get the value
                 var val = parseFloat($(this).html());
+                console.log(val);
                 // Make sure that the value is in 0 - 5 range, multiply to get width
                 var size = Math.max(0, (Math.min(5, val))) * 16;
                 // Create stars holder
@@ -341,8 +342,8 @@
 
 
             $('#addressList').on('mouseenter', '.oneShop', function(){
-                // $(this).css('background-color', '#a7abb2');
                 let address_id = $(this).attr('data-id');
+                $("article[data-id='"+address_id+"']").css('background-image', 'linear-gradient(#083346, #0A5E67, #083346)');
                 if(viewStatus === "all"){
                     currentIcon = $("img[alt='"+address_id+"']").attr('src');
                     $("img[alt='"+address_id+"']").attr('src', '{{ asset("img/markerPoint.png") }}');
@@ -352,8 +353,10 @@
 
 
             $('#addressList').on('mouseleave', '.oneShop', function(){
-                // $(this).css('background-color', '#fff');
                 let address_id = $(this).attr('data-id');
+                $("article[data-id='"+address_id+"']").css('background-color', '#083346');
+                $("article[data-id='"+address_id+"']").css('background-image', 'none');
+
                 if(viewStatus === "all") {
                     $("img[alt='" + address_id + "']").attr('src', currentIcon);
                 }
@@ -363,7 +366,7 @@
 
             $('.leaflet-marker-icon').on('mouseenter', function(){
                 var address_id = $(this).attr('alt');
-                $("article[data-id='"+address_id+"']").css('background-color', '#a7abb2');
+                $("article[data-id='"+address_id+"']").css('background-image', 'linear-gradient(#083346, #0A5E67, #083346)');
                 if (viewStatus === "all"){
                     currentIcon = $("img[alt='"+address_id+"']").attr('src');
                     $("img[alt='"+address_id+"']").attr('src', '{{ asset("img/markerPoint.png") }}');
@@ -373,7 +376,8 @@
 
             $('.leaflet-marker-icon').on('mouseleave', function(){
                 var address_id = $(this).attr('alt');
-                $("article[data-id='"+address_id+"']").css('background-color', '#fff');
+                $("article[data-id='"+address_id+"']").css('background-color', '#083346');
+                $("article[data-id='"+address_id+"']").css('background-image', 'none');
                 if (viewStatus === "all"){
                     $("img[alt='"+address_id+"']").attr('src', currentIcon);
                 }
