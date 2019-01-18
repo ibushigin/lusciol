@@ -79,7 +79,9 @@ class AddressController extends AbstractController
             if($address->getImage()){
                 $filename = $fileuploader->upload($address->getImage(),
                     $this->getParameter('shop_image_directory'));
-                $address->setImage()($filename);
+                $address->setImage($filename);
+            }else{
+                $address->setImage('avatar.jpg');
             }
 
             $address->setStatus('pending');
