@@ -32,8 +32,14 @@ class AjaxController extends AbstractController
             ->getRepository(Address::class)
             ->find($address_id);
 
+        //----- AFFICHAGE DES COMMENTAIRES -----//
+
+        $repository = $this->getDoctrine()->getRepository(Comment::class);
+
+        $comments = $repository->findByAddress($address);
+
         return $this->render('ajax/singleView.html.twig', [
-            'address' => $address]);
+            'address' => $address, 'comments' => $comments]);
 
     }
 
@@ -45,6 +51,7 @@ class AjaxController extends AbstractController
         if(!empty($request->request->all())){
 
             $content = $request->request->get('content');
+
             $comment = new Comment();
 
             $comment->setDateenvoi(New \DateTime(date('bite')));
@@ -72,15 +79,6 @@ class AjaxController extends AbstractController
 
         }
 
-        //----- AFFICHAGE DES COMMENTAIRES -----//
-
-//        $repository = $this->getDoctrine()->getRepository(Comment::class);
-//
-//        $comments = $repository->findAll();
-
-        return $this->render('ajax/singleView.html.twig', [
-            'address' => $address]);
-//        , 'comments' => $comments
     }
 
 

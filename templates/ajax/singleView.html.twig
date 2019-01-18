@@ -51,9 +51,9 @@
             <br>
             <span>Liste des commentaires</span>
 
-            {#{% for comment in comments %}#}
-                {#<p>{{ comment.content }}, envoyé le {{ comment.dateenvoi|date('d/m/Y')}}</p><br>#}
-            {#{% endfor %}#}
+            {% for comment in comments %}
+                <p>{{ comment.content }}, envoyé le {{ comment.dateenvoi|date('d/m/Y')}}</p><br>
+            {% endfor %}
 
 
         </div>
