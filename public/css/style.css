@@ -109,9 +109,9 @@ span.starsSingle span {
 .rating {
 	display: inline-block;
 	position: relative;
-	height: 50px;
-	line-height: 50px;
-	font-size: 50px;
+	height: 2em;
+	line-height: 2em;
+	font-size: 2em;
 }
 
 .rating label {

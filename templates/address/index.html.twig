@@ -42,7 +42,7 @@
                         {% for item in address %}
                             <a class="linkToSingle">
                                 <article class="oneShop hoverItem roboto " data-id="{{ item.subCategory.category.label }}_{{ item.id }}" data-coordinates="{{ item.coordinates }}">
-                                    <div class="row mt-1 mb-1">
+                                    <div class="row mt-1 mb-1 flex-nowrap">
                                         <div class="col-4">
                                             <img src="{{ asset("uploads/shop/image/"~item.image) }}" alt="" class="img-fluid rounded">
                                         </div>

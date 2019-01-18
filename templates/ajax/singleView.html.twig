@@ -12,94 +12,110 @@
         </a>
     </div>
     <div class="col-12 d-flex justify-content-center">
-        <img src="{{ asset("uploads/shop/image/"~item.image) }}" alt="" class="img-fluid rounded">
+        <img src="{{ asset("uploads/shop/image/"~address.image) }}" alt="" class="img-fluid rounded">
     </div>
-    <div class="col-12 d-flex flex-column">
+    <div class="col-12 d-flex flex-column mt-3">
         <div class="d-flex flex-row justify-content-center">
                 <span class="starsSingle">{{ address.average }}</span>
         </div>
-        <div class="d-flex flex-row">
+        <div class="d-flex flex-row mt-1">
                 <span class="col-1"><i class="fas fa-map-marker"></i></span>
                 <span class="col-11">{{ address.location }}</span>
         </div>
-        <div class="d-flex flex-row">
+        <div class="d-flex flex-row mt-1">
             <span class="col-1"><i class="fas fa-phone-square"></i></span>
             <span class="col-11">{{ address.tel }}</span>
         </div>
-        <div class="d-flex flex-row">
+        <div class="d-flex flex-row mt-1">
             <span class="col-1"><i class="fas fa-globe-europe"></i></span>
             <span class="col-11"><a href="{{ address.website }}" target="_blank">{{ address.website }}</a></span>
         </div>
-        <div class="d-flex flex-row">
+        <div class="d-flex flex-row mt-1">
             <span class="col-1"><i class="fas fa-euro-sign"></i></span>
             <span class="col-11">{{ address.discount }}</span>
         </div>
 
-        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-
-            <div class="d-flex flex-row">
-                <div id="result"></div>
-                <form method="post">
-
-                    <div class="form-group rating">
-
-                        <label>
-                            <input type="radio" name="stars" value="1" />
-                            <span class="icon">★</span>
-                        </label>
-                        <label>
-                            <input type="radio" name="stars" value="2" />
-                            <span class="icon">★</span>
-                            <span class="icon">★</span>
-                        </label>
-                        <label>
-                            <input type="radio" name="stars" value="3" />
-                            <span class="icon">★</span>
-                            <span class="icon">★</span>
-                            <span class="icon">★</span>
-                        </label>
-                        <label>
-                            <input type="radio" name="stars" value="4" />
-                            <span class="icon">★</span>
-                            <span class="icon">★</span>
-                            <span class="icon">★</span>
-                            <span class="icon">★</span>
-                        </label>
-                        <label>
-                            <input type="radio" name="stars" value="5" />
-                            <span class="icon">★</span>
-                            <span class="icon">★</span>
-                            <span class="icon">★</span>
-                            <span class="icon">★</span>
-                            <span class="icon">★</span>
-                        </label>
-
-                    </div>
-
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="comment" placeholder="Écrire un commentaire...">
-                    </div>
-
-                    <input type="hidden" name="address_id" value="{{ address.id }}">
-                    <button type="submit" class="btn bg-white theme-color" id="envoiComment">Envoyer</button>
-
-                </form>
+        {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+            <div class="d-flex flex-row mt-3">
+                <div class="row justify-content-center">
+                    <span class="col-12 text-center">Identifiez-vous pour laisser un commentaire</span>
+                    <button class="btn bg-white theme-color col-6 mt-1">S'identifier</button>
+                </div>
             </div>
-
         {% endif %}
 
-        <div class="commentaires" id="commentaires">
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
 
-            <br>
-            <span>Liste des commentaires</span>
+            <div class="d-flex flex-row mt-3">
+                <div class="row align-content-center">
+                    <span class="col-12 text-center">Partagez votre avis</span>
+                    <form method="post" class="row">
+                        <div class="col-12">
+                            <div class="form-group rating ">
 
+                                <label>
+                                    <input type="radio" name="stars" value="1" />
+                                    <span class="icon">★</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="stars" value="2" />
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="stars" value="3" />
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="stars" value="4" />
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="stars" value="5" />
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                </label>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group col-12">
+                            <textarea  id="comment"  rows="3" class="form-control" placeholder="Écrire un commentaire..."></textarea>
+                        </div>
+                        <input type="hidden" name="address_id" value="{{ address.id }}">
+                        <div class="col-12">
+                            <button type="submit" class="btn bg-white theme-color mt-1 " id="envoiComment">Envoyer</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        {% endif %}
+
+        <div class="commentaires mt-5" id="commentaires">
             {% for comment in comments %}
-                <p><span class="starsSingle">{{ comment.rate }}</span> {{ comment.content }},
-                    envoyé le {{ comment.dateenvoi|date('d/m/Y')}} à {{ comment.dateenvoi|date('H:i') }}
-                    par {{ comment.user.username }}</p><br>
+                <div class="mt-3">
+                    <div class="row flex-nowrap">
+                        <div class="col-4">
+                            <img src="{{ asset("uploads/user/avatar/"~comment.user.avatar) }}" alt="" class=" rounded img-fluid">
+                        </div>
+                        <div class="col-8 pr-0">
+                            <span class="col-12">{{ comment.user.username }}</span>
+                            <div class="col-12"><span class="starsSingle">{{ comment.rate }}</span></div>
+                            <span class="col-12">Le {{ comment.dateenvoi|date('d/m/Y')}} à {{ comment.dateenvoi|date('H:i') }}</span>
+                        </div>
+                    </div>
+                    <div class="col-12"><p>{{ comment.content }}</p></div>
+                </div>
             {% endfor %}
-
-
         </div>
     </div>
 </div>

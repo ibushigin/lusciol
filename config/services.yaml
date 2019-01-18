@@ -8,6 +8,7 @@ parameters:
     upload_directory: "%kernel.project_dir%/public/uploads"
     shop_image_directory: "/shop/image"
     user_avatar_directory: "/user/avatar"
+    mail: "z8rpz42@gmail.com"
 
 services:
     # default configuration for services in *this* file
