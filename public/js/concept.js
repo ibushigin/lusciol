@@ -6,5 +6,3 @@ $(function(){
         $('#DEMILOGO').fadeOut(1000);
     });
 })
-
-
