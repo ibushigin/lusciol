@@ -4,11 +4,15 @@
 }
 
 body{
-	overflow: hidden;
+	/*overflow: hidden;*/
 	background-color: #1b1e21;
 }
 
 /*NAVBAR*/
+
+#burgerHome{
+	color: #fff;
+}
 
 #navbarHompage{
 	background: transparent!important;
@@ -160,60 +164,33 @@ color: white;
 	}
 }
 
-@media all and (max-width: 1700px){
-	#mainbgimg, #mainbgimg2{
-		width: 1700px;
-		height: 859px;
-	}
-
-	#gifMAP{
-		top: 61px;
-		left : 168px;
-	}
-
-	#gifMAP img{
-		height: 815px;
-		width: auto;
-	}
-
-	#fondseul{
-		position: absolute;
-		top: 859px;
-	}
-}
-
 @media all and (max-width: 1600px){
 	/* Rattrapage du decallage en low Résolution*/
 	#toplowR{
 		display: block;
 		height: 50px;
-		width: 1600px;
+		width: 2000px;
 	}
-
 
 	#mainbgimg, #mainbgimg2{
-		width: 1600px;
-		height: 807px;
+		width: 1400px;
+		height: 706px;
 	}
 	#gifMAP{
-		top: 61px;
-		left : 162px;
+		top: 38px;
+		left : 131px;
 	}
 
 	#gifMAP img{
-		height: 766px;
+		height: 671px;
 		width: auto;
 	}
 
 	#fondseul{
 		position: absolute;
-		top: 807px;
+		top: 706px;
 	}
-	#SloganLUSCIOL{
-
-		margin-top: 15vh;
-		font-size: 4rem;
-	}
+}
 
 }
 
@@ -296,10 +273,6 @@ color: white;
 
 	#HomenavbarContent ul{
 		text-align: right;
-	}
-
-	#burgerHome{
-		color: #fff;
 	}
 
 	.connectHome i::before{
