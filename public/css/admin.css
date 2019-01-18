@@ -1,4 +1,4 @@
-#idLOGIN{
+#idLOGIN, #contentLogin{
     background-image: url('../img/fond2.png');
     background-position: cover;
     background-repeat: repeat-y;
@@ -8,6 +8,10 @@
     overflow-y: auto;
 }
 
-#contentLogin{
+#contentLoginAdmin{
     margin-top: 25vh!important;
+}
+
+#contentManageAddress, contentManageUser{
+    margin-top: 10vh;
 }

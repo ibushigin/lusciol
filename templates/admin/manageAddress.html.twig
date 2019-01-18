@@ -1,5 +1,10 @@
 {% extends 'base-navbar.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/admin.css') }}">
+{% endblock %}
+
 {% block title %}Manage Address{% endblock %}
 
 {% block body %}
@@ -10,11 +15,11 @@
         {% endfor %}
     {% endfor %}
 
-    <div class="container-fluid">
+    <div class="container-fluid" id="idLOGIN">
         <container>
-            <div class="row">
+            <div class="row" id="contentManageAddress">
                 <div class="col-6">
-                    <h2 class="text-secondary mt-5 text-center"><span class="badge badge-info p-3">Valider l'enregistrement d'un magasin</span></h2>
+                    <h2 class="text-secondary mt-5 text-center"><span class="badge badge-light p-3">Valider l'enregistrement d'un magasin</span></h2>
                     <div class="form-group col-6 col-md-8 mt-5 mx-auto">
                         <select id="selectPendingAddress" class="form-control" name="selectPendingAddress">
                             <option value="9999">Magasins en attente de validation...</option>
@@ -25,7 +30,7 @@
                     </div>
                 </div>
                 <div class="col-6">
-                    <h2 class="text-secondary mt-5 text-center"><span class="badge badge-info p-3">Modifier un magasin</span></h2>
+                    <h2 class="text-secondary mt-5 text-center"><span class="badge badge-light p-3">Modifier un magasin</span></h2>
                     <div class="form-group col-6 col-md-6 mt-5 mx-auto">
                         <select id="selectAddress" class="form-control" name="selectAddress">
                             <option value="9999">Magasins...</option>
