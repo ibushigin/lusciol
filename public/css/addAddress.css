@@ -77,3 +77,7 @@
     position: relative;
     left: -2vw;
 }
+
+.pt-8{
+    padding-top: 8rem!important;
+}
