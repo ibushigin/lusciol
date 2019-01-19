@@ -4,60 +4,49 @@
 
 {% block body %}
 
-<!-- {% for label, messages in app.flashes %}
+		<!-- {% for label, messages in app.flashes %}
 	{% for message in messages %} -->
 	<!-- <div class="alert alert-{{ label }}">{{ message}}</div> -->
-<!-- {% endfor %}
+	<!-- {% endfor %}
 	{% endfor %} -->
 
 	<!--HEADER-->
 
 	<div class="container-fluid">
-		<div class="row">
-			<img id="toplowR" src="{{ asset("img/toplowR.png") }}" alt="Fond_degrade">
-		</div>
-		<div class="row">
-			<div class="col-12" id="mainbg">
-				<img id="mainbgimg" src="{{ asset("img/fond1.png") }}" alt="Fond_degrade">
-				<img id="mainbgimg3" src="{{ asset("img/fond2.png") }}" alt="Fond_degrade">
-				{#<img id="mainbgimg2" src="{{ asset("img/Fond1shine.png") }}" alt="Fond_degrade">#}
-				<div class="d-none d-md-block" id="gifMAP">
-					<img src="{{ asset("img/gifmap.gif") }}" alt="GifMap" id="gifMAPimg" class="img-fluid">
+		<div class="row h-100 d-flex justify-content-between align-items-center">
+			<div class="col-12 col-md-6 d-lg-flex justify-content-center align-items-center d-none">
+				<img id="mainbgimg" src="{{ asset("img/gifLogo.gif") }}" alt="Logo-gif">
+				{#<img id="mainbgimg2" src="{{ asset("img/gifLogo.gif") }}" alt="Logo-gif">#}
+			</div>
+			<div class="col-12 col-md-6">
+				<div class="SloganLUSCIOL col-md-8 mx-auto text-center" id="SloganLUSCIOL">
 				</div>
-				<div class="offset-1 col-10 offset-md-6 col-md-6 px-0" id="mainViewHeight">
-					<div class="col-12">
-						<div class="SloganLUSCIOL offset-md-1 col-md-8 text-center" id="SloganLUSCIOL">
-						</div>
+				<div class="col-12">
+					<div id="BUTTONMap" class="col-12 col-md-8 mx-auto text-center">
+						<a class="col-12" href="{{ path('viewAll') }}">
+							<button class="btn col-9 py-3 mt-5">
+								TROUVE TON BON PLAN
+							</button>
+						</a>
 					</div>
-					<div class="col-12">
-						<div id="BUTTONMap" class="offset-md-2 col-md-8">
-							<a class="col-12" href="{{ path('viewAll') }}">
-								<button class="btn col-9 py-3 mt-5">
-									TROUVE TON BON PLAN
-								</button> 
-							</a>
-						</div>
-					</div>	
 				</div>
 			</div>
 		</div>
-		<div class="row">
-			<img id="fondseul" src="{{ asset("img/fondseul.png") }}" alt="Fond_degrade">
-		</div>
+	</div>
 	</div>
 
-		{% endblock %}
+{% endblock %}
 
-		{% block javascripts %}
-		{{ parent() }}
-		<script type="text/javascript">
-			let setBG = function(){
-				let $Wwidth = $(window).width();
-				console.log($Wwidth);
-				if ($Wwidth < 1300 ){
-					$('#mainbgimg').attr('src', '{{ asset("img/fond2.png") }}')
-				}
+{% block javascripts %}
+	{{ parent() }}
+	<script type="text/javascript">
+		let setBG = function(){
+			let $Wwidth = $(window).width();
+			console.log($Wwidth);
+			if ($Wwidth < 1300 ){
+				$('#mainbgimg').attr('src', '{{ asset("img/fond2.png") }}')
 			}
-			setBG();
-		</script>
-		{% endblock %}
+		}
+		setBG();
+	</script>
+{% endblock %}
