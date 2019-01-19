@@ -59,4 +59,15 @@ class CommentRepository extends ServiceEntityRepository
         return $qb->execute();
     }
 
+    public function findCommentUserByAddress($address){
+        $qb = $this->createQueryBuilder('c')
+            ->innerJoin('c.user', 'u')
+            ->addSelect('u')
+            ->andWhere('c.user = :user')
+            ->setParameter(':address', $address)
+            ->orderBy('c.dateenvoi', 'DESC')
+            ->getQuery();
+        return $qb->execute();
+    }
+
 }

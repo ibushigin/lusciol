@@ -3,7 +3,15 @@ namespace App\Service;
 
 class Rate{
 
-    public function rate(){
+    private $directory;
+
+    public function __construct($targetDirectory)
+    {
+        $this->directory = $targetDirectory;
+    }
+
+    public function rateAverage()
+    {
 
 
 

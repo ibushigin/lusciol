@@ -48,6 +48,14 @@ class AjaxController extends AbstractController
      */
     public function addComment(Request $request, Address $address){
 
+//        $user = $this->getUser();
+//
+//        $repository = $this->getDoctrine()->getRepository(Comment::class);
+//
+//        $address_id = $address->getId();
+//
+//        if($user)
+
         if(!empty($request->request->all())){
 
             $content = $request->request->get('content');
