@@ -13,9 +13,7 @@ body{
 
 /*Ne pas afficher le logo en haut a droite*/
 
-.navbar-brand img{
-    visibility: hidden;
-}
+
 
 /* LOGO LOGIN */
 

@@ -2,9 +2,12 @@
 *{
 	overflow: hidden;
 }
+body{
+	background-image: url('../img/fond2.png');
+	background-repeat: repeat-y;
+}
 #idLOGIN{
-	background-image: url('../img/fond2.png'); 
-	background-position: cover; 
+
 	height: 100vh;
 	position: relative; 
 	z-index: 0;
@@ -33,6 +36,4 @@
 	left : 36%;
 }
 
-#LOGO2LUSCIOL{
-	margin-top: 10vh!important;
-}
+
