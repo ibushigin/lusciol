@@ -10,10 +10,19 @@ class Rate{
         $this->directory = $targetDirectory;
     }
 
-    public function rateAverage()
+
+    //TODO Service calcul moyenne des notes
+    public function rateAverage($rates)
     {
 
+        foreach($rates as $rate)
+        {
 
+           $average = $rate + $rate / $rate;
+
+        }
+
+        return $average;
 
     }
 

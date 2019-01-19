@@ -46,55 +46,72 @@ class AjaxController extends AbstractController
     /**
      * @Route("/ajax/addComment/{id}", name="addComment", requirements={"id"="[0-9]+"})
      */
-    public function addComment(Request $request, Address $address){
+    public function addComment(Request $request, Address $address)
+    {
 
-//        $user = $this->getUser();
-//
-//        $repository = $this->getDoctrine()->getRepository(Comment::class);
-//
-//        $address_id = $address->getId();
-//
-//        if($user)
+        //TODO régler le pb d'ajout de commentaires si user comment = 0
 
-        if(!empty($request->request->all())){
+        $user = $this->getUser();
 
-            $content = $request->request->get('content');
+        $address_id = $address->getId();
 
-            $note = $request->request->get('note');
+        $repository = $this->getDoctrine()->getRepository(Comment::class);
 
-            $comment = new Comment();
+        $userAlreadyCommented = $repository->findCommentUserByAddress($address_id, $user);
 
-            $comment->setDateenvoi(New \DateTime(date('Y-m-d H:i:s')));
+        if ($userAlreadyCommented > 0) {
 
-            $comment->setUser($this->getUser());
-
-            $comment->setAddress($address);
-
-            $comment->setContent($content);
-
-            $comment->setRate($note);
-
-            $entityManager = $this->getDoctrine()->getManager();
-
-            $entityManager->persist($comment);
-
-            $entityManager->flush();
+            $this->addFlash('danger', 'Vous avez déjà donné votre avis.');
 
             $repository = $this->getDoctrine()->getRepository(Comment::class);
 
             $comments = $repository->findAllCommentsByAddress($address);
 
-            $this->addFlash('success', 'Commentaire posté');
+            return $this->render('ajax/singleView.html.twig', [
+                'address' => $address, 'comments' => $comments]);
 
-            return $this->render('ajax/comments.html.twig', [
-                'comments' => $comments]);
+        } else {
 
-        }else{
+            if (!empty($request->request->all())) {
 
-            return $this->redirectToRoute('home');
+                $content = $request->request->get('content');
+
+                $note = $request->request->get('note');
+
+                $comment = new Comment();
+
+                $comment->setDateenvoi(New \DateTime(date('Y-m-d H:i:s')));
+
+                $comment->setUser($this->getUser());
+
+                $comment->setAddress($address);
+
+                $comment->setContent($content);
+
+                $comment->setRate($note);
+
+                $entityManager = $this->getDoctrine()->getManager();
+
+                $entityManager->persist($comment);
+
+                $entityManager->flush();
+
+                $repository = $this->getDoctrine()->getRepository(Comment::class);
+
+                $comments = $repository->findAllCommentsByAddress($address);
+
+                $this->addFlash('success', 'Commentaire posté');
+
+                return $this->render('ajax/comments.html.twig', [
+                    'comments' => $comments]);
+
+            } else {
+
+                return $this->redirectToRoute('home');
+
+            }
 
         }
-
     }
 
     /**

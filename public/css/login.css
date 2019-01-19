@@ -1,8 +1,10 @@
 /* BACKGROUND */
-
-#idLOGIN{
+body{
 	background-image: url('../img/fond2.png');
 	background-repeat: repeat-y;
+}
+#idLOGIN{
+
 	height: 100vh;
 	position: relative; 
 	z-index: 0;
@@ -11,9 +13,7 @@
 
 /*Ne pas afficher le logo en haut a droite*/
 
-.navbar-brand img{
-	visibility: hidden;
-}
+
 
 /* LOGO LOGIN */
 
