@@ -12,6 +12,17 @@
     margin-top: 25vh!important;
 }
 
-#contentManageAddress, contentManageUser{
-    margin-top: 10vh;
+#contentManageAddress, #contentManageUser{
+    margin-top: 2vh;
+}
+
+/*Affichage des checkbox inline*/
+#update_user_roles{
+    display: flex;
+    justify-content: space-around;
+}
+
+.flashDiv{
+    height: 7vh;
+    margin-top: 12vh;
 }

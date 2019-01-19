@@ -66,7 +66,12 @@ class AdminController extends AbstractController
 
             $entityManager->flush();
 
-            $this->addFlash('success', 'Adresse ajoutée');
+            $status = $address->getStatus();
+            if ($status === 'valid'){
+                $this->addFlash('success', 'Succès!');
+            } else {
+                $this->addFlash('success', 'Succès (Addresse à valider)');
+            }
 
             return $this->redirectToRoute('manageAddress');
         }
@@ -106,7 +111,7 @@ class AdminController extends AbstractController
         $entityManager->flush();
 
         // génération d'un message flash
-        $this->addFlash('warning', 'Article supprimé');
+        $this->addFlash('warning', 'Adresse supprimée');
 
         return $this->redirectToRoute('manageAddress');
     }

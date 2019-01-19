@@ -9,20 +9,23 @@
 
 {% block body %}
 
-    {% for label, messages in app.flashes %}
-        {% for message in messages %}
-            <div class="alert alert-{{ label }}">{{ message}}</div>
-        {% endfor %}
-    {% endfor %}
-
     <div class="container-fluid" id="idLOGIN">
         <container>
+            <div class="row flashDiv">
+                <div class="col-2 mx-auto">
+                {% for label, messages in app.flashes %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ label }} text-center">{{ message}}</div>
+                    {% endfor %}
+                {% endfor %}
+                </div>
+            </div>
             <div class="row" id="contentManageAddress">
                 <div class="col-6">
-                    <h2 class="text-secondary mt-5 text-center"><span class="badge badge-light p-3">Valider l'enregistrement d'un magasin</span></h2>
+                    <h2 class="text-secondary mt-1 text-center"><span class="badge badge-light p-3">Valider l'enregistrement d'un magasin</span></h2>
                     <div class="form-group col-6 col-md-8 mt-5 mx-auto">
                         <select id="selectPendingAddress" class="form-control" name="selectPendingAddress">
-                            <option value="9999">Magasins en attente de validation...</option>
+                            <option value="99999">Magasins en attente de validation...</option>
                             {% for address in pendingAddress %}
                                 <option value="{{ address.id }}">{{ address.name }}</option>
                             {% endfor %}
@@ -30,10 +33,10 @@
                     </div>
                 </div>
                 <div class="col-6">
-                    <h2 class="text-secondary mt-5 text-center"><span class="badge badge-light p-3">Modifier un magasin</span></h2>
+                    <h2 class="text-secondary mt-1 text-center"><span class="badge badge-light p-3">Modifier un magasin</span></h2>
                     <div class="form-group col-6 col-md-6 mt-5 mx-auto">
                         <select id="selectAddress" class="form-control" name="selectAddress">
-                            <option value="9999">Magasins...</option>
+                            <option value="99999">Magasins...</option>
                             {% for address in allAddress %}
                                 <option value="{{ address.id }}">{{ address.name }}</option>
                             {% endfor %}
@@ -78,13 +81,6 @@
                 $('#addressDescription').css('display', 'none');
             })
 
-            // $('#pendingResult').on('submit', '#validateAfterModif', function(e){
-            //     e.preventDefault();
-            //     var form_data = ($("#modifyAddressByAdmin").serialize());
-            //     console.log(form_data);
-            //
-            // })
-
             // Menu de droite modifier un magasin
 
             $('#selectAddress').on('change', function(){
@@ -106,12 +102,8 @@
                 });
             })
 
-
-
-
-
-
-
+            // Effacer les messages flashs
+            $('.alert').fadeOut(6000);
         })
 
 

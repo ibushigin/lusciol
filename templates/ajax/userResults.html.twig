@@ -1,5 +1,5 @@
 {% if user %}
-<article id="userDescription">
+<article id="userDescription" class="text-white">
     <strong>Nom d'utilisateur :</strong> {{ user.username }}<br>
     <strong>ID :</strong> {{ user.id }}<br>
     <strong>Email :</strong> {{ user.email }}<br>
@@ -38,12 +38,12 @@
             <div class="'input-group-prepend">
                 <span id="label_avatar" class="input-group-text">Avatar</span>
             </div>
-            {{ form_widget(form.avatar, {'attr': {'class': 'form-control'}}) }}
+            {{ form_widget(form.avatar, {'attr': {'class': 'form-control d-none'}}) }}
         </div>
         <div class="d-flex justify-content-around">
             <a>{{ form_widget(form.enregistrer, {'attr': {'class': 'btn btn-success'}}) }}</a>
             {#TODO Ajouter confirmation#}
-            <a href="{{ path('deleteUser', {id : user.id}) }}"><button type="button" id="deny2" class="btn btn-danger">Rejeter</button></a>
+            <a href="{{ path('deleteUser', {id : user.id}) }}" id="deleteUser"><button type="button" id="deny2" class="btn btn-danger" >Supprimer</button></a>
         </div>
         {{ form_end(form) }}
     </article>
@@ -51,3 +51,16 @@
     <article>
     </article>
 {% endif %}
+
+{% block javascipts %}
+    <script>
+        $(function(){
+            $('body').on('click', '#deleteUser', function() {
+                return confirm('Supprimer definitevement?');
+            })
+            $('body').on('click', '#deny2', function() {
+                return confirm('Supprimer definitevement?');
+            })
+        })
+    </script>
+{% endblock %}

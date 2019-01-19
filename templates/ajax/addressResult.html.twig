@@ -83,3 +83,16 @@
     </article>
 
 {% endif %}
+
+{% block javascipts %}
+    <script>
+        $(function(){
+            $('body').on('click', '#deny', function() {
+                return confirm('Supprimer definitevement?');
+            })
+            $('body').on('click', '#deny2', function() {
+                return confirm('Supprimer definitevement?');
+            })
+        })
+    </script>
+{% endblock %}

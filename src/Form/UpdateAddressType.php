@@ -53,4 +53,3 @@ class UpdateAddressType extends AbstractType
     }
 }
 
-//TODO bootstrap_4_layout.html.twig a voir pour les fichier file : https://github.com/symfony/symfony/issues/27477#ref-pullrequest-328782629

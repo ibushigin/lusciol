@@ -74,10 +74,19 @@ color: white;
 
 #mainbgimg, #mainbgimg2, #fondseul{
 	position: absolute;
-	width: 1920px;
-	height: 969px;
+	width: 100%;
+	height: 100vh;
 	z-index:1;  
 	padding : 0;
+}
+
+#mainbgimg3{
+	position: absolute;
+	width: 100%;
+	height: 706px;
+	z-index:1;
+	padding : 0;
+	left: 1400px;
 }
 
 #fondseul{
@@ -164,6 +173,7 @@ color: white;
 	}
 }
 
+/*REFERENCE MEDIA QUERY*/
 @media all and (max-width: 1600px){
 	/* Rattrapage du decallage en low Résolution*/
 	#toplowR{
@@ -190,9 +200,13 @@ color: white;
 		position: absolute;
 		top: 706px;
 	}
+
+	#SloganLUSCIOL{
+		margin-top: 10vh;
+	}
 }
 
-}
+
 
 @media all and (max-width: 1500px){
 

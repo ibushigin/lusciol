@@ -1,23 +1,31 @@
 {% extends 'base-navbar.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/admin.css') }}">
+{% endblock %}
+
 {% block title %}Manage Users{% endblock %}
 
 {% block body %}
 
-    {% for label, messages in app.flashes %}
-        {% for message in messages %}
-            <div class="alert alert-{{ label }}">{{ message}}</div>
-        {% endfor %}
-    {% endfor %}
-
-<div class="container-fluid">
+<div class="container-fluid" id="idLOGIN">
     <container>
-        <div class="row">
+        <div class="row flashDiv">
+            <div class="col-2 mx-auto">
+                {% for label, messages in app.flashes %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ label }} text-center">{{ message}}</div>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+        </div>
+        <div class="row" id="contentManageUser">
             <div class="col-12">
-                <h2 class="text-secondary mt-5 text-center"><span class="badge badge-info p-3">Gestion des utilisateurs</span></h2>
+                <h2 class="text-secondary mt-5 text-center"><span class="badge badge-light p-3">Gestion des utilisateurs</span></h2>
                 <div class="form-group col-6 col-md-3 mt-5 mx-auto">
                     <select id="selectUser" class="form-control" name="selectUser">
-                        <option value="">Utilisateurs...</option>
+                        <option value="99999">Utilisateurs...</option>
                         {% for user in users %}
                             <option value="{{ user.id }}">{{ user.username }}</option>
                         {% endfor %}
@@ -61,6 +69,9 @@
             $('#updateUserForm').css('display', 'block');
             $('#userDescription').css('display', 'none');
         })
+
+        // Effacer les messages flashs
+        $('.alert').fadeOut(3000);
     })
 </script>
 {% endblock %}
