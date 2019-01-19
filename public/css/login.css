@@ -54,7 +54,7 @@
 
 #DEMILOGO{
 	position: absolute;
-	z-index: 1; 
-	top: 30.8vh;
-	right: 48vw;
+	z-index: -1;
+	bottom: 0;
+	left: 11%;
 }

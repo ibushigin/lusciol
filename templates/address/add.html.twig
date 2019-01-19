@@ -18,27 +18,25 @@
 
 		<div class="row">
 			<div class="col-12 offset-md-2 col-md-8">
-			{{ form_start(form) }}
-			{{ form_row(form.subCategory, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Sous-catégorie : '}}) }}
-			{{ form_row(form.name, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Nom du magasin : '}}) }}
-			{{ form_row(form.location, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Adresse (ensuite appuyez sur "Chercher coordonées) : '}}) }}
-			<button id="btnCoord" class="btn btn-secondary offset-md-3 col-md-6 mb-3 align-middle"><i class="fas fa-crosshairs fa-2x"></i><span id="getgeo">Chercher  coordonnées</span></button>
-			{{ form_row(form.coordinates, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Coordonées géographiques : '}}) }}
-			{{ form_row(form.website, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Site internet : '}}) }}
-			{{ form_row(form.tel, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Téléphone : '}}) }}
-			{{ form_row(form.discount, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Réduction étudiante proposée : '}}) }}
-			{{ form_row(form.image, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Image (optionnelle) : '}}) }}
-			{{ form_row(form.save, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Sous-catégorie : '}}) }}
-			<div class="form-group col-12 col-md-6 mx-auto my-auto">
-				<button class="btn bg-white btn-block">Valider</button>
-				{{ form_end(form) }}
+				{{ form_start(form) }}
+				{{ form_row(form.subCategory, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Sous-catégorie : '}}) }}
+				{{ form_row(form.name, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Nom du magasin : '}}) }}
+				{{ form_row(form.location, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Adresse (ensuite appuyez sur "Chercher coordonées) : '}}) }}
+				<button id="btnCoord" class="btn btn-secondary offset-md-3 col-md-6 mb-3 align-middle"><i class="fas fa-crosshairs fa-2x"></i><span id="getgeo">Chercher  coordonnées</span></button>
+				{{ form_row(form.coordinates, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Coordonées géographiques : '}}) }}
+				{{ form_row(form.website, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Site internet : '}}) }}
+				{{ form_row(form.tel, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Téléphone : '}}) }}
+				{{ form_row(form.discount, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Réduction étudiante proposée : '}}) }}
+				{{ form_row(form.image, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Image (optionnelle) : '}}) }}
+				{{ form_row(form.save, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Sous-catégorie : '}}) }}
+				<div class="form-group col-12 col-md-6 mx-auto my-auto">
+					<button class="btn bg-white btn-block">Valider</button>
+					{{ form_end(form) }}
+				</div>
 			</div>
-			<div class="col-12" id="DEMILOGO">
-				<img class="d-none d-lg-block" src="{{ asset("img/fond3.png") }}" alt="LUEUR">
-			</div>
-
-
-			</div>
+		</div>
+		<div class="col-12" id="DEMILOGO">
+			<img class="d-none d-lg-block" src="{{ asset("img/fond3.png") }}" alt="LUEUR">
 		</div>
 	</div>
  </div>
