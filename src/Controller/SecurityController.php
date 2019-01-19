@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\ChangePasswordType;
 use App\Form\RegistrationFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -136,5 +137,55 @@ class SecurityController extends AbstractController
         }
     }
 
+//    /**
+//     * @Route("/changePassword", "changePassword")
+//     */
+//    public function changePassword(Request $request, UserPasswordEncoderInterface $encoder)
+//    {
+//
+//        $form = $this->createForm(ChangePasswordType::class);
+//
+//        $form->handleRequest($request);
+//
+//        if($form->isSubmitted() && $form->isValid())
+//        {
+//
+//            $user = $this->getUser();
+//
+//            $checkPass = $encoder->isPasswordValid($user, $request->request->get('oldPassword'));
+//
+//            if($request->request->get('') === $request->request->get(''))
+//            {
+//
+//
+//
+//            }
+//
+//        }
+//
+//        $old_password = $request->request->get('old_password');
+//        $new_password = $request->request->get('new_password');
+//        $new_password_2 = $request->request->get('new_password_2');
+//
+//        $user = $this->getUser();
+//        $checkPass = $encoder->isPasswordValid($user, $old_password);
+//
+//        if($new_password !== $new_password_2){
+//
+//            $this->addFlash('danger', 'Nouveaux mots de passe ');
+//
+//        }else{
+//
+//            if($checkPass === true){
+//
+//                $new_password_encoded = $encoder->encodePassword($user, $new_password_2);
+//
+//            }else{
+//                $this->addFlash('danger', 'Votre ancien mot de passe n\'est pas correct');
+//            }
+//
+//        }
+//
+//    }
 
 }
