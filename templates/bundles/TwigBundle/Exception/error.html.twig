@@ -1,0 +1,28 @@
+{% extends 'base-navbar.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/addAddress.css') }}">
+{% endblock %}
+
+{% block title %}Error{% endblock %}
+
+{% block body %}
+    <div class="container-fluid" id="idLOGIN">
+        <div class="container">
+            <div class="row">
+                <div class=" text-center col-12 col-md-12" id="LOGOLOGIN">
+                    <a href="{{ path('home') }}"><img src="{{ asset('img/Logo3.png') }}" alt="Logo2LUSCIOL"></a>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 offset-md-2 col-md-8">
+                    <h2 class="text-center text-white pt-8">Whoops, looks like something went wrong :)</h2>
+                </div>
+            </div>
+
+        </div>
+        <img id="DEMILOGO" class="d-none d-lg-block" src="{{ asset("img/fond3.png") }}" alt="LUEUR">
+    </div>
+{% endblock %}
