@@ -1,7 +1,9 @@
-#idLOGIN, #contentLogin{
+body{
     background-image: url('../img/fond2.png');
-    background-position: cover;
     background-repeat: repeat-y;
+}
+
+#idLOGIN, #contentLogin{
     height: 100vh;
     position: relative;
     z-index: 0;

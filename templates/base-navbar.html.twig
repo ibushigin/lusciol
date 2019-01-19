@@ -10,6 +10,7 @@
         {# FAVICON #}
         <link rel="icon" href="{{ asset("img/favicon.ico") }}">
         {# Typographies GOOGLE FONT#}
+        <link href="https://fonts.googleapis.com/css?family=Abril+Fatface" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Chivo" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
         {#Le css bootstrap#}
@@ -28,11 +29,9 @@
 
 <body>
 
-<div class="container-fluid">
-    <div class="row d-flex justify-content-end">
 
             <nav class="navbar navbar-expand-lg navbar-light bg-light" id="navbarHompage">
-                <a class="navbar-brand" href="{{ path('home') }}"><img src="{{ asset('img/logo.png') }}" alt="LusciolLogo"></a>
+                <a class="navbar-brand align-self-start" href="{{ path('home') }}"><img src="{{ asset('img/logo.png') }}" alt="LusciolLogo"></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#HomenavbarContent" aria-controls="HomenavbarContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span><i class="fas fa-bars fa-2x" id="burgerHome"></i></span>
                 </button>
@@ -76,8 +75,7 @@
             </nav>
 
 
-    </div>
-</div>
+
 
 {% block body %}
 
