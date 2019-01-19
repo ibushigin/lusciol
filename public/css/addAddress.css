@@ -2,7 +2,6 @@
 
 #idLOGIN{
     background-image: url('../img/fond2.png');
-    background-position: cover;
     background-repeat: repeat-y;
     height: 100vh;
     position: relative;
@@ -55,7 +54,7 @@
 #DEMILOGO{
     position: absolute;
     z-index: -1;
-    bot: 0vh;
+    bottom: 0vh;
     left: 11%;
 }
 
