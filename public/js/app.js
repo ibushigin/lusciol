@@ -28,8 +28,8 @@ btn.addEventListener('click', function (e) {
         if (err !== null) {
             alert('Erreur API Coordonnées ' + err);
         } else {
-
-            if (data.length > 1){
+            // console.log('data',data);
+            if (data[0].geojson.coordinates.length > 2){
                 result0 = data[0].geojson.coordinates[0][0];
                 result1 = data[0].geojson.coordinates[0][1];
             }else{
@@ -37,6 +37,12 @@ btn.addEventListener('click', function (e) {
                 result1 = data[0].geojson.coordinates[1];
             }
             result = result1 + ', ' + result0;
+
+            // console.log("dataleng",data.length);
+            // console.log("coordleng",data[0].geojson.coordinates.length);
+            //
+            // console.log("result=", result1, result0);
+            // console.log(result);
             target.value = result;
         };
     });
