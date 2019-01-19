@@ -46,8 +46,13 @@ body{
 	 height: 200vh;
 }
 
+#divLogo{
+	position: relative;
+	height: 80vh;
+}
+
 #mainbgimg, #mainbgimg2{
-	/*position: absolute;*/
+	position: absolute;
 	width: 58%;
 }
 
@@ -87,6 +92,10 @@ body{
 @media all and (max-width: 1200px) {
 	#SloganLUSCIOL{
 		font-size: 2.5rem;
+	}
+
+	#BUTTONMap{
+		font-size: 0.8rem;
 	}
 }
 

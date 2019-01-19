@@ -8,18 +8,18 @@
 
 {% block body %}
 	<div class="container-fluid">
-		<div class="row h-100 d-flex justify-content-between align-items-center">
-			<div class="col-12 col-md-6 d-lg-flex justify-content-center align-items-center d-none">
+		<div class="row h-100 d-flex justify-content-lg-between align-items-center justify-content-center">
+			<div class="col-12 col-md-6 d-lg-flex justify-content-center align-items-center d-none" id="divLogo">
 				<img id="mainbgimg" src="{{ asset("img/gifLogo.gif") }}" alt="Logo-gif">
 				{#<img id="mainbgimg2" src="{{ asset("img/gifLogo.gif") }}" alt="Logo-gif">#}
 			</div>
 			<div class="col-12 col-md-6">
-				<div class="SloganLUSCIOL col-md-8 mx-auto text-center" id="SloganLUSCIOL">
+				<div class="SloganLUSCIOL col-12 col-md-10 col-lg-8 col-xl-6 mx-auto text-center" id="SloganLUSCIOL">
 				</div>
 				<div class="col-12">
-					<div id="BUTTONMap" class="col-12 col-md-8 mx-auto text-center">
+					<div id="BUTTONMap" class="col-12 col-md-12 col-lg-10 col-xl-8 mx-auto text-center">
 						<a class="col-12" href="{{ path('viewAll') }}">
-							<button class="btn col-9 py-3 mt-5">
+							<button class="btn col-12 col-md-12 col-lg-12 py-3 mt-5">
 								TROUVE TON BON PLAN
 							</button>
 						</a>
