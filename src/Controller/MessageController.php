@@ -23,25 +23,30 @@ class MessageController extends AbstractController
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()){
+        if($form->isSubmitted() && $form->isValid()) {
 
             $message = $form->getData();
-            $mail = (new \Swift_Message($message->getSubject()))
-                ->setFrom($user->getEmail())
-                ->setTo($this->getParameter('mail'))
-                ->setBody(
-                    'envoyé par ' . $user->getEmail() . '<br>' . $message->getContent(),
-                    "text/html"
-                );
+            if (($message->getSubject()) === "") {
+                $this->addFlash('danger', 'Veuillez choisir un objet de message');
+                return $this->redirectToRoute('message');
+            } else {
+                $mail = (new \Swift_Message($message->getSubject()))
+                    ->setFrom($user->getEmail())
+                    ->setTo($this->getParameter('mail'))
+                    ->setBody(
+                        'envoyé par ' . $user->getEmail() . '<br>' . $message->getContent(),
+                        "text/html"
+                    );
 
-            $mailer->send($mail);
-            $this->addFlash('notice', 'Message envoyé');
+                $mailer->send($mail);
+                $this->addFlash('success', 'Message envoyé');
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($message);
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($message);
 
-           return $this->redirectToRoute('message');
+                return $this->redirectToRoute('message');
 
+            }
         }
 
         return $this->render('message/index.html.twig', [

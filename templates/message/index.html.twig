@@ -1,19 +1,52 @@
 {% extends 'base-navbar.html.twig' %}
 
-{% block title %}Page de message{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/contact.css') }}">
+{% endblock %}
+
+{% block title %}Contact{% endblock %}
 
 {% block body %}
 
-    {% for label, messages in app.flashes %}
-        {% for message in messages %}
-            <div class="alert alert-{{ label }}">{{ message}}</div>
-        {% endfor %}
-    {% endfor %}
+<div class="container" id="contactContent">
+    <div class="row flashDiv">
+        <div class="col-2 mx-auto">
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ label }} text-center">{{ message}}</div>
+                {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <div class="row my-5">
+            <h1 class="text-center text-white m-auto" id="contactH1">Contact</h1>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-8 col-xl-6 mx-auto">
+                {{ form_start(messageForm) }}
+                {{ form_row(messageForm.subject, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Objet : '}}) }}
+                {{ form_row(messageForm.content, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Message...'}}) }}
+                <div class="col-6 m-auto text-center">
+                    <button type="submit" class="btn btn-danger">Envoyer</button>
+                </div>
+                {{ form_end(messageForm) }}
+            </div>
 
-    {{ form_start(messageForm) }}
-    {{ form_row(messageForm.subject) }}
-    {{ form_row(messageForm.content) }}
-    <button type="submit" class="btn btn-danger">Envoyer</button>
-    {{ form_end(messageForm) }}
+        </div>
+    {% else %}
+        <div class="row my-5">
+            <h1 class="text-center text-white m-auto" id="contactH1">Contact</h1>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-8 col-xl-6 mx-auto">
+                <p class="text-center text-white">
+                    Vous devez être connecté pour envoyer un message, merci
+                </p>
+            </div>
+        </div>
+    {% endif %}
+</div>
 
 {% endblock %}
