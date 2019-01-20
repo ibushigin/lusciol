@@ -38,18 +38,21 @@
                 <div class="collapse navbar-collapse" id="HomenavbarContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link allNavItems mx-4" href="{{ path('viewAll') }}">Map</a>
+                            <a class="nav-link allNavItems mx-3" href="{{ path('viewAll') }}">Map</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link allNavItems mx-4" href="{{ path('concept') }}">Concept</a>
+                            <a class="nav-link allNavItems mx-3" href="{{ path('concept') }}">Concept</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link allNavItems mx-4" href="{{ path('addAddress') }}">Proposer un bon plan</a>
+                            <a class="nav-link allNavItems mx-3" href="{{ path('addAddress') }}">Proposer un bon plan</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link allNavItems mx-3" href="{{ path('message') }}">Contact</a>
                         </li>
                         {# crée un lien vers la page admin si on a le role admin #}
                         {% if is_granted('ROLE_ADMIN') %}
                             <li class="nav-item">
-                                <a class="nav-link allNavItems mx-4" href="{{ path('admin') }}">Admin</a>
+                                <a class="nav-link allNavItems mx-3" href="{{ path('admin') }}">Admin</a>
                             </li>
                         {% endif %}
 
@@ -60,7 +63,7 @@
                             </div>
                         {% else %}
                             <li class="nav-item">
-                                <a class="nav-link allNavItems mx-4" href="{{ path('logout') }}">Logout</a>
+                                <a class="nav-link allNavItems mx-3" href="{{ path('logout') }}">Logout</a>
                             </li>
                             {# Picto connexion#}
                             <div class="connectHome">
@@ -68,7 +71,7 @@
                             </div>
                         {% endif %}
                         {#<li class="nav-item" id="connect">#}
-                        {#<a href="{{ path('app_login') }}"><i class="fas fa-user pl-3"></i></a>#}
+                            {#<a href="{{ path('app_login') }}"><i class="fas fa-user pl-3"></i></a>#}
                         {#</li>#}
                     </ul>
                 </div>
