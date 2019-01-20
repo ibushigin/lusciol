@@ -46,7 +46,7 @@ body{
 
 #DEMILOGO{
 	width: 63%;
-	bottom: 0;
+	bottom: 0vh;
 	left: 20%;
 }
 
@@ -74,6 +74,7 @@ body{
 }
 
 @media all and (max-width: 576px) {
+
 	#SloganLUSCIOL{
 		font-size: 2rem;
 		margin-top: 5vh;
