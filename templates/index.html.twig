@@ -8,7 +8,7 @@
 
 {% block body %}
 	<div class="container-fluid" id="contentHomePage">
-		<div class="row h-100 d-flex justify-content-lg-between align-items-center justify-content-center">
+		<div class="row d-flex justify-content-lg-between align-items-center justify-content-center">
 			<div class="col-12 col-md-6 d-lg-flex justify-content-center align-items-center d-none" id="divLogo">
 				<img id="mainbgimg" src="{{ asset("img/gifLogo.gif") }}" alt="Logo-gif">
 				{#<img id="mainbgimg2" src="{{ asset("img/gifLogo.gif") }}" alt="Logo-gif">#}
@@ -26,7 +26,12 @@
 			</div>
 		</div>
 	</div>
-	<img class="d-lg-none d-block position-absolute" id="DEMILOGO" class="d-none d-lg-block" src="{{ asset("img/fond3.png") }}" alt="LUEUR">
+	<div class="container-fluid">
+		<div class="row">
+			<img class="d-lg-none d-block position-fixed" id="DEMILOGO" class="d-none d-lg-block" src="{{ asset("img/fond3.png") }}" alt="LUEUR">
+		</div>
+	</div>
+
 
 {% endblock %}
 
