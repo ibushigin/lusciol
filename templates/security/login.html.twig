@@ -29,7 +29,7 @@
                                  <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                                  {#TODO STYLE CHECKBOX#}
                                  <div class="checkbox mb-3">
-                                     <input type="checkbox" name="_remember_me"> Remember me
+                                     <input type="checkbox" name="_remember_me" ><span class="text-white">Remember me</span>
                                  </div>
                                  <br>
                                  <div class="col-12 col-md-8 mx-auto my-auto">
@@ -66,7 +66,7 @@
 {% block javascripts %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('js/login.js') }}"></script>
+    <script src="{{ asset('js/Login.js') }}"></script>
     {#JS Pour Leaflet#}
     <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
             integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
