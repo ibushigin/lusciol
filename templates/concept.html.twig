@@ -7,69 +7,51 @@
 {% block body %}
 
 	<!--CONTAIN-->
-	
-	<div class="container-fluid" id="idLOGIN">
+
+	<div class="container-fluid" id="ConceptContent">
 		<div class="row">
-			<div id="LOGO2LUSCIOL" class="mx-auto">
-				<a href="{{ path('home') }}"><img src="{{ asset('img/Logo3.png') }}" alt="Logo2LUSCIOL"></a>
-			</div>
+			<h1 class="text-white text-center mx-auto">Concept</h1>
 		</div>
 
 		<div class="container">
 			<div class="row">
-				<div class="ConceptLUSCIOl col-12 col-md-12 mt-5">
-					<!--Description du concept LUSCIOL-->
-					<p class="text-center text-white" >Et quoniam inedia gravi adflictabantur, locum petivere Paleas nomine, vergentem in mare, valido muro firmatum, ubi conduntur nunc usque commeatus distribui militibus omne latus Isauriae defendentibus adsueti. circumstetere igitur hoc munimentum per triduum et trinoctium et cum neque adclivitas ipsa sine discrimine adiri letali, nec cuniculis quicquam geri posset, nec procederet ullum obsidionale commentum, maesti excedunt postrema vi subigente maiora viribus adgressuri.Paphius quin etiam et Cornelius senatores, ambo venenorum artibus pravis se polluisse confessi, eodem pronuntiante Maximino sunt interfecti. pari sorte etiam procurator monetae extinctus est. Sericum enim et Asbolium supra dictos.</p>
-				</div>
-			</div>
-			<div class="row">
-				<div id="DEMILOGO">
-					<img class="d-none d-lg-block" src="{{ asset("img/fond3.png") }}" alt="LUEUR">
-				</div>
+				<div class="ConceptLUSCIOl col-12 col-md-12 mt-5 text-white"">
+				<!--Description du concept LUSCIOL-->
+				<p>
+					LUSCIOL est le projet de fin d'études de quatres étudiants à l'école Webforce 3 (developpement/intégration WEB) au sein de la société philomatique de Bordeaux.
+					Il a été mis en place en deux semaines. Le nom du projet fait référence à la lussiole, qui brille dans la nuit, et par analogie indique des lieux d'interêts.
+				</p>
+				<p>
+					Il s'agit d'une appli WEB full responsive, qui permet aux étudiants de trouver tous les bons plan qui leur sont déstinés
+					(réductions sur présentation de la carte étudiante.) via un systeme de géolocalisation.
+					Nous avons fait le choix de l'opensource, en utilisant l'API OpenStreetMap.
+				</p>
+				<p>
+					Sur le plan technique, les technologies utilisées sont :<br>
+					-HTML5/CSS3 (+Bootstrap)<br>
+					-javascript ES6 (+jQuery +AJAX)<br>
+					-PHP (+Symfony4)<br>
+					-API OpenStreetMap (+MapBox +Leaflet)<br>
+					-Librairie FontAwesome<br>
+					-PhotoShop/Illustrator<br>
+					-Editeurs de texte : SublimText, PHPStorm<br>
+				</p>
+				<p>
+					Les ressources proposées par l'application sont pour l'instant purement fictives, mais nous souhaitons faire vivre le site et l'alimenter
+					avec un contenu réel dans les prochaines semaines.
+				</p>
+				<p>
+					Nous vous souhaitons une agréable éxperience sur Lusciol.fr,
+				</p>
+				<br><br>
+				<p class="text-right">
+					Jean, Jean, Mélanie et Vincent
+				</p>
+				</p>
 			</div>
 		</div>
+		<img id="DEMILOGO" class="d-none d-lg-block" src="{{ asset("img/fond3.png") }}" alt="LUEUR">
 	</div>
-	
-
-
-	{# 	<div class="row">
-			<div class=" form-group col-12 col-md-4 mx-auto">
-			<!-- Logo lusciol clignotant-->
-				<div class="col-12" id="DEMILOGO">
-	                <img class="d-none d-lg-block" src="{{ asset("img/fond3.png") }}" alt="LUEUR">
-	            </div>
-	          </div>
-	    </div> #}
-
-			<!--Les meilleurs plans de la semaine/mois (à déterminer)-->
-​
-			<div class="BESTPlans my-3 mx-auto">
-			
-			</div>
-		</div>
-
-		<div class="row">
-	{# 		<div class="d-flex justify-content-between align-content-between flex-wrap">
-        <div class="col-6 col-xl-3 py-3"><img src="{{ asset("img/Vignettes/MamaShelter.jpg") }}" alt="MamaShelter"></div>
-        <div class="col-6 col-xl-3 py-3"><img src="{{ asset("img/Vignettes/Girondins.jpg") }}" alt="Girondins"></div>
-        <div class="col-6 col-xl-3 py-3"><img src="{{ asset("img/Vignettes/CA.jpg") }}" alt="CA"></div>
-        <div class="col-6 col-xl-3 py-3"><img src="{{ asset("img/Vignettes/OnglesDiva.jpg") }}" alt="CA"></div>
-        <div class="col-6 col-xl-3 py-3"><img src="{{ asset("img/Vignettes/Kokomo.jpg") }}" alt="Kokomo"></div>
-        <div class="col-6 col-xl-3 py-3"><img src="{{ asset("img/Vignettes/Coiffeur.jpg") }}" alt="JOHN'S"></div>
-        <div class="col-6 col-xl-3 py-3"><img src="{{ asset("img/Vignettes/Darnauzan.jpg") }}" alt="Darnauzan"></div>
-        <div class="col-6 col-xl-3 py-3"><img src="{{ asset("img/Vignettes/UGC.jpg") }}" alt="UGC"></div>
-			</div>
-		</div> #}
-		<div class="row">
-			<!--FOOTER-->
-​
-
-        <div class="FOOTERHome">
-        </div>
-      </div>
-		</div>
-	</div>
-
 {% endblock %}
 
 {% block javascripts %}
