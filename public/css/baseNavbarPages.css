@@ -57,6 +57,19 @@ body{
     left: -2vw;
 }
 
+/*PAGE LOGIN*/
+
+#MDPLOST a{
+    color: white;
+}
+
+#MDPLOST a:hover{
+    text-decoration: none;
+    border: 1px solid white;
+    border-radius: 3px;
+    padding: 5px 9px;
+}
+
 /*PAGE D'ERREUR'*/
 .pt-8{
     padding-top: 8rem!important;
