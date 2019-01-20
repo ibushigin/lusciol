@@ -51,10 +51,10 @@ class RegistrationController extends AbstractController
             //traitement du formulaire d'upload d'image
             //on m'a envoyé une image
             if($user->getAvatar()){
-            $filename = $fileuploader->upload($user->getAvatar(),
-                $this->getParameter('user_avatar_directory'));
-            //j'injecte le nom du fichier dans la propriété image
-            $user->setAvatar($filename);
+                $filename = $fileuploader->upload($user->getAvatar(),
+                    $this->getParameter('user_avatar_directory'));
+                //j'injecte le nom du fichier dans la propriété image
+                $user->setAvatar($filename);
             }else{
                 $user->setAvatar('avatar.jpg');
             }

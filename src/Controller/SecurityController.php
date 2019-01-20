@@ -25,7 +25,7 @@ class SecurityController extends AbstractController
 
         if($this->getUser() instanceof UserInterface) {
 
-             return $this->redirectToRoute('app_forgotten_password');
+            return $this->redirectToRoute('app_forgotten_password');
 
         }
 
@@ -137,55 +137,47 @@ class SecurityController extends AbstractController
         }
     }
 
-//    /**
-//     * @Route("/changePassword", "changePassword")
-//     */
-//    public function changePassword(Request $request, UserPasswordEncoderInterface $encoder)
-//    {
-//
-//        $form = $this->createForm(ChangePasswordType::class);
-//
-//        $form->handleRequest($request);
-//
-//        if($form->isSubmitted() && $form->isValid())
-//        {
-//
-//            $user = $this->getUser();
-//
-//            $checkPass = $encoder->isPasswordValid($user, $request->request->get('oldPassword'));
-//
-//            if($request->request->get('') === $request->request->get(''))
-//            {
-//
-//
-//
-//            }
-//
-//        }
-//
-//        $old_password = $request->request->get('old_password');
-//        $new_password = $request->request->get('new_password');
-//        $new_password_2 = $request->request->get('new_password_2');
-//
-//        $user = $this->getUser();
-//        $checkPass = $encoder->isPasswordValid($user, $old_password);
-//
-//        if($new_password !== $new_password_2){
-//
-//            $this->addFlash('danger', 'Nouveaux mots de passe ');
-//
-//        }else{
-//
-//            if($checkPass === true){
-//
-//                $new_password_encoded = $encoder->encodePassword($user, $new_password_2);
-//
-//            }else{
-//                $this->addFlash('danger', 'Votre ancien mot de passe n\'est pas correct');
-//            }
-//
-//        }
-//
-//    }
+    /**
+     * @Route("/changePassword", name="changePassword")
+     */
+    public function changePassword(Request $request, UserPasswordEncoderInterface $encoder)
+    {
+
+        $form = $this->createForm(ChangePasswordType::class);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+
+            $user = $this->getUser();
+
+            $checkPass = $encoder->isPasswordValid($user, $form->get('oldPassword'));
+
+            if($checkPass === true){
+
+                $user->setPassword(
+                    $encoder->encodePassword(
+                        $user, $form->get('plainPassword')->getData())
+                );
+
+                $user->eraseCredentials();
+
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->flush();
+
+            }else{
+
+                $this->addFlash('danger', 'Votre ancien mot de passe n\'est pas correct');
+
+            }
+
+        }
+
+        return $this->render('security/changePassword.html.twig', [
+            'changePasswordForm' => $form->createView()
+        ]);
+
+    }
 
 }
