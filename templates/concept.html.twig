@@ -2,28 +2,28 @@
 
 {% block stylesheets %}
 	{{ parent() }}
-	<link rel="stylesheet" type="text/css" href="{{ asset('css/concept.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/baseNavbarPages.css') }}">
 {% endblock %}
 {% block body %}
 
 	<!--CONTAIN-->
 
-	<div class="container-fluid" id="ConceptContent">
+	<div class="container-fluid ContentFullSize">
 		<div class="row">
-			<h1 class="text-white text-center mx-auto">Concept</h1>
+			<h1 class="text-white text-center mx-auto mainTitle">Concept</h1>
 		</div>
 
 		<div class="container">
 			<div class="row">
-				<div class="ConceptLUSCIOl col-12 col-md-12 mt-5 text-white"">
+				<div class="conceptLusciol col-12 col-md-12 col-xl-8 mt-5 text-white text-center mx-auto">
 				<!--Description du concept LUSCIOL-->
 				<p>
-					LUSCIOL est le projet de fin d'études de quatres étudiants à l'école Webforce 3 (developpement/intégration WEB) au sein de la société philomatique de Bordeaux.
-					Il a été mis en place en deux semaines. Le nom du projet fait référence à la lussiole, qui brille dans la nuit, et par analogie indique des lieux d'interêts.
+					LUSCIOL est le projet de fin d'études de quatre étudiants à l'école Webforce 3 (developpement/intégration WEB) au sein de la société Philomatique de Bordeaux.
+					Il a été mis en place en deux semaines. Le nom du projet fait référence à la luciole, qui brille dans la nuit, et par analogie indique des lieux d'interêts.
 				</p>
 				<p>
-					Il s'agit d'une appli WEB full responsive, qui permet aux étudiants de trouver tous les bons plan qui leur sont déstinés
-					(réductions sur présentation de la carte étudiante.) via un systeme de géolocalisation.
+					Il s'agit d'une appli WEB full responsive, qui permet aux étudiants de trouver tous les bons plans qui leur sont déstinés
+					(réductions sur présentation de la carte étudiante) via un systeme de géolocalisation.
 					Nous avons fait le choix de l'opensource, en utilisant l'API OpenStreetMap.
 				</p>
 				<p>
@@ -34,14 +34,14 @@
 					-API OpenStreetMap (+MapBox +Leaflet)<br>
 					-Librairie FontAwesome<br>
 					-PhotoShop/Illustrator<br>
-					-Editeurs de texte : SublimText, PHPStorm<br>
+					-Editeurs de texte : SublimText, PHPStorm, Visual Code Studio<br>
 				</p>
 				<p>
 					Les ressources proposées par l'application sont pour l'instant purement fictives, mais nous souhaitons faire vivre le site et l'alimenter
 					avec un contenu réel dans les prochaines semaines.
 				</p>
 				<p>
-					Nous vous souhaitons une agréable éxperience sur Lusciol.fr,
+					Nous vous souhaitons une agréable experience sur Lusciol.fr,
 				</p>
 				<br><br>
 				<p class="text-right">
@@ -50,7 +50,7 @@
 				</p>
 			</div>
 		</div>
-		<img id="DEMILOGO" class="d-none d-lg-block" src="{{ asset("img/fond3.png") }}" alt="LUEUR">
+		<img class="DEMILOGO d-none d-lg-block" src="{{ asset("img/fond3.png") }}" alt="LUEUR">
 	</div>
 {% endblock %}
 
