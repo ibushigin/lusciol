@@ -2,44 +2,49 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/login.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/baseNavbarPages.css') }}">
 {% endblock %}
 
 {% block title %}Profile{% endblock %}
 
 {% block body %}
 
-    <div class="container-fluid ContentFullSize">
+    <div class="container ContentFullSize">
         <div class="row flashDiv">
-            <div class="col-2 mx-auto">
+            <div class="col-12 mx-auto">
                 {% for label, messages in app.flashes %}
                     {% for message in messages %}
                         <div class="alert alert-{{ label }} text-center">{{ message}}</div>
                     {% endfor %}
                 {% endfor %}
             </div>
-            <div class="row" id="contentManageUser">
-                <div class="col-12">
-                    <div class="form-group col-6 col-md-3 mt-5 mx-auto">
-                        <article id="userDescription" class="text-white">
-                            <strong>Nom d'utilisateur :</strong> {{ moi.username }}<br>
-                            <strong>Email :</strong> {{ moi.email }}<br>
-                            <strong>Avatar :</strong> <img src="{{ asset('uploads/user/avatar/' ~ moi.avatar) }}" alt="avateur de l'utilisateur"><br>
-                            <div class="col-12 d-flex mt-5">
-                                <a href="{{ path('changePassword') }}">
-                                    <button class="btn btn-warning">Changer votre mdp</button>
-                                </a>
-                            </div>
-                            <div class="col-12 d-flex mt-5">
-                                <a href="{{ path('deleteUser', {id : moi.id}) }}">
-                                    <button id="deleteUser" class="btn btn-danger">Supprimer votre compte</button>
-                                </a>
-                            </div>
-                        </article>
+        </div>
+        <div class="row">
+            <h1 class="mainTitle text-center mx-auto mb-5 text-white">Gestion du profil :</h1>
+        </div>
+        <div class="row">
+            <article class="col-12 col-md-8 mx-auto text-white text-center">
+                <strong>Nom d'utilisateur :</strong> {{ moi.username }}<br>
+                <strong>Email :</strong> {{ moi.email }}<br>
+                <strong>Avatar :</strong> <img src="{{ asset('uploads/user/avatar/' ~ moi.avatar) }}" alt="avateur de l'utilisateur"><br>
+                <div class="d-flex justify-content-around">
+                    <div class="col-12 col-md-6 mx-auto mt-5">
+                        <a href="{{ path('changePassword') }}">
+                            <button class="btn btn-warning">Changer votre mdp</button>
+                        </a>
+                    </div>
+                    <div class="col-12 col-md-6 mx-auto mt-5">
+                        <a href="{{ path('deleteUser', {id : moi.id}) }}">
+                            <button id="deleteUser" class="btn btn-danger">Supprimer votre compte</button>
+                        </a>
                     </div>
                 </div>
-            </div>
+            </article>
         </div>
     </div>
-    <img id="DEMILOGO" class="d-none d-lg-block" src="{{ asset("img/fond3.png") }}" alt="LUEUR">
+    <img class="DEMILOGO d-none d-lg-block" src="{{ asset("img/fond3.png") }}" alt="LUEUR">
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/baseNavbarPages.js') }}"></script>
 {% endblock %}

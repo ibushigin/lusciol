@@ -55,6 +55,7 @@
 
 {% block javascripts %}
     {{ parent() }}
+    <script src="{{ asset('js/baseNavbarPages.js') }}"></script>
     <script>
         $(function(){
             // Requete AJAX pour l'affichage d'une adresse a valider
@@ -101,9 +102,6 @@
                     },
                 });
             })
-
-            // Effacer les messages flashs
-            $('.alert').fadeOut(6000);
         })
 
 

@@ -8,9 +8,13 @@ body{
 /*CSS GENERAL*/
 
 .ContentFullSize{
-    height: calc(100vh - 114px);
+    /*height: calc(100vh - 114px);*/
     position: relative;
     z-index: 0;
+}
+
+.flashDiv{
+    height: 6vh;
 }
 
 .mainTitle{

@@ -8,28 +8,35 @@
 {% block title %}Lusciol - Ajout d'adresse{% endblock %}
 
 {% block body %}
-	<div class="container-fluid ContentFullSize">
-		<div class="container">
-			<div class="row">
-				<h1 class="mainTitle text-center mx-auto mb-5 text-white">Proposez votre bon plan :</h1>
-			</div>
-			<div class="row">
-				<div class="col-12 offset-md-2 col-md-8">
-					{{ form_start(form) }}
-					{{ form_row(form.subCategory, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Sous-catégorie : '}}) }}
-					{{ form_row(form.name, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Nom du magasin : '}}) }}
-					{{ form_row(form.location, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Adresse (ensuite appuyez sur "Chercher coordonées) : '}}) }}
-					<button id="btnCoord" class="btn btn-secondary offset-md-3 col-md-6 mb-3 align-middle"><i class="fas fa-crosshairs fa-2x"></i><span id="getgeo">Chercher  coordonnées</span></button>
-					{{ form_row(form.coordinates, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Coordonées géographiques : '}}) }}
-					{{ form_row(form.website, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Site internet : '}}) }}
-					{{ form_row(form.tel, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Téléphone : '}}) }}
-					{{ form_row(form.discount, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Réduction étudiante proposée : '}}) }}
-					{{ form_row(form.image, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Image (optionnelle) : '}}) }}
-					{{ form_row(form.save, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Sous-catégorie : '}}) }}
-					<div class="form-group col-12 col-md-6 m-auto pb-5">
-						<button class="btn bg-white btn-block">Valider</button>
-						{{ form_end(form) }}
-					</div>
+	<div class="container ContentFullSize">
+		{#<div class="row flashDiv">#}
+			{#<div class="col-12 mx-auto">#}
+				{#{% for label, messages in app.flashes %}#}
+					{#{% for message in messages %}#}
+						{#<div class="alert alert-{{ label }} text-center">{{ message}}</div>#}
+					{#{% endfor %}#}
+				{#{% endfor %}#}
+			{#</div>#}
+		{#</div>#}
+		<div class="row">
+			<h1 class="mainTitle text-center mx-auto mb-5 text-white">Proposez votre bon plan :</h1>
+		</div>
+		<div class="row">
+			<div class="col-12 col-md-8 mx-auto">
+				{{ form_start(form) }}
+				{{ form_row(form.subCategory, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Sous-catégorie : '}}) }}
+				{{ form_row(form.name, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Nom du magasin : '}}) }}
+				{{ form_row(form.location, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Adresse (ensuite appuyez sur "Chercher coordonées) : '}}) }}
+				<button id="btnCoord" class="btn btn-secondary offset-md-3 col-md-6 mb-3 align-middle"><i class="fas fa-crosshairs fa-2x"></i><span id="getgeo">Chercher  coordonnées</span></button>
+				{{ form_row(form.coordinates, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Coordonées géographiques : '}}) }}
+				{{ form_row(form.website, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Site internet : '}}) }}
+				{{ form_row(form.tel, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Téléphone : '}}) }}
+				{{ form_row(form.discount, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Réduction étudiante proposée : '}}) }}
+				{{ form_row(form.image, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Image (optionnelle) : '}}) }}
+				{{ form_row(form.save, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Sous-catégorie : '}}) }}
+				<div class="form-group col-12 col-md-6 m-auto pb-5">
+					<button class="btn bg-white btn-block">Valider</button>
+					{{ form_end(form) }}
 				</div>
 			</div>
 		</div>
