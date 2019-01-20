@@ -19,27 +19,25 @@
                     {% endfor %}
                 {% endfor %}
             </div>
-        </div>
-        <div class="row my-5">
-            <h1 class="text-center text-white m-auto" id="contactH1">Contact</h1>
-        </div>
-        <div class="row" id="contentManageUser">
-                <div class="col-12 col-md-10 col-lg-6 mt-5 mx-auto text-center">
-                    <article id="userDescription" class="text-white">
-                        <strong>Nom d'utilisateur :</strong> {{ moi.username }}<br>
-                        <strong>Email :</strong> {{ moi.email }}<br>
-                        <strong>Avatar :</strong> <img src="{{ asset('uploads/user/avatar/' ~ moi.avatar) }}" alt="avateur de l'utilisateur"><br>
-                        <div class="col-12 d-flex mt-5">
-                            <a href="{{ path('changePassword', {id : moi.id}) }}">
-                                <button class="btn btn-warning">Changer votre mdp</button>
-                            </a>
-                        </div>
-                        <div class="col-12 d-flex mt-5">
-                            <a href="{{ path('deleteUser', {id : moi.id}) }}">
-                                <button id="deleteUser" class="btn btn-danger">Supprimer votre compte</button>
-                            </a>
-                        </div>
-                    </article>
+            <div class="row" id="contentManageUser">
+                <div class="col-12">
+                    <div class="form-group col-6 col-md-3 mt-5 mx-auto">
+                        <article id="userDescription" class="text-white">
+                            <strong>Nom d'utilisateur :</strong> {{ moi.username }}<br>
+                            <strong>Email :</strong> {{ moi.email }}<br>
+                            <strong>Avatar :</strong> <img src="{{ asset('uploads/user/avatar/' ~ moi.avatar) }}" alt="avateur de l'utilisateur"><br>
+                            <div class="col-12 d-flex mt-5">
+                                <a href="{{ path('changePassword') }}">
+                                    <button class="btn btn-warning">Changer votre mdp</button>
+                                </a>
+                            </div>
+                            <div class="col-12 d-flex mt-5">
+                                <a href="{{ path('deleteUser', {id : moi.id}) }}">
+                                    <button id="deleteUser" class="btn btn-danger">Supprimer votre compte</button>
+                                </a>
+                            </div>
+                        </article>
+                    </div>
                 </div>
         </div>
     </div>

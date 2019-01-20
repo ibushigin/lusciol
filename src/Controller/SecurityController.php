@@ -138,7 +138,7 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @Route("/changePassword/{id}", name="changePassword", requirements={"id"="[0-9]+"})
+     * @Route("/changePassword", name="changePassword")
      */
     public function changePassword(Request $request, UserPasswordEncoderInterface $encoder)
     {
@@ -147,29 +147,28 @@ class SecurityController extends AbstractController
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()){
+        if($form->isSubmitted() && $form->isValid())
+        {
 
             $user = $this->getUser();
-            $plainOldPassword = $form->get('oldPassword')->getData();
-            $checkPass = $encoder->isPasswordValid($user, $plainOldPassword);
+
+            $checkPass = $encoder->isPasswordValid($user, $form->get('oldPassword'));
 
             if($checkPass === true){
 
-                $newEncodedPassword = $encoder->encodePassword($user, $form->get('plainPassword')->getData());
+                $user->setPassword(
+                    $encoder->encodePassword(
+                        $user, $form->get('plainPassword')->getData())
+                );
 
-                $user->setPassword($newEncodedPassword);
                 $user->eraseCredentials();
 
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->flush();
 
-                $this->addFlash('success', 'Votre mot de passe a bien été modifié');
-
-                return $this->redirectToRoute('userInfo');
-
             }else{
 
-                $this->addFlash('danger', 'Votre ancien mot de passe est incorrect');
+                $this->addFlash('danger', 'Votre ancien mot de passe n\'est pas correct');
 
             }
 
@@ -178,7 +177,6 @@ class SecurityController extends AbstractController
         return $this->render('security/changePassword.html.twig', [
             'changePasswordForm' => $form->createView()
         ]);
-
 
     }
 

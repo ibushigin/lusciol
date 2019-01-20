@@ -10,8 +10,7 @@
                 <div id="resultAjax" class="theme-bg">
                     <div class="searchGroup pt-3">
                         <div class="row  ml-1 mr-1">
-                            <a class="btn bg-white col-1 pr-1 pl-1" href="{{ path('home') }}" role="button"><i class="fas fa-home theme-color"></i></a>
-                            <div class="search input-group col-11 ">
+                            <div class="search input-group col-12 ">
                                 <div class="input-group-prepend ">
                                     <span class="input-group-text bg-white" id="input-addon"><i class="fas fa-search theme-color"></i></span>
                                 </div>
@@ -63,7 +62,55 @@
                 </div>
 
             <div class="col-12 col-lg-9 p-0 order-first">
-                <div id="map"></div>
+                <nav class="navbar theme-color fixed-top" id="burgerMap">
+                    <a class="navbar-brand"></a>
+                    <button class="navbar-toggler theme-color" type="button" data-toggle="collapse" data-target="#mapnavbarContent" aria-controls="mapnavbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span><i class="fas fa-bars fa-2x" ></i></span>
+                    </button>
+                    <div class="collapse navbar-collapse theme-color text-right mt-2" id="mapnavbarContent">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link mx-4 mapNavBarItem" href="{{ path('viewAll') }}">Map</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link mx-4 mapNavBarItem" href="{{ path('concept') }}">Concept</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link  mx-4 mapNavBarItem" href="{{ path('addAddress') }}">Proposer un bon plan</a>
+                            </li>
+                            {# crée un lien vers la page admin si on a le role admin #}
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <li class="nav-item">
+                                    <a class="nav-link mx-4 mapNavBarItem" href="{{ path('admin') }}">Admin</a>
+                                </li>
+                            {% endif %}
+
+                            {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+                                {# Picto connexion#}
+                                <div class="connectHome mapNavBarItem">
+                                    <a href="{{ path('app_login') }}"><i class="fas fa-user"></i></a>
+                                </div>
+                            {% else %}
+                                <li class="nav-item">
+                                    <a class="nav-link mx-4 mapNavBarItem" href="{{ path('logout') }}">Logout</a>
+                                </li>
+                                {# Picto connexion#}
+                                <li class="nav-item mapNavBarItem theme-color">
+                                    <a href="{{ path('userInfo') }}" class="nav-link mx-4 mapNavBarItem"><i class="fas fa-user"></i></a>
+                                </li>
+                            {% endif %}
+                            {#<li class="nav-item" id="connect">#}
+                            {#<a href="{{ path('app_login') }}"><i class="fas fa-user pl-3"></i></a>#}
+                            {#</li>#}
+                        </ul>
+                    </div>
+                </nav>
+                <div id="map">
+
+
+
+                </div>
+
             </div>
         </div>
     </div>
@@ -508,5 +555,9 @@
 
 
         });
+
+
+
+
     </script>
 {% endblock %}
