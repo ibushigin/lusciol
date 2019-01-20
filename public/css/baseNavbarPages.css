@@ -5,7 +5,7 @@ body{
     background-repeat: repeat-y;
 }
 
-/*CSS GENERAL*/
+/*CSS GENERAL***********************************/
 
 .ContentFullSize{
     /*height: calc(100vh - 114px);*/
@@ -30,7 +30,7 @@ body{
     left : 36%;
 }
 
-/*PAGE CONCEPT*/
+/*PAGE CONCEPT**********************************/
 .conceptLusciol p{
     font-family: 'Roboto Condensed', serif;
     font-size: 1.2rem;
@@ -43,7 +43,7 @@ body{
     left : 11%;
 }
 
-/*PAGE AJOUT D ADRESSE*/
+/*PAGE AJOUT D ADRESSE***************************/
 
 #getgeo{
     font-size: 1rem;
@@ -78,7 +78,15 @@ body{
     padding: 5px 9px;
 }
 
-/*PAGE D'ERREUR'*/
+/*PAGE D'ERREUR'**********************/
 .pt-8{
     padding-top: 8rem!important;
+}
+
+/*PAGES ADMIN*************************/
+
+/*Affichage des checkbox inline sur ManageUsers*/
+#update_user_roles{
+    display: flex;
+    justify-content: space-around;
 }

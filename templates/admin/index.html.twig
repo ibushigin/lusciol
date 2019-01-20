@@ -2,26 +2,40 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/admin.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/baseNavbarPages.css') }}">
 {% endblock %}
 
 {% block title %}Administration{% endblock %}
 
 {% block body %}
 
-    <div class="container-fluid" id="idLOGIN">
-        <div class="container">
-            <div id="contentLoginAdmin" class="col-12">
-                <div class="row">
+    <div class="container ContentFullSize">
+        <div class="row flashDiv">
+            <div class="col-12 mx-auto">
+                {% for label, messages in app.flashes %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ label }} text-center">{{ message}}</div>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+        </div>
+        <div class="row">
+            <h1 class="mainTitle text-center mx-auto mb-5 text-white">Panneau d'administration</h1>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-10 col-lg-8 col-xl-6 mx-auto text-center">
                 <a href="{{ path('manageAddress')}}" class="col-12 col-md-6 text-center"><button id="manageShops" class="btn btn-white px-4 py-4">Gérer les magasins</button></a>
                 <a href="{{ path('manageUsers')}}" class="col-12 col-md-6 text-center"><button class="btn btn-white px-4 py-4">Gérer les utilisateurs</button></a>
             </div>
-            </div>
-            <div id="adminResultContent">
-
-            </div>
+        </div>
+        <div id="adminResultContent">
         </div>
     </div>
+    <img class="DEMILOGO d-none d-lg-block" src="{{ asset("img/fond3.png") }}" alt="LUEUR">
 
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/baseNavbarPages.js') }}"></script>
 {% endblock %}
 

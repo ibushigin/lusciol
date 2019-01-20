@@ -10,7 +10,7 @@ $(function(){
     //Confirmations de formulaires
 
     // Pages Profile utilisateur -> suppression de compte
-        $('body').on('click', '#deleteUser', function() {
+        $('body').on('click', '#deleteUserFromProfil', function() {
             return confirm('Votre compte sera definitivement supprimer, ainsi que toutes les informations vous concernant, êtes vous sur de vouloir continuer?');
         })
 

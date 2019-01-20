@@ -2,51 +2,55 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/contact.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/baseNavbarPages.css') }}">
 {% endblock %}
 
 {% block title %}Contact{% endblock %}
 
 {% block body %}
 
-<div class="container" id="contactContent">
-    <div class="row flashDiv">
-        <div class="col-2 mx-auto">
-            {% for label, messages in app.flashes %}
-                {% for message in messages %}
-                    <div class="alert alert-{{ label }} text-center">{{ message}}</div>
+    <div class="container" id="contactContent">
+        <div class="row flashDiv">
+            <div class="col-12 mx-auto">
+                {% for label, messages in app.flashes %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ label }} text-center">{{ message}}</div>
+                    {% endfor %}
                 {% endfor %}
-            {% endfor %}
+            </div>
         </div>
-    </div>
-    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-        <div class="row my-5">
-            <h1 class="text-center text-white m-auto" id="contactH1">Contact</h1>
-        </div>
-        <div class="row">
-            <div class="col-12 col-md-8 col-xl-6 mx-auto">
-                {{ form_start(messageForm) }}
-                {{ form_row(messageForm.subject, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Objet : '}}) }}
-                {{ form_row(messageForm.content, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Message...'}}) }}
-                <div class="col-6 m-auto text-center">
-                    <button type="submit" class="btn btn-danger">Envoyer</button>
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <div class="row my-5">
+                <h1 class="text-center text-white mx-auto mainTitle">Contact</h1>
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-8 col-xl-6 mx-auto">
+                    {{ form_start(messageForm) }}
+                    {{ form_row(messageForm.subject, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Objet : '}}) }}
+                    {{ form_row(messageForm.content, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Message...'}}) }}
+                    <div class="col-6 m-auto text-center">
+                        <button type="submit" class="btn btn-danger">Envoyer</button>
+                    </div>
+                    {{ form_end(messageForm) }}
                 </div>
-                {{ form_end(messageForm) }}
-            </div>
 
-        </div>
-    {% else %}
-        <div class="row my-5">
-            <h1 class="text-center text-white m-auto" id="contactH1">Contact</h1>
-        </div>
-        <div class="row">
-            <div class="col-12 col-md-8 col-xl-6 mx-auto">
-                <p class="text-center text-white">
-                    Vous devez être connecté pour envoyer un message, merci
-                </p>
             </div>
-        </div>
-    {% endif %}
-</div>
-
+        {% else %}
+            <div class="row my-5">
+                <h1 class="text-center text-white mx-auto mainTitle">Contact</h1>
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-8 col-xl-6 mx-auto">
+                    <p class="text-center text-white">
+                        Vous devez être connecté pour envoyer un message, merci.
+                    </p>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+    <img class="DEMILOGO d-none d-lg-block" src="{{ asset("img/fond3.png") }}" alt="LUEUR">
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/baseNavbarPages.js') }}"></script>
 {% endblock %}

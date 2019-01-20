@@ -2,17 +2,16 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/admin.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/baseNavbarPages.css') }}">
 {% endblock %}
 
 {% block title %}Manage Address{% endblock %}
 
 {% block body %}
 
-    <div class="container-fluid" id="idLOGIN">
-        <container>
+    <div class="container-fluid ContentFullSize">
             <div class="row flashDiv">
-                <div class="col-2 mx-auto">
+                <div class="col-12 mx-auto">
                 {% for label, messages in app.flashes %}
                     {% for message in messages %}
                         <div class="alert alert-{{ label }} text-center">{{ message}}</div>
@@ -22,7 +21,7 @@
             </div>
             <div class="row" id="contentManageAddress">
                 <div class="col-6">
-                    <h2 class="text-secondary mt-1 text-center"><span class="badge badge-light p-3">Valider l'enregistrement d'un magasin</span></h2>
+                    <h2 class="mainTitle mt-1 text-center text-white">Valider l'enregistrement d'un magasin</h2>
                     <div class="form-group col-6 col-md-8 mt-5 mx-auto">
                         <select id="selectPendingAddress" class="form-control" name="selectPendingAddress">
                             <option value="99999">Magasins en attente de validation...</option>
@@ -33,7 +32,7 @@
                     </div>
                 </div>
                 <div class="col-6">
-                    <h2 class="text-secondary mt-1 text-center"><span class="badge badge-light p-3">Modifier un magasin</span></h2>
+                    <h2 class="mainTitle mt-1 text-center text-white">Modifier un magasin</h2>
                     <div class="form-group col-6 col-md-6 mt-5 mx-auto">
                         <select id="selectAddress" class="form-control" name="selectAddress">
                             <option value="99999">Magasins...</option>
@@ -47,9 +46,9 @@
             </div>
             <div id="pendingResult" class="col-6 col-md-3 mt-5 mx-auto">
             </div>
-        </container>
     </div>
     <div id="results"></div>
+    <img class="DEMILOGO d-none d-lg-block" src="{{ asset("img/fond3.png") }}" alt="LUEUR">
 
 {% endblock %}
 
@@ -103,9 +102,5 @@
                 });
             })
         })
-
-
-
-
     </script>
 {% endblock %}
