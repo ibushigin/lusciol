@@ -4,6 +4,9 @@ body{
     background-image: url('../img/fond2.png');
     background-repeat: repeat-y;
 }
+
+/*CSS GENERAL*/
+
 .ContentFullSize{
     height: calc(100vh - 114px);
     position: relative;
@@ -36,4 +39,25 @@ body{
     left : 11%;
 }
 
-/*AUTRE PAGE*/
+/*PAGE AJOUT D ADRESSE*/
+
+#getgeo{
+    font-size: 1rem;
+    font-weight: normal;
+    vertical-align: super;
+    display: inline-block;
+}
+
+#btnCoord{
+    padding: inherit;
+}
+
+#btnCoord .fa-crosshairs::before{
+    position: relative;
+    left: -2vw;
+}
+
+/*PAGE D'ERREUR'*/
+.pt-8{
+    padding-top: 8rem!important;
+}
