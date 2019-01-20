@@ -13,36 +13,24 @@
 				<img id="mainbgimg" src="{{ asset("img/gifLogo.gif") }}" alt="Logo-gif">
 				{#<img id="mainbgimg2" src="{{ asset("img/gifLogo.gif") }}" alt="Logo-gif">#}
 			</div>
-			<div class="col-12 col-md-6">
+			<div class="col-12 col-md-6 mx-auto">
 				<div class="SloganLUSCIOL col-12 col-md-10 col-lg-8 col-xl-6 mx-auto text-center" id="SloganLUSCIOL">
 				</div>
-				<div class="col-12">
-					<div id="BUTTONMap" class="col-12 col-md-12 col-lg-10 col-xl-8 mx-auto text-center">
-						<a class="col-12" href="{{ path('viewAll') }}">
-							<button class="btn col-12 col-md-12 col-lg-12 py-3 mt-5">
-								TROUVE TON BON PLAN
-							</button>
-						</a>
-					</div>
+				<div id="BUTTONMap" class="col-12 col-md-12 col-lg-10 col-xl-8 mx-auto text-center">
+					<a href="{{ path('viewAll') }}">
+						<button class="btn col-12 col-md-12 col-lg-12 py-3 mt-5">
+							TROUVE TON BON PLAN
+						</button>
+					</a>
 				</div>
 			</div>
 		</div>
 	</div>
-	</div>
+	<img class="d-lg-none d-block position-absolute" id="DEMILOGO" class="d-none d-lg-block" src="{{ asset("img/fond3.png") }}" alt="LUEUR">
 
 {% endblock %}
 
 {% block javascripts %}
 	{{ parent() }}
 	<script src="{{ asset('js/Home.js') }}"></script>
-	<script type="text/javascript">
-		let setBG = function(){
-			let $Wwidth = $(window).width();
-			console.log($Wwidth);
-			if ($Wwidth < 1300 ){
-				$('#mainbgimg').attr('src', '{{ asset("img/fond2.png") }}')
-			}
-		}
-		setBG();
-	</script>
 {% endblock %}

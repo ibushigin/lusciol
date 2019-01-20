@@ -43,7 +43,7 @@
 
 body{
 	 background: #1b1e21 url('../img/fond2.png');
-	 height: 200vh;
+	 height: 100vh;
 }
 
 #divLogo{
@@ -76,6 +76,15 @@ body{
 #BUTTONMap button{
 	background-color: #fff;
 }
+
+/*Demi LOGO affiché uniquement en taille < lg*/
+
+#DEMILOGO{
+	width: 63%;
+	bottom: 0;
+	left: 20%;
+}
+
 
 @media all and (max-width: 1700px) {
 	#SloganLUSCIOL{
