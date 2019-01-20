@@ -28,7 +28,7 @@
                             <strong>Email :</strong> {{ moi.email }}<br>
                             <strong>Avatar :</strong> <img src="{{ asset('uploads/user/avatar/' ~ moi.avatar) }}" alt="avateur de l'utilisateur"><br>
                             <div class="col-12 d-flex mt-5">
-                                <a href="{{ path('changePassword') }}">
+                                <a href="{{ path('changePassword', {id : moi.id}) }}">
                                     <button class="btn btn-warning">Changer votre mdp</button>
                                 </a>
                             </div>

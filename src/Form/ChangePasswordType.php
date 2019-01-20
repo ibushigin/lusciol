@@ -14,12 +14,15 @@ class ChangePasswordType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('oldPassword', PasswordType::class)
+            ->add('oldPassword', PasswordType::class, array(
+                'mapped' => false
+            ))
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'invalid_message' => 'Les mots de passe ne correspondent pas.',
                 'first_options' => ['label' => false, 'attr' => ['placeholder' => 'Mot de passe : ', 'class' => 'form-control font-italic']],
-                'second_options' => ['label' => false, 'attr' => ['placeholder' => 'Confirmer le mot de passe :',  'class' => 'form-control font-italic']]
+                'second_options' => ['label' => false, 'attr' => ['placeholder' => 'Confirmer le mot de passe :',  'class' => 'form-control font-italic']],
+                'required' => true,
             ])
         ;
     }
