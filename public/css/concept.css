@@ -33,7 +33,7 @@ body{
 /*LOGO CLIGNOTANT*/
 
 #DEMILOGO{
-	position: absolute;
+	position: fixed;
 	z-index: -1;
 	bottom: 0vh;
 	left : 11%;
