@@ -10,7 +10,6 @@
 {% block body %}
 
     <div class="container" id="contactContent">
-    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
         <div class="row flashDiv">
             <div class="col-2 mx-auto">
                 {% for label, messages in app.flashes %}
@@ -20,33 +19,34 @@
                 {% endfor %}
             </div>
         </div>
-        <div class="row my-5">
-            <h1 class="text-center text-white m-auto" id="contactH1">Contact</h1>
-        </div>
-        <div class="row">
-            <div class="col-12 col-md-8 col-xl-6 mx-auto">
-                {{ form_start(messageForm) }}
-                {{ form_row(messageForm.subject, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Objet : '}}) }}
-                {{ form_row(messageForm.content, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Message...'}}) }}
-                <div class="col-6 m-auto text-center">
-                <button type="submit" class="btn btn-danger">Envoyer</button>
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <div class="row my-5">
+                <h1 class="text-center text-white m-auto" id="contactH1">Contact</h1>
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-8 col-xl-6 mx-auto">
+                    {{ form_start(messageForm) }}
+                    {{ form_row(messageForm.subject, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Objet : '}}) }}
+                    {{ form_row(messageForm.content, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Message...'}}) }}
+                    <div class="col-6 m-auto text-center">
+                        <button type="submit" class="btn btn-danger">Envoyer</button>
+                    </div>
+                    {{ form_end(messageForm) }}
                 </div>
-                {{ form_end(messageForm) }}
-            </div>
 
-        </div>
-    {% elseif %}
-        <div class="row my-5">
-            <h1 class="text-center text-white m-auto" id="contactH1">Contact</h1>
-        </div>
-        <div class="row">
-            <div class="col-12 col-md-8 col-xl-6 mx-auto">
-                <p class="text-center text-white">
-                    Vous devez être connecté pour envoyer un message, merci
-                </p>
             </div>
-        </div>
-    {% endif %}
+        {% else %}
+            <div class="row my-5">
+                <h1 class="text-center text-white m-auto" id="contactH1">Contact</h1>
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-8 col-xl-6 mx-auto">
+                    <p class="text-center text-white">
+                        Vous devez être connecté pour envoyer un message, merci
+                    </p>
+                </div>
+            </div>
+        {% endif %}
     </div>
 
 

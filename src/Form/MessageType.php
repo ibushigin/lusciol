@@ -25,7 +25,6 @@ class MessageType extends AbstractType
                 ]
             ])
             ->add('content', TextareaType::class)
-            ->add('')
         ;
     }
 
