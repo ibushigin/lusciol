@@ -3,44 +3,6 @@
  src: url("../typo/TektonPro-BoldCond.otf") format("otf");
 }
 
-/*NAVBAR*/
-
-/*#burgerHome{*/
-	/*color: #fff;*/
-/*}*/
-
-/*.connectHome i{*/
-	/*font-size: 1.5rem;*/
-	/*color: white;*/
-	/*margin-top: 30px;*/
-	/*margin-right: 30px;*/
-	/*padding-left: 25px;*/
-/*}*/
-
-/*.connectHome i::before{*/
-	/*position: absolute;*/
-	/*top: 26px;*/
-/*}*/
-
-/*.allNavItems{*/
-	/*color: #fff!important;*/
-	/*font-size: 1.2rem;*/
-	/*font-family: 'Roboto Condensed', sans-serif;*/
-	/*margin-top: -15px;*/
-	/*transition: 0.3s ease;*/
-	/*border-top: 1px solid transparent;*/
-	/*border-bottom: 1px solid transparent;*/
-	/*padding-bottom: 25px;*/
-/*}*/
-
-/*.allNavItems:hover{*/
-/*border-bottom: 1px solid white;*/
-/*padding: 8px 0;*/
-/*color: white;*/
-/*}*/
-
-/*HOMEPAGE*/
-
 body{
 	 background: #1b1e21 url('../img/fond2.png');
 	 height: 100vh;
