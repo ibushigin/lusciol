@@ -2,7 +2,7 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/admin.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/login.css') }}">
 {% endblock %}
 
 {% block title %}Profile{% endblock %}
@@ -10,15 +10,14 @@
 {% block body %}
 
     <div class="container-fluid" id="idLOGIN">
-        <container>
-            <div class="row flashDiv">
-                <div class="col-2 mx-auto">
-                    {% for label, messages in app.flashes %}
-                        {% for message in messages %}
-                            <div class="alert alert-{{ label }} text-center">{{ message}}</div>
-                        {% endfor %}
+
+        <div class="row flashDiv">
+            <div class="col-2 mx-auto">
+                {% for label, messages in app.flashes %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ label }} text-center">{{ message}}</div>
                     {% endfor %}
-                </div>
+                {% endfor %}
             </div>
             <div class="row" id="contentManageUser">
                 <div class="col-12">
@@ -40,10 +39,7 @@
                         </article>
                     </div>
                 </div>
-            </div>
-            <div id="results" class="col-6 col-md-3 mt-5 mx-auto">
-            </div>
-        </container>
+        </div>
     </div>
-    <div id="results"></div>
+    <img id="DEMILOGO" class="d-none d-lg-block" src="{{ asset("img/fond3.png") }}" alt="LUEUR">
 {% endblock %}
