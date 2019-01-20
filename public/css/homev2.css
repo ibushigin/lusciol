@@ -70,3 +70,11 @@ body{
 	}
 }
 
+@media all and (max-width: 576px) {
+	#SloganLUSCIOL{
+		font-size: 2rem;
+		margin-top: 5vh;
+	}
+}
+
+
