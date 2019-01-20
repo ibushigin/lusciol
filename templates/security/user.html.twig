@@ -9,8 +9,7 @@
 
 {% block body %}
 
-    <div class="container-fluid" id="idLOGIN">
-
+    <div class="container-fluid ContentFullSize">
         <div class="row flashDiv">
             <div class="col-2 mx-auto">
                 {% for label, messages in app.flashes %}
@@ -39,6 +38,7 @@
                         </article>
                     </div>
                 </div>
+            </div>
         </div>
     </div>
     <img id="DEMILOGO" class="d-none d-lg-block" src="{{ asset("img/fond3.png") }}" alt="LUEUR">
