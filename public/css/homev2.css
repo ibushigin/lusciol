@@ -5,7 +5,10 @@
 
 body{
 	 background: #1b1e21 url('../img/fond2.png');
-	 height: 100vh;
+}
+
+#contentHomePage{
+	height: calc(100vh - 114px);
 }
 
 #divLogo{
