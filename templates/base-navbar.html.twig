@@ -36,42 +36,42 @@
                     <span><i class="fas fa-bars fa-2x" id="burgerHome"></i></span>
                 </button>
                 <div class="collapse navbar-collapse" id="HomenavbarContent">
-                    <ul class="navbar-nav ml-auto">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link allNavItems mx-4" href="{{ path('viewAll') }}">Map</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link allNavItems mx-4" href="{{ path('concept') }}">Concept</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link allNavItems mx-4" href="{{ path('addAddress') }}">Proposer un bon plan</a>
+                    </li>
+                    {# crée un lien vers la page admin si on a le role admin #}
+                    {% if is_granted('ROLE_ADMIN') %}
                         <li class="nav-item">
-                            <a class="nav-link allNavItems mx-4" href="{{ path('viewAll') }}">Map</a>
+                            <a class="nav-link allNavItems mx-4" href="{{ path('admin') }}">Admin</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link allNavItems mx-4" href="{{ path('concept') }}">Concept</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link allNavItems mx-4" href="{{ path('addAddress') }}">Proposer un bon plan</a>
-                        </li>
-                        {# crée un lien vers la page admin si on a le role admin #}
-                        {% if is_granted('ROLE_ADMIN') %}
-                            <li class="nav-item">
-                                <a class="nav-link allNavItems mx-4" href="{{ path('admin') }}">Admin</a>
-                            </li>
-                        {% endif %}
+                    {% endif %}
 
-                        {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
-                            {# Picto connexion#}
-                            <div class="connectHome">
-                                <a href="{{ path('app_login') }}"><i class="fas fa-user"></i></a>
-                            </div>
-                        {% else %}
-                            <li class="nav-item">
-                                <a class="nav-link allNavItems mx-4" href="{{ path('logout') }}">Logout</a>
-                            </li>
-                            {# Picto connexion#}
-                            <div class="connectHome">
-                                <a href="{{ path('userInfo') }}"><i class="fas fa-user"></i></a>
-                            </div>
-                        {% endif %}
-                        {#<li class="nav-item" id="connect">#}
-                        {#<a href="{{ path('app_login') }}"><i class="fas fa-user pl-3"></i></a>#}
-                        {#</li>#}
-                    </ul>
-                </div>
+                    {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+                        {# Picto connexion#}
+                        <div class="connectHome">
+                            <a href="{{ path('app_login') }}"><i class="fas fa-user"></i></a>
+                        </div>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link allNavItems mx-4" href="{{ path('logout') }}">Logout</a>
+                        </li>
+                        {# Picto connexion#}
+                        <div class="connectHome">
+                            <a href="{{ path('userInfo') }}"><i class="fas fa-user"></i></a>
+                        </div>
+                    {% endif %}
+                    {#<li class="nav-item" id="connect">#}
+                    {#<a href="{{ path('app_login') }}"><i class="fas fa-user pl-3"></i></a>#}
+                    {#</li>#}
+                </ul>
+            </div>
             </nav>
 
 
