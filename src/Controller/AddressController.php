@@ -96,10 +96,6 @@ class AddressController extends AbstractController
 
             return $this->redirectToRoute('viewAll');
 
-        }else{
-
-            $this->addFlash('danger', 'Formulaire d\'ajout invalide');
-
         }
 
         return $this->render('address/add.html.twig', ['form' => $form->createView()]);

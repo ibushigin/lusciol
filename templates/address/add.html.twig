@@ -9,15 +9,15 @@
 
 {% block body %}
 	<div class="container ContentFullSize">
-		{#<div class="row flashDiv">#}
-			{#<div class="col-12 mx-auto">#}
-				{#{% for label, messages in app.flashes %}#}
-					{#{% for message in messages %}#}
-						{#<div class="alert alert-{{ label }} text-center">{{ message}}</div>#}
-					{#{% endfor %}#}
-				{#{% endfor %}#}
-			{#</div>#}
-		{#</div>#}
+		<div class="row flashDiv">
+			<div class="col-12 mx-auto">
+				{% for label, messages in app.flashes %}
+					{% for message in messages %}
+						<div class="alert alert-{{ label }} text-center">{{ message}}</div>
+					{% endfor %}
+				{% endfor %}
+			</div>
+		</div>
 		<div class="row">
 			<h1 class="mainTitle text-center mx-auto mb-5 text-white">Proposez votre bon plan :</h1>
 		</div>
