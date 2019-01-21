@@ -50,7 +50,6 @@ class User implements UserInterface
      *     )
      */
     private $email;
-//TODO supprimer le téléphone car inutile
     /**
      * @ORM\Column(type="string", length=20, nullable=true)
      */

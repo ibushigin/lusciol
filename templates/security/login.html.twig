@@ -29,7 +29,6 @@
                         <label for="inputPassword" class="sr-only">Password : </label>
                         <input type="password" name="password" id="inputPassword" class="form-control font-italic" placeholder="Password : " required>
                         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-                        {#TODO STYLE CHECKBOX#}
                         <div class="checkbox mb-3">
                             <input type="checkbox" name="_remember_me" ><span class="text-white">Remember me</span>
                         </div>

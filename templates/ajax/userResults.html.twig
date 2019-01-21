@@ -42,7 +42,6 @@
         </div>
         <div class="d-flex justify-content-around">
             <a>{{ form_widget(form.enregistrer, {'attr': {'class': 'btn btn-success'}}) }}</a>
-            {#TODO Ajouter confirmation#}
             <a href="{{ path('deleteUser', {id : user.id}) }}" id="deleteUser"><button type="button" id="deny2" class="btn btn-danger" >Supprimer</button></a>
         </div>
         {{ form_end(form) }}

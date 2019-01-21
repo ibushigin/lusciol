@@ -84,6 +84,7 @@ class Address
     public function __construct()
     {
         $this->comment = new ArrayCollection();
+        $this->average = 0;
     }
 
     public function getId(): ?int
