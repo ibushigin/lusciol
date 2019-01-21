@@ -3,8 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="description" content="Lusciol.fr est une appli WEB full responsive, qui permet aux étudiants de trouver tous les bons plans à Bordeaux qui leur sont destinés (réductions sur présentation de la carte étudiante) via un système de géolocalisation. " />
 
     <title>{% block title %}Welcome!{% endblock %}</title>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-132850010-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-132850010-1');
+    </script>
+
 
     {% block stylesheets %}
         {# FAVICON #}
@@ -31,7 +43,7 @@
 
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light" id="navbarHompage">
-    <a class="navbar-brand align-self-start" href="{{ path('home') }}"><img src="{{ asset('img/logo.png') }}" alt="LusciolLogo"></a>
+    <a class="navbar-brand align-self-start" href="{{ path('home') }}"><img src="{{ asset('img/Logo3.png') }}" alt="LusciolLogo"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#HomenavbarContent" aria-controls="HomenavbarContent" aria-expanded="false" aria-label="Toggle navigation">
         <span><i class="fas fa-bars fa-2x" id="burgerHome"></i></span>
     </button>
