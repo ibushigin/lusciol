@@ -8,7 +8,7 @@ btn.addEventListener('click', function (e) {
     e.preventDefault();
     var inputVal = document.getElementById("address_location").value;
     var input = inputVal.split(' ').join('+');
-    console.log(input);
+    // console.log(input);
     //custom getJSON vanilla
     var getJSON = function(url, callback){
         var xhr = new XMLHttpRequest();
