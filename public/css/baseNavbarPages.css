@@ -96,3 +96,8 @@ body{
 #UserProfilUpdateForm{
     display: none;
 }
+
+.imgavatar-profil{
+    width: 150px;
+    height: auto;
+}
