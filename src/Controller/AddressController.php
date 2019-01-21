@@ -33,7 +33,7 @@ class AddressController extends AbstractController
 
 
     /**
-     * @Route("/address/all", name="viewAll")
+     * @Route("/carte-reduction", name="viewAll")
      */
     public function viewAll(){
         $repository = $this->getDoctrine()->getRepository(Address::class);
@@ -64,7 +64,7 @@ class AddressController extends AbstractController
     }
 
      /**
-    *@Route("/address/add", name="addAddress")
+    *@Route("ajout-bon-plan", name="addAddress")
     */
     public function addAdress(Request $request, FileUploader $fileuploader){
 
