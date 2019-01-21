@@ -61,14 +61,12 @@ class CommentRepository extends ServiceEntityRepository
 
     //TODO Finir le queryBuilder de 1 comment/user
 
-    public function findCommentUserByAddress($id_address, $id_user){
+    public function findCommentUserByAddress($address, $user){
         $qb = $this->createQueryBuilder('c')
-            ->innerJoin('c.user', 'u')
-            ->addSelect('u')
             ->andWhere('c.address = :address')
-            ->setParameter(':address', $id_address)
+            ->setParameter(':address', $address)
             ->andWhere('c.user = :user')
-            ->setParameter(':user', $id_user)
+            ->setParameter(':user', $user)
             ->getQuery();
         return $qb->execute();
     }
