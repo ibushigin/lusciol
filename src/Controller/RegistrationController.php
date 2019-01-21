@@ -36,7 +36,6 @@ class RegistrationController extends AbstractController
             /** @var User */
 
             $user = $form->getData();
-            dump($user);
             $user->setPassword(
                 $passwordEncoder->encodePassword(
                     $user,
