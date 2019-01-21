@@ -60,13 +60,13 @@ class AjaxController extends AbstractController
 
         if (!empty($userAlreadyCommented)) {
 
-            $this->addFlash('danger', 'Vous avez déjà donné votre avis.');
-
             $repository = $this->getDoctrine()->getRepository(Comment::class);
 
             $comments = $repository->findAllCommentsByAddress($address);
 
-            return $this->render('ajax/singleView.html.twig', [
+            $this->addFlash('danger', 'Vous avez déjà donné votre avis.');
+
+            return $this->render('ajax/comments.html.twig', [
                 'address' => $address, 'comments' => $comments]);
 
         } else {
