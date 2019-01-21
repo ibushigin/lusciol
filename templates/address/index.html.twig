@@ -340,7 +340,7 @@
                 }
                 var filter1 = no_accent(input.value);
                 var filter2 = filter1.toUpperCase();
-                console.log(filter1);
+                // console.log(filter1);
                 var div = document.getElementById('addressLoop');
                 var a = div.getElementsByTagName('a');
                 var i;
@@ -465,7 +465,7 @@
                             $("#resultAjax").html(result);
                         },
                         error: function(error){
-                            console.log(error)
+                            // console.log(error)
                         },
                     });
                     viewStatus ="single";
@@ -479,8 +479,8 @@
                 var pointRaw = $(this).attr('data-coordinates');
                 var point = pointRaw.split( /\s*,\s*/ );
 
-                console.log('DataCoord=', point);
-                console.log(typeof point);
+                // console.log('DataCoord=', point);
+                // console.log(typeof point);
 
                 map.setView(point);
 
@@ -505,7 +505,7 @@
 
                         },
                         error: function(error){
-                            console.log(error)
+                            // console.log(error)
                         },
                     });
                     viewStatus = "single";
@@ -530,7 +530,7 @@
                         map.setView(bordeaux, 14);
                     },
                     error: function(error){
-                        console.log(error)
+                        // console.log(error)
                     },
                 });
                 // On remet l'icone qu'avait le magasin sur la carte avant que l'on clic dessus
