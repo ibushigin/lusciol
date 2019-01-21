@@ -59,10 +59,10 @@
 }
 
 /*/adresse/all*/
+#addressList .name{
+	font-size: 1.5rem !important;
+}
 
-/*#burgerMap{*/
-    /*z-index: 9999;*/
-/*}*/
 #burgerMap{
 	position: absolute;
 	top: 0;

@@ -92,9 +92,9 @@ class AddressController extends AbstractController
 
             $entityManager->flush();
 
-            $this->addFlash('success', 'Adresse ajoutée');
+            $this->addFlash('success', 'Adresse ajoutée, en attente de validation');
 
-            return $this->redirectToRoute('viewAll');
+            return $this->redirectToRoute('addAddress');
 
         }
 
