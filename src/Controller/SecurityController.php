@@ -56,8 +56,6 @@ class SecurityController extends AbstractController
 
         $user = $this->getUser();
 
-        dump($user);
-
         return $this->render('security/user.html.twig', ['moi' => $user]);
     }
 
@@ -96,7 +94,7 @@ class SecurityController extends AbstractController
                     'text/html'
                 );
             $mailer->send($message);
-            $this->addFlash('notice', 'Mail envoyé');
+            $this->addFlash('success', 'Mail envoyé');
             return $this->redirectToRoute('message');
         }
         return $this->render('security/forgotten_password.html.twig');
@@ -127,7 +125,7 @@ class SecurityController extends AbstractController
             if($request->request->get('password') === $request->request->get('repeatedPassword')) {
                 $user->setPassword($passwordEncoder->encodePassword($user, $request->request->get('password')));
                 $entityManager->flush();
-                $this->addFlash('notice', 'Mot de passe mis à jour');
+                $this->addFlash('success', 'Mot de passe mis à jour');
                 return $this->redirectToRoute('home');
             }else{
                 $this->addFlash('danger', 'Les mots de passe ne correspondent pas');

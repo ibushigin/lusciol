@@ -23,7 +23,7 @@
             <h1 class="mainTitle text-center mx-auto mb-5 text-white">Gestion du profil :</h1>
         </div>
         <div class="row">
-            <article class="col-12 col-md-8 mx-auto text-white text-center">
+            <article class="col-12 col-md-8 mx-auto text-white text-center" id="ajaxUserProfilResults">
                 <strong>Nom d'utilisateur :</strong> {{ moi.username }}<br>
                 <strong>Email :</strong> {{ moi.email }}<br>
                 <strong>Avatar :</strong> <img src="{{ asset('uploads/user/avatar/' ~ moi.avatar) }}" alt="avateur de l'utilisateur"><br>
