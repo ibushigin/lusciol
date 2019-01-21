@@ -8,7 +8,7 @@
         {{ role }} -
     {% endfor %}
     <br>
-    <strong>Avatar :</strong> <img src="{{ asset('uploads/user/avatar/' ~ user.avatar) }}" alt="avateur de l'utilisateur"><br>
+    <strong>Avatar :</strong> <img class="img-fluid imgavatar-profil" src="{{ asset('uploads/user/avatar/' ~ user.avatar) }}" alt="avateur de l'utilisateur"><br>
     <div class="col-12 d-flex justify-content-around mt-5">
         <button id="modify" class="btn btn-warning">Modifier</button>
         <a href="{{ path('deleteUser', {id : user.id}) }}"><button id="deleteUser" class="btn btn-danger">Supprimer</button></a>
