@@ -13,16 +13,33 @@ class Rate{
         $this->em = $em;
     }
 
-
-    //TODO Service calcul moyenne des notes
     public function rateAverage($address)
     {
 
         $repo = $this->em->getRepository(Comment::class);
         $comments = $repo->findByAddress($address);
+        $allComments = count($comments);
+        $total = 0;
+
+        if($allComments != 0){
+
+            foreach($comments as $comment){
+
+                $total += $comment->getRate();
+
+            }
+
+            $moyenne = ($total / $allComments);
+
+        }else{
+
+            $moyenne = 0;
+
+        }
 
 
-        return $comments;
+
+        return $moyenne;
 
     }
 
