@@ -67,7 +67,7 @@ class Address
     private $subCategory;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="address")
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="address", orphanRemoval=true)
      */
     private $comment;
 
