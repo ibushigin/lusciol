@@ -50,8 +50,6 @@ class AjaxController extends AbstractController
     public function addComment(Request $request, Address $address, Rate $rate)
     {
 
-        //TODO régler le pb d'ajout de commentaires si user comment = 0
-
         $user = $this->getUser();
 
         $repository = $this->getDoctrine()->getRepository(Comment::class);
@@ -95,12 +93,16 @@ class AjaxController extends AbstractController
 
                 $entityManager->flush();
 
+                //calcul de la moyenne
+                $average = $rate->rateAverage($address);
+
+                $address->setAverage($average);
+
+                $entityManager->flush();
+
                 $repository = $this->getDoctrine()->getRepository(Comment::class);
 
                 $comments = $repository->findAllCommentsByAddress($address);
-
-//                //calcul de la moyenne
-//                $moyenne = $rate->rateAverage($address);
 
                 $this->addFlash('success', 'Commentaire posté');
 
