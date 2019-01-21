@@ -29,7 +29,7 @@
 
                 <strong>Avatar :</strong> <img class="img-fluid imgavatar-profil" src="{{ asset('uploads/user/avatar/' ~ moi.avatar) }}" alt="avateur de l'utilisateur"><br>
 
-                <div class="justify-content-evenly">
+                <div class="flex-column flex-lg-row justify-content-evenly">
                     <div class="mt-5">
                         <a href="{{ path('changePassword', {id : moi.id}) }}">
                             <button class="btn btn-light">Changement de mot de passe</button>
