@@ -1,28 +1,28 @@
 <?php
 namespace App\Service;
 
+use App\Entity\Comment;
+use Doctrine\ORM\EntityManagerInterface;
+
 class Rate{
 
-    private $directory;
+    private $em;
 
-    public function __construct($targetDirectory)
+    public function __construct(EntityManagerInterface $em)
     {
-        $this->directory = $targetDirectory;
+        $this->em = $em;
     }
 
 
     //TODO Service calcul moyenne des notes
-    public function rateAverage($rates)
+    public function rateAverage($address)
     {
 
-        foreach($rates as $rate)
-        {
+        $repo = $this->em->getRepository(Comment::class);
+        $comments = $repo->findByAddress($address);
 
-           $average = $rate + $rate / $rate;
 
-        }
-
-        return $average;
+        return $comments;
 
     }
 

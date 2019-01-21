@@ -10,6 +10,7 @@ use App\Form\CommentType;
 use App\Form\UpdateAddressType;
 use App\Form\UpdateUserType;
 use App\Service\FileUploader;
+use App\Service\Rate;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -46,20 +47,18 @@ class AjaxController extends AbstractController
     /**
      * @Route("/ajax/addComment/{id}", name="addComment", requirements={"id"="[0-9]+"})
      */
-    public function addComment(Request $request, Address $address)
+    public function addComment(Request $request, Address $address, Rate $rate)
     {
 
         //TODO régler le pb d'ajout de commentaires si user comment = 0
 
         $user = $this->getUser();
 
-        $address_id = $address->getId();
-
         $repository = $this->getDoctrine()->getRepository(Comment::class);
 
-        $userAlreadyCommented = $repository->findCommentUserByAddress($address_id, $user);
+        $userAlreadyCommented = $repository->findCommentUserByAddress($address, $user);
 
-        if ($userAlreadyCommented > 0) {
+        if (!empty($userAlreadyCommented)) {
 
             $this->addFlash('danger', 'Vous avez déjà donné votre avis.');
 
@@ -99,6 +98,9 @@ class AjaxController extends AbstractController
                 $repository = $this->getDoctrine()->getRepository(Comment::class);
 
                 $comments = $repository->findAllCommentsByAddress($address);
+
+//                //calcul de la moyenne
+//                $moyenne = $rate->rateAverage($address);
 
                 $this->addFlash('success', 'Commentaire posté');
 
