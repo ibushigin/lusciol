@@ -29,7 +29,7 @@
                     {{ form_row(messageForm.subject, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Objet : '}}) }}
                     {{ form_row(messageForm.content, {'label': false,'attr': {'class': 'form-control font-italic', 'placeholder': 'Message...'}}) }}
                     <div class="col-6 m-auto text-center">
-                        <button type="submit" class="btn btn-danger">Envoyer</button>
+                        <button type="submit" class="btn btn-light">Envoyer</button>
                     </div>
                     {{ form_end(messageForm) }}
                 </div>
@@ -45,6 +45,16 @@
                         Vous devez être connecté pour envoyer un message, merci.
                     </p>
                 </div>
+                <form action="{{ path('app_login') }}" method="post" class="col-12 col-md-8 col-xl-6 mx-auto">
+                    <div class=" form-group">
+                        <label for="inputEmail" class="sr-only">Email : </label>
+                        <input type="email"  name="email" id="inputEmail" class="form-control font-italic bg-white theme-color col-12 mt-1 shadow-none border-secondary" placeholder="Email : " required>
+                        <label for="inputPassword" class="sr-only">Password : </label>
+                        <input type="password" name="password" id="inputPassword" class="form-control font-italic bg-white theme-color col-12 mt-1 shadow-none border-secondary" placeholder="Password : " required>
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                        <button class="btn bg-white theme-color col-12 mt-1" type="submit">S'identifier</button>
+                    </div>
+                </form>
             </div>
         {% endif %}
     </div>
