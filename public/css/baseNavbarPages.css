@@ -90,3 +90,9 @@ body{
     display: flex;
     justify-content: space-around;
 }
+
+/*PAGE PROFIL UPDATE USER*/
+
+#UserProfilUpdateForm{
+    display: none;
+}

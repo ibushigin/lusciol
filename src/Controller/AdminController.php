@@ -169,7 +169,7 @@ class AdminController extends AbstractController
             //$article->getImage() contient un objet qui représent le fichier image envoyé
             $file = $user->getAvatar();
 
-            $filename = $file ? $fileuploader->upload($file, $this->getParameter('shop_image_directory')) : '';
+            $filename = $file ? $fileuploader->upload($file, $this->getParameter('user_avatar_directory')) : '';
 
             //je remplace l'attribut imgae qui contient toujours le fichier par le nom du fichier
             $user->setAvatar($filename);

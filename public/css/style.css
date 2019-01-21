@@ -9,6 +9,11 @@
 .theme-color{
 	color: #083346;
 }
+
+.justify-content-evenly{
+	display: flex;
+	justify-content: space-evenly;
+}
 /* Navbar */
 
 #navbarHompage{
