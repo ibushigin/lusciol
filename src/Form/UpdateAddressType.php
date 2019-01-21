@@ -21,7 +21,9 @@ class UpdateAddressType extends AbstractType
         $builder
             ->add('name', TextType::class)
             ->add('location', TextType::class )
-            ->add('website', TextType::class)
+            ->add('website', TextType::class, [
+                'required' => false
+            ])
             ->add('coordinates', TextType::class)
             ->add('tel', TelType::class)
             ->add('discount', TextType::class)
