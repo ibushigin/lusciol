@@ -26,7 +26,7 @@
             <article class="col-12 col-md-8 mx-auto text-white text-center" id="userProfilContent">
                 <strong>Nom d'utilisateur :</strong> {{ moi.username }}<br>
                 <strong>Email :</strong> {{ moi.email }}<br>
-                <strong>Avatar :</strong> <img src="{{ asset('uploads/user/avatar/' ~ moi.avatar) }}" alt="avateur de l'utilisateur"><br>
+                <strong>Avatar :</strong> <img src="{{ asset('uploads/user/avatar/' ~ moi.avatar) }}" alt="avatar de l'utilisateur"><br>
                 <div class="justify-content-evenly">
                     <div class="mt-5">
                         <a href="{{ path('changePassword', {id : moi.id}) }}">
